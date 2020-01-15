@@ -1,0 +1,1 @@
+console.log('main.js start rad 1');
