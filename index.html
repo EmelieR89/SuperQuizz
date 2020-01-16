@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +19,10 @@
     <link rel="stylesheet" href="./css/admin-container.css">
     <!--JS files-->
     <script defer src="./js/main.js"></script>
-    <script src="./js/GameController.js"></script>
+    <script defer src="./js/GameController.js"></script>
     <title>Super Quizz</title>
 </head>
+
 <body>
     <div class="start-container">
         <!---->
@@ -40,10 +42,9 @@
     </div>
     <div class="game-play-container">
         <!---->
-        <input id="number" type="text" placeholder="pick a number">
+        <input id="numberGuessed" type="text" placeholder="pick a number">
         <button id="play">Play</button>
-        <h1 id="higher"></h1>
-        <h1 id="lower"></h1>
+        <h1 id="gameResponse"></h1>
     </div>
     <div class="game-winner-container">
         <!---->
@@ -58,4 +59,5 @@
         <!---->
     </div>
 </body>
+
 </html>
