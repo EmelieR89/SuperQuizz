@@ -1,3 +1,18 @@
+  // Detta är klassen som kontrollerar användarens input 
+  // och matchar mot det vinnande värdet
+
+class GameController() {
+  construktor() {
+
+  }
+}
+
+
+
+
+
+// v Logik som ska implementeras i klasser v
+
 const randomGeneratedNumber = random() // Denna ska köras när spelaren väljer att köra en ny omgång. 
 let gameResults = "";
 
