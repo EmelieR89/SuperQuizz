@@ -1,3 +1,45 @@
 *{
     margin: 0;
+   
+}
+html{
+    font-family: 'Open Sans', sans-serif;
+  
+}
+body{
+    background: -webkit-linear-gradient(top, rgba(41,38,42,1) 0%, rgba(92,84,95,1) 100%);
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #fbefff;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.wrapper{
+ 
+}
+
+.game-play-container{
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    background: #bf00ff;
+    color: #fbefff;
+    border: none;
+    border-radius: 4rem; 
+    font-size: 0.9rem;
+}
+
+input{
+    background: #47354e;
+    border: none;
+    color: #fbefff;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 4rem; 
+    margin-bottom: 1rem;
 }
