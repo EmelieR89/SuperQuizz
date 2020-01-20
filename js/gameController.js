@@ -9,6 +9,7 @@ class GameController {
     this.gameResults = ""
     this.list = []
 
+    this.players = new BotPlayer()
   }
 
   /**
@@ -69,8 +70,9 @@ class GameController {
    * Skriver ut resultatet i DOMen
    * @param {String} status Resultatet av checkUserInput
    */
-  updateGameResponse(status) {
-    this.gameResults = " Go " + status + "!"
+  updateGameResponse(newGuess, status) {
+    this.players.calculateAndReturnNewGuess(parseInt(newGuess), status)
+    this.gameResults += newGuess + ", you have to go " + status + "\n"
     document.getElementById("gameResponse").innerHTML = this.gameResults
   }
 
