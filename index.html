@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
     <!--CSS files-->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/start-container.css">
@@ -26,7 +28,7 @@
     <script defer src="./js/Player.js"></script>
     <script defer src="./js/HumanPlayer.js"></script>
     <!-- <script defer src="./js/SelectPage.js"></script> -->
-    <!-- <script defer src="./js/StartPageController.js"></script> -->
+    <script defer src="./js/StartPageController.js"></script> 
     <!-- <script defer src="./js/GameSetupController.js"></script> -->
     <title>Super Quizz</title>
    
@@ -36,8 +38,12 @@
     <div class="wrapper">
         <div class="start-container pageHolder">
             <!---->
-            <h1>Super Quizz</h1>
-            <input type="text" name="" id="startNameInput" placeholder="Enter Name"> <br>
+            <button id="readRulesButton">Rules</button>
+            <h1 class="gameTitel">Super Quizz</h1>
+            <div id="showRules">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum accusamus deleniti quod! Autem eaque reprehenderit possimus? Accusamus harum nesciunt nam enim voluptate odio tenetur quod maxime omnis. Ducimus, natus!<>
+            </div>
+            <input type="text" name="" id="startNameInput" placeholder="Enter Name">
             <button id="startPageButton">Game Setup</button>
         </div>
         <div class="login-container pageHolder">

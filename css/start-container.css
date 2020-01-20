@@ -1,3 +1,27 @@
+ .start-container{
+    max-width: 600px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
 #startPageButton{
     border-radius: 10%;
+    max-width: 7rem;
 }
+#startNameInput{
+    max-width: 12rem;
+}
+
+.gameTitel{
+    font-family: 'Bangers', cursive;
+    font-size: 4rem;
+    /* margin: -20rem 0 0 10rem; */
+} 
+
+
+#showRules {
+    max-width: 19rem;
+    padding-bottom: 2rem;
+    border:pink;
+    margin-top: 20px;
+  }
