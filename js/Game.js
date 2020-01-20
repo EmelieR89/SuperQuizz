@@ -2,8 +2,8 @@
 class Game {
     constructor() {
         this.bu
-        this.gameController = new GameController()
-        this.currentPage = ""
+        this.gameController = new GameController(this)
+        this.currentPageState = ""
         this.addEvents()
 
     }
@@ -28,12 +28,18 @@ class Game {
     }
     //End events.
 
-    //Start click functions.
     startGame() {
         this.showPage('start-container')
         this.gameController.addEventToPlay()
     }
 
+    updateState(){
+        if(this.currentPageState === 'game-winner-container'){
+            console.log("run winner code " + this.gameController.gameResults)
+        }
+    }
+    
+    //Start click functions.
     gotoSetupPage(){
         this.showPage('game-setup-container')
     }
@@ -66,6 +72,7 @@ class Game {
                 pageEl.classList.remove('hiddenPage')
             }
         }
-        this.currentPage = classStringIn
+        this.currentPageState = classStringIn
+        this.updateState()
     }
 }
