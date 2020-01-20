@@ -1,3 +1,4 @@
+//code for start page
 class StartPageController{
     constructor(){
        // this.selectPageStart = new SelectPage()
@@ -10,6 +11,18 @@ class StartPageController{
 
     goToPage(){
         this.selectPageStart.showPage('game-setup-container')
+    //     this.playerNameInputEl = document.getElementById('startNameInput')
+    //     this.playerNameInputEl.addEventListener('keyup', this.printPlayerName.bind(this))
+    //     this.humanPlayerName = ""
+    
+
+    // printPlayerName(){
+    //     this.humanPlayerName = this.playerNameInputEl.value
+    //     document.querySelector('.start-container').append(this.humanPlayerName)
+    // }
+
+    // getHumanPlayerName(){
+    //     return this.humanPlayerName
     }
     
     rulesToggle(){
