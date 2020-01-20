@@ -1,10 +1,10 @@
 *{
     margin: 0;
+    outline:none;
 }
 
 .hiddenPage{
     display: none;
-    outline:none;
    
 }
 html{
