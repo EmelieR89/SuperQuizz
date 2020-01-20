@@ -37,9 +37,9 @@ class GameController {
    */
   checkUserInput(input) {
     if (input < this.randomGeneratedNumber) {
-      this.updateGameResponse("Higher")
+      this.updateGameResponse(input, "Higher")
     } else if (input > this.randomGeneratedNumber) {
-      this.updateGameResponse("Lower")
+      this.updateGameResponse(input, "Lower")
     } else if (input == this.randomGeneratedNumber) {
       document.getElementById("gameResponse").innerHTML = "WINNER!"
     }
@@ -72,7 +72,7 @@ class GameController {
    */
   updateGameResponse(newGuess, status) {
     this.players.calculateAndReturnNewGuess(parseInt(newGuess), status)
-    this.gameResults += newGuess + ", you have to go " + status + "\n"
+    this.gameResults = "Go " + status + "!"
     document.getElementById("gameResponse").innerHTML = this.gameResults
   }
 
