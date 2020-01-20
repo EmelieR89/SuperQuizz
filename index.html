@@ -26,8 +26,8 @@
     <script defer src="./js/Player.js"></script>
     <script defer src="./js/HumanPlayer.js"></script>
     <!-- <script defer src="./js/SelectPage.js"></script> -->
-    <!-- <script defer src="./js/StartPageController.js"></script> -->
-    <!-- <script defer src="./js/GameSetupController.js"></script> -->
+    <script defer src="./js/StartPageController.js"></script>
+    <script defer src="./js/GameSetupController.js"></script>
     <title>Super Quizz</title>
    
 </head>
@@ -67,6 +67,7 @@
             <h1>Game Setup</h1>
             <h2>Select AI players</h2>
             <h2>Read AI player info</h2>
+            <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players">
             <button id="backToStart">Back to Start</button>
             <button id="gameSetupButton">Start Game</button>
         </div>
@@ -79,8 +80,9 @@
         <div class="game-winner-container pageHolder">
             <!---->
             <h1>You are a winner!</h1>
-            <h6>game-winner-container</h6>
+            <h6>game-winner-container, output in console</h6>
             <button id="backToStart">Start Page</button>
+            <button id="playAgain">Play Again</button>
         </div>
         <div class="statistics-container pageHolder">
             <!---->
