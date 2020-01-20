@@ -4,4 +4,22 @@
 
 .hiddenPage{
     display: none;
+    outline:none;
+   
+}
+html{
+    font-family: 'Open Sans', sans-serif;  
+}
+body{
+    background: -webkit-linear-gradient(top, rgba(41,38,42,1) 0%, rgba(92,84,95,1) 100%);
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #fbefff;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgba(92,84,95,1);
 }
