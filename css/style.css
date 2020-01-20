@@ -23,3 +23,7 @@ body{
     align-items: center;
     background-color:rgba(92,84,95,1);
 }
+
+h1{
+    padding: 1rem 0;
+}
