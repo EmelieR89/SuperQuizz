@@ -35,7 +35,7 @@ class GameController {
       this.updateGameResponse(input, "Higher")
     } else if (input > this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Lower")
-    } else if (input === this.randomGeneratedNumber) {
+    } else if (input == this.randomGeneratedNumber) {
       document.getElementById("gameResponse").innerHTML = "WINNER!"
     }
   }
