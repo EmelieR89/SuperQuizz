@@ -25,45 +25,54 @@
     <script defer src="./js/HighScore.js"></script>
     <script defer src="./js/Player.js"></script>
     <script defer src="./js/HumanPlayer.js"></script>
+    <!-- <script defer src="./js/SelectPage.js"></script> -->
+    <!-- <script defer src="./js/StartPageController.js"></script> -->
+    <!-- <script defer src="./js/GameSetupController.js"></script> -->
     <title>Super Quizz</title>
    
 </head>
 
 <body>
- 
-    <div class="start-container">
-        <!---->
-        <h1>Super Quizz</h1>
-    </div>
-    <div class="login-container">
-        <!---->
-    </div>
-    <div class="high-score-container">
-        <!---->
-    </div>
-    <div class="rules-container">
-        <!---->
-    </div>
-    <div class="game-setup-container">
-        <!---->
-    </div>
-    <div class="game-play-container">
-        <!---->
-        <input id="numberGuessed" type="text" placeholder="pick a number">
-        <button id="play">Play</button>
-        <h1 id="gameResponse"></h1>
-    </div>
-    <div class="game-winner-container">
-        <!---->
-    </div>
-    <div class="statistics-container">
-        <!---->
-    </div>
-    <div class="user-suggestion-container">
-        <!---->
-    </div>
-    <div class="admin-container">
-        <!---->
+    <div class="wrapper">
+        <div class="start-container pageHolder">
+            <!---->
+            <h1>Super Quizz</h1>
+            <input type="text" name="" id="startNameInput" placeholder="Enter Name">
+            <button id="startPageButton">Game Setup</button>
+        </div>
+        <div class="login-container pageHolder">
+            <!---->
+        </div>
+        <div class="high-score-container pageHolder">
+            <!---->
+        </div>
+        <div class="rules-container pageHolder">
+            <!---->
+        </div>
+        <div class="game-setup-container pageHolder">
+            <!---->
+            <h1>Game Setup</h1>
+            <button id="backToStart">Back to Start</button>
+            <button id="gameSetupButton">Start Game</button>
+        </div>
+        <div class="game-play-container pageHolder">
+            <!---->
+            <input id="numberGuessed" type="text" placeholder="pick a number">
+            <button id="play">Play</button>
+            <h1 id="gameResponse"></h1>
+        </div>
+        <div class="game-winner-container pageHolder">
+            <!---->
+        </div>
+        <div class="statistics-container pageHolder">
+            <!---->
+        </div>
+        <div class="user-suggestion-container pageHolder">
+            <!---->
+        </div>
+        <div class="admin-container pageHolder">
+            <!---->
+        </div>
     </div>
   
 </body>
