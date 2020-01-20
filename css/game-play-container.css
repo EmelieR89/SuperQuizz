@@ -2,3 +2,28 @@
     outline: none;
     /* background-color: aqua; */
 }
+
+.game-play-container{
+    padding: 3rem 1rem;
+    max-width: 14.1rem;
+}
+
+button{
+    background: #bf00ff;
+    color: #fbefff;
+    border: none;
+    border-radius: 30%; 
+    padding:0.5rem;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+input{
+    background: #47354e;
+    border: none;
+    color: #fbefff;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 4rem; 
+    margin-bottom: 1rem;
+}
