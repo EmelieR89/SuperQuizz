@@ -1,13 +1,18 @@
+//code for game setup page
 class GameSetupController{
     constructor(){
-        this.selectPage = new SelectPage()
-        this.backToStartButton = document.getElementById('backToStart')
-        this.backToStartButton.addEventListener('click', this.goToPage.bind(this))
+        this.numberOfAIPlayersEl = document.getElementById('NumberOfAIPlayers')
+        this.numberOfAIPlayersEl.addEventListener('keyup', this.printNumberOfAIPlayers.bind(this))
+        this.numberOfAIPlayers = 0
     }
 
-    goToPage(){
-        console.log('go to start page.')
-        this.selectPage.showPage('start-container')
+    printNumberOfAIPlayers(){
+        this.numberOfAIPlayers = this.numberOfAIPlayersEl.value
+        document.querySelector('.game-setup-container').append(this.numberOfAIPlayers)
+    }
+
+    getNumberOfAIPlayers(){
+        return this.numberOfAIPlayers
     }
 
 }
