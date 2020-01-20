@@ -2,7 +2,8 @@
   // och matchar mot det vinnande värdet
 
 class GameController {
-  constructor() {
+  constructor(game) {
+    this.game = game
     this.randomGeneratedNumber = this.generateRandomNumber()
     this.playButton = document.querySelector('.game-play-container button')
     this.userInput = document.querySelector('.game-play-container input')
@@ -38,6 +39,7 @@ class GameController {
       this.updateGameResponse(input, "Lower")
     } else if (input == this.randomGeneratedNumber) {
       document.getElementById("gameResponse").innerHTML = "WINNER!"
+      this.game.showPage('game-winner-container')
     }
   }
 
