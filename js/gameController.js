@@ -7,6 +7,7 @@ class GameController {
     this.playButton = document.querySelector('.game-play-container button')
     this.userInput = document.querySelector('.game-play-container input')
     this.gameResults = ""
+    this.players = new BotPlayer()
   }
 
   /**
@@ -46,6 +47,7 @@ class GameController {
    * @param {String} status Resultatet av checkUserInput
    */
   updateGameResponse(newGuess, status) {
+    this.players.calculateAndReturnNewGuess(parseInt(newGuess), status)
     this.gameResults += newGuess + ", you have to go " + status + "\n"
     document.getElementById("gameResponse").innerHTML = this.gameResults
   }

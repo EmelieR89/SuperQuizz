@@ -1,7 +1,6 @@
 // Detta är klassen som kör hela spelet, som alla andra klasser utgår ifrån
 class Game {
     constructor() {
-        this.bu
         this.gameController = new GameController()
         this.currentPage = ""
         this.addEvents()
