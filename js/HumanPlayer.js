@@ -1,7 +1,7 @@
 // Detta är användarens spelare
 
 class HumanPlayer extends Player {
-    constructor() {
-        
+    constructor(name) {
+        super(name)
     }
 }
