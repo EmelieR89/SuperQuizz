@@ -15,25 +15,46 @@ class GameController {
     this.gameOver = false
   }
   
+  /**
+   * Sets up the turn-based logic, meant for everything necessary when starting up a game
+   */
   setupInitialGameState() {
     this.updateActivePlayer()
   }
   
+  /**
+   * Updates the active player based from turn and checks if that player is a bot
+   */
   updateActivePlayer() {
     this.activePlayer = this.playerTurns[this.turn]
     this.updatePlayerTurnTitle()
     this.checkIfBotTurn()
   }
 
+  /**
+   * Checks if active player is a bot and retrieves answer if it is
+   */
   checkIfBotTurn() {
     if (this.activePlayer instanceof BotPlayer) {
-      const numberGuessed = this.activePlayer.activate()
-      this.checkPlayerInput(numberGuessed)
-      this.setListGuessedNumber(numberGuessed)
-      if (!this.gameOver) {
+      const activeBot = this.activePlayer
+      this.retrieveAnswerFromBot(activeBot)
+    }
+  }
+
+  /**
+   * Retrieves the answer from the active BotPlayer with a delay
+   * @param {BotPlayer} activeBot The active BotPlayer
+   */
+  retrieveAnswerFromBot(activeBot) {
+    const numberGuessed = activeBot.activate()
+    const generateRandomDelay = parseInt((Math.random() * 4000) + 500)
+    setTimeout(()=> {
+        this.checkPlayerInput(numberGuessed)
+        this.setListGuessedNumber(numberGuessed)
+        if (!this.gameOver) {
         this.cyclePlayerTurns()
       }
-    }
+    }, generateRandomDelay)
   }
 
   /**
@@ -43,13 +64,15 @@ class GameController {
   createPlayerTurns(nOfPlayers) {
     let playerArray = []
     let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers+1))
+    console.log(humanPlayerTurn);
+    
     
     for (let i = 0; i < nOfPlayers+1; i++){
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer('hooman'))
       }
       else {
-        playerArray.push(new BotPlayer(i))
+        playerArray.push(new BotPlayer(`Bot ${i}`))
       }
     }    
     this.playerTurns = playerArray
@@ -66,6 +89,7 @@ class GameController {
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
+    // return 75 För buggfix
     return parseInt(Math.random() * 100);
   }
 
@@ -77,10 +101,14 @@ class GameController {
       const numberGuessed = parseInt(this.userInput.value)
       this.checkPlayerInput(numberGuessed)
       this.setListGuessedNumber(numberGuessed)
+      if (!this.gameOver)
       this.cyclePlayerTurns()
     })
   }
 
+  /**
+   * Logic for cycling player turns
+   */
   cyclePlayerTurns() {
     this.turn++
     if (this.turn > this.playerTurns.length-1) {
@@ -100,15 +128,22 @@ class GameController {
       this.updateGameResponse(input, "Higher")
     } else if (input > this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Lower")
-    } else if (input == this.randomGeneratedNumber) {
+    } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true
-      this.winnerTitle.innerHTML = `${this.activePlayer.name} is the winner!`
-      this.game.showPage('game-winner-container')
+      this.goToWinnerPage()
     }
+  }
+  
+  /**
+   * Shows game state to over and presents the winner
+   */
+  goToWinnerPage() {
+    this.game.showPage('game-winner-container')
+    this.winnerTitle.innerHTML = `${this.activePlayer.name} is the winner!`
   }
 
   /**
-   * Skriver ut en lista med de tal som användaren redan har gissat på 
+   * Prints a list of the guessed numbers and stores them in Local storage
    * @param {Number} numberInput User input
    */
   setListGuessedNumber(numberInput) {
@@ -129,13 +164,14 @@ class GameController {
 
 
   /**
-   * Skriver ut resultatet i DOMen
-   * @param {String} status Resultatet av checkUserInput
+   * Prints the game controller's answer to a players input
+   * @param {number} newGuess The player's guess
+   * @param {String} status The result of the input
    */
   updateGameResponse(newGuess, status) {
     this.playerTurns.forEach(player => {
       if (player instanceof BotPlayer) {
-        player.calculateAndReturnNewGuess(newGuess, status)
+        player.calculateNewOptimalGuess(newGuess, status)
       }
     });
     this.gameResults = "Go " + status + "!"
