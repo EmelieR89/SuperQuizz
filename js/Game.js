@@ -1,7 +1,7 @@
 // Detta är klassen som kör hela spelet, som alla andra klasser utgår ifrån
 class Game {
     constructor() {
-        this.startPageController = new StartPageController()
+        this.startPageController = new StartPageController(this)
         this.gameSetupController = new GameSetupController()
         this.gameController = new GameController(this)
         this.currentPageState = ""
@@ -14,10 +14,7 @@ class Game {
         this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         this.gamePlayButton = document.getElementById('gameSetupButton')
         this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
-        this.highScoreButton = document.getElementById('highScoreButton')
-        this.highScoreButton.addEventListener('click', this.goToHighScore.bind(this))
-        this.rulesButton = document.getElementById('rulesButton')
-        this.rulesButton.addEventListener('click', this.gotoRulesPage.bind(this))
+        
         this.playAgainButton = document.getElementById('playAgain')
         this.playAgainButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         this.addEventToAllStartPageButtons()
@@ -42,6 +39,10 @@ class Game {
             this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             this.gameSetupController.getNumberOfAIPlayers())
         }
+    }
+
+    getCurrentGameState(){
+        return this.currentPageState
     }
     
     //Start click functions.
