@@ -2,7 +2,7 @@
 // användarens spelare samt botar kommer att utgå ifrån
 
 class Player {
-    constructor() {
-
+    constructor(name) {
+        this.name = name
     }
 }
