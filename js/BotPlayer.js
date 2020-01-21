@@ -4,9 +4,10 @@
 // GameController needs more work before implementation is ready
 
 class BotPlayer extends Player {
-    constructor() {
-        super()
+    constructor(name) {
+        super(name)
         this.previousGuesses = [0, 100]
+        this.optimalValue = (this.previousGuesses[0]+this.previousGuesses[1])/2
     }
 
     /**
@@ -29,6 +30,11 @@ class BotPlayer extends Player {
         }
     }
 
+    activate() {
+        console.log(`Bot ${this.name} returns ${this.optimalValue}`);
+        return this.optimalValue
+    }
+
     /**
      * This bots logic for making a new guess
      * @param {Number} guess The last made guess
@@ -40,8 +46,8 @@ class BotPlayer extends Player {
         const guessArray = this.previousGuesses;
         console.log(guessArray);
         
-        const optimalValue = Math.floor((guessArray[0]+guessArray[1])/2);
-        console.log(optimalValue);
+        this.optimalValue = Math.floor((guessArray[0]+guessArray[1])/2);
+        console.log(`Bot ${this.name} would like to enter ${this.optimalValue}`);
           
     }
 }

@@ -32,7 +32,7 @@ class Game {
     //End events.
 
     startGame() {
-        this.showPage('start-container')
+        this.showPage('start-container')        
         this.gameController.addEventToPlay()
     }
 
@@ -50,6 +50,8 @@ class Game {
     }
 
     goToGamePlayPage(){
+        this.gameController.createPlayerTurns(this.gameSetupController.getNumberOfAIPlayers())
+        this.gameController.setupInitialGameState()
         this.showPage('game-play-container')
     }
 

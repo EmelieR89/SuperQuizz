@@ -12,7 +12,7 @@ class GameSetupController{
     }
 
     getNumberOfAIPlayers(){
-        return this.numberOfAIPlayers
+        return parseInt(this.numberOfAIPlayers)
     }
 
 }
