@@ -15,14 +15,14 @@ class GameController {
     this.turn = 0
     this.gameOver = false
   }
-  
+
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
     this.updateActivePlayer()
   }
-  
+
   /**
    * Updates the active player based from turn and checks if that player is a bot
    */
@@ -49,10 +49,10 @@ class GameController {
   retrieveAnswerFromBot(activeBot) {
     const numberGuessed = activeBot.activate()
     const generateRandomDelay = parseInt((Math.random() * 4000) + 500)
-    setTimeout(()=> {
-        this.checkPlayerInput(numberGuessed)
-        this.setListGuessedNumber(numberGuessed)
-        if (!this.gameOver) {
+    setTimeout(() => {
+      this.checkPlayerInput(numberGuessed)
+      this.setListGuessedNumber(numberGuessed)
+      if (!this.gameOver) {
         this.cyclePlayerTurns()
       }
     }, generateRandomDelay)
@@ -64,21 +64,21 @@ class GameController {
    */
   createPlayerTurns(nOfPlayers) {
     let playerArray = []
-    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers+1))
+    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers + 1))
     console.log(humanPlayerTurn);
-    
-    
-    for (let i = 0; i < nOfPlayers+1; i++){
+
+
+    for (let i = 0; i < nOfPlayers + 1; i++) {
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer('hooman'))
       }
       else {
         playerArray.push(new BotPlayer(`Bot ${i}`))
       }
-    }    
+    }
     this.playerTurns = playerArray
-  } 
-  
+  }
+
   /**
    * Updates the title based on turn
    */
@@ -90,8 +90,9 @@ class GameController {
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    // return 75 För buggfix
-    return parseInt(Math.random() * 100);
+    return 75  // för buggfix
+    // return parseInt(Math.random() * 100);
+
   }
 
   /**
@@ -103,7 +104,7 @@ class GameController {
       this.checkPlayerInput(numberGuessed)
       this.setListGuessedNumber(numberGuessed)
       if (!this.gameOver)
-      this.cyclePlayerTurns()
+        this.cyclePlayerTurns()
     })
   }
 
@@ -112,7 +113,7 @@ class GameController {
    */
   cyclePlayerTurns() {
     this.turn++
-    if (this.turn > this.playerTurns.length-1) {
+    if (this.turn > this.playerTurns.length - 1) {
       this.turn = 0
     }
     if (!this.gameOver) {
@@ -134,7 +135,7 @@ class GameController {
       this.goToWinnerPage()
     }
   }
-  
+
   /**
    * Shows game state to over and presents the winner
    */
@@ -143,7 +144,7 @@ class GameController {
     this.updateWinnerNumberTitle()
     this.game.showPage('game-winner-container')
   }
-  
+
   /**
    * Updates the winning player title
    */
@@ -154,7 +155,7 @@ class GameController {
   /**
    * Updates the winning number
    */
-  updateWinnerNumberTitle(){
+  updateWinnerNumberTitle() {
     this.winnerNumberTitle.innerHTML = `${this.randomGeneratedNumber}`
   }
 
@@ -168,7 +169,7 @@ class GameController {
     let userGuesses = JSON.parse(localStorage.getItem('guessedNumber'))
     let ul = document.getElementById("guessedNumbersFromPlayer")
     ul.innerHTML = ""
-
+    console.log('här')
     for (let guess of userGuesses) {
       let li = document.createElement("li")
       li.innerHTML = guess
@@ -177,7 +178,6 @@ class GameController {
 
     ul.className = "guessedNumbersShown"
   }
-
 
   /**
    * Prints the game controller's answer to a players input
@@ -193,6 +193,4 @@ class GameController {
     this.gameResults = "Go " + status + "!"
     document.getElementById("gameResponse").innerHTML = this.gameResults
   }
-
-
 }

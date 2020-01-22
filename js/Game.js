@@ -9,18 +9,18 @@ class Game {
 
     }
     //Start events.
-    addEvents(){
+    addEvents() {
         this.gameSetupButton = document.getElementById('startPageButton')
         this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         this.gamePlayButton = document.getElementById('gameSetupButton')
         this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
-        
+
         this.playAgainButton = document.getElementById('playAgain')
         this.playAgainButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         this.addEventToAllStartPageButtons()
     }
 
-    addEventToAllStartPageButtons(){
+    addEventToAllStartPageButtons() {
         let startPageButtonList = document.querySelectorAll('#backToStart')
         for (const startPageButtonEl of startPageButtonList) {
             startPageButtonEl.addEventListener('click', this.goToStartPage.bind(this))
@@ -29,54 +29,54 @@ class Game {
     //End events.
 
     startGame() {
-        this.showPage('start-container')        
+        this.showPage('start-container')
         this.gameController.addEventToPlay()
     }
 
-    updateState(){
-        if(this.currentPageState === 'game-winner-container'){
-            console.log("run winner code " + this.gameController.gameResults )
+    updateState() {
+        if (this.currentPageState === 'game-winner-container') {
+            console.log("run winner code " + this.gameController.gameResults)
             // this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             // this.gameSetupController.getNumberOfAIPlayers())
         }
     }
 
-    getCurrentGameState(){
+    getCurrentGameState() {
         return this.currentPageState
     }
-    
+
     //Start click functions.
-    gotoSetupPage(){
+    gotoSetupPage() {
         this.showPage('game-setup-container')
     }
 
-    goToGamePlayPage(){
+    goToGamePlayPage() {
         this.gameController.createPlayerTurns(this.gameSetupController.getNumberOfAIPlayers())
         this.gameController.setupInitialGameState()
         this.showPage('game-play-container')
     }
 
-    goToStartPage(){
+    goToStartPage() {
         this.showPage('start-container')
     }
 
-    gotoRulesPage(){
+    gotoRulesPage() {
         this.showPage('rules-container')
     }
 
-    goToHighScore(){
+    goToHighScore() {
         this.showPage('high-score-container')
     }
     //End click functions.
 
     //Change pages by css Display: none in 'hiddenPages' style.css.
-    showPage(classStringIn){
+    showPage(classStringIn) {
         let pageHolderList = document.body.querySelectorAll('.pageHolder')
-        for(let pageEl of pageHolderList){
-            if(!pageEl.classList.contains(classStringIn)){
+        for (let pageEl of pageHolderList) {
+            if (!pageEl.classList.contains(classStringIn)) {
                 pageEl.classList.add('hiddenPage')
             }
-            else{
+            else {
                 pageEl.classList.remove('hiddenPage')
             }
         }
