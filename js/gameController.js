@@ -90,8 +90,8 @@ class GameController {
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    return 75  // för buggfix
-    // return parseInt(Math.random() * 100);
+    //return 75 för buggfix
+    return parseInt(Math.random() * 100);
 
   }
 
@@ -170,7 +170,6 @@ class GameController {
     let userGuesses = JSON.parse(localStorage.getItem('guessedNumber'))
     let ul = document.getElementById("guessedNumbersFromPlayer")
     ul.innerHTML = ""
-    console.log('här')
     for (let guess of userGuesses) {
       let li = document.createElement("li")
       li.innerHTML = guess
