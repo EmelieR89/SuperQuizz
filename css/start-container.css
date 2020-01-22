@@ -4,10 +4,25 @@
     flex-direction: column; */
 }
 
-#startPageButton{
+.active-start {
+    background-color: #bf00ff;
+    color: #fbefff
+}
+
+.start-container .start-button {
+    border-radius: 1rem;
+}
+
+.inactive-start {
+    background-color: #76647d;
+    color: #262028
+}
+
+/* #startPageButton{
     border-radius: 10%;
     max-width: 7rem;
-}
+} */
+
 #startNameInput{
     max-width: 12rem;
 }
