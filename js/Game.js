@@ -5,11 +5,8 @@ class Game {
         this.gameSetupController = new GameSetupController()
         this.gameController = new GameController(this)
         this.currentPageState = ""
-        this.addEvents()
 
-    }
-    //Start events.
-    addEvents(){
+        //Add Events
         this.gameSetupButton = document.getElementById('startPageButton')
         if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
             this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
@@ -22,18 +19,16 @@ class Game {
         if(this.playAgainButton !== null){
             this.playAgainButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
-        this.addEventToAllStartPageButtons()
-    }
 
-    addEventToAllStartPageButtons(){
-        let startPageButtonList = document.querySelectorAll('#backToStart')
-        if(startPageButtonList !== null){
-            for (const startPageButtonEl of startPageButtonList) {
+        //Add events for all back to start buttons.
+        this.startPageButtonList = document.querySelectorAll('#backToStart')
+        if(this.startPageButtonList !== null){
+            for (const startPageButtonEl of this.startPageButtonList) {
                 startPageButtonEl.addEventListener('click', this.goToStartPage.bind(this))
             }
         }
+
     }
-    //End events.
 
     startGame() {
         this.showPage('start-container')        
@@ -43,7 +38,7 @@ class Game {
     //runs after showPage changes pages, 
     updateState(){
         if(this.currentPageState === 'game-winner-container'){
-            console.log("run winner code " + this.gameController.gameResults + 
+            console.log("run winner code " + this.gameController.gameResults)
             //this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             //this.gameSetupController.getNumberOfAIPlayers())
         }
