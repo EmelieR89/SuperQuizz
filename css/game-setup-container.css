@@ -12,3 +12,6 @@
     display: flex;
     justify-content: space-around;
 }
+.bots .active {
+    opacity: 50%;
+}
