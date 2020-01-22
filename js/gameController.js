@@ -8,7 +8,8 @@ class GameController {
     this.playButton = document.querySelector('.game-play-container button')
     this.userInput = document.querySelector('.game-play-container input')
     this.activePlayerTitle = document.querySelector('.player-turn')
-    this.winnerTitle = document.querySelector('.game-winner-container h1')
+    this.winnerPlayerTitle = document.querySelector('.game-winner-container h2')
+    this.winnerNumberTitle = document.querySelector('.win-con')
     this.gameResults = ""
     this.list = []
     this.turn = 0
@@ -138,8 +139,23 @@ class GameController {
    * Shows game state to over and presents the winner
    */
   goToWinnerPage() {
+    this.updateWinnerPlayerTitle()
+    this.updateWinnerNumberTitle()
     this.game.showPage('game-winner-container')
-    this.winnerTitle.innerHTML = `${this.activePlayer.name} is the winner!`
+  }
+  
+  /**
+   * Updates the winning player title
+   */
+  updateWinnerPlayerTitle() {
+    this.winnerPlayerTitle.innerHTML = `${this.activePlayer.name}`
+  }
+
+  /**
+   * Updates the winning number
+   */
+  updateWinnerNumberTitle(){
+    this.winnerNumberTitle.innerHTML = `${this.randomGeneratedNumber}`
   }
 
   /**

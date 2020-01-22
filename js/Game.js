@@ -45,7 +45,7 @@ class Game {
         if(this.currentPageState === 'game-winner-container'){
             console.log("run winner code " + this.gameController.gameResults + 
             //this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
-            this.gameSetupController.getNumberOfAIPlayers())
+            //this.gameSetupController.getNumberOfAIPlayers())
         }
     }
 
