@@ -7,10 +7,10 @@ class Game {
         this.currentPageState = ""
 
         //Add Events
-        this.gameSetupButton = document.getElementById('startPageButton')
-        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
-            this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
-        }
+        // this.gameSetupButton = document.getElementById('startPageButton')
+        // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
+        //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
+        // }
         this.gamePlayButton = document.getElementById('gameSetupButton')
         if(this.gamePlayButton !== null){
             this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
@@ -31,7 +31,9 @@ class Game {
     }
 
     startGame() {
-        this.showPage('start-container')        
+        this.showPage('start-container')
+        this.startPageController.addStartGameEvent()        
+        this.startPageController.addUserNameInputEvent()
         this.gameController.addEventToPlay()
     }
     
