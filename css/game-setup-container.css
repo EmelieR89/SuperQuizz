@@ -7,7 +7,8 @@
     border-radius: 10%;
     margin-left: 1.5rem;
 }
-li {
+.bots {
     list-style: none;
-    display: inline;
+    display: flex;
+    justify-content: space-around;
 }
