@@ -90,8 +90,8 @@ class GameController {
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    return 75  // för buggfix
-    // return parseInt(Math.random() * 100);
+    //return 75 för buggfix
+    return parseInt(Math.random() * 100);
 
   }
 
@@ -103,6 +103,7 @@ class GameController {
       const numberGuessed = parseInt(this.userInput.value)
       this.checkPlayerInput(numberGuessed)
       this.setListGuessedNumber(numberGuessed)
+      this.userInput.value = ""
       if (!this.gameOver)
         this.cyclePlayerTurns()
     })
@@ -169,7 +170,6 @@ class GameController {
     let userGuesses = JSON.parse(localStorage.getItem('guessedNumber'))
     let ul = document.getElementById("guessedNumbersFromPlayer")
     ul.innerHTML = ""
-    console.log('här')
     for (let guess of userGuesses) {
       let li = document.createElement("li")
       li.innerHTML = guess
@@ -193,4 +193,15 @@ class GameController {
     this.gameResults = "Go " + status + "!"
     document.getElementById("gameResponse").innerHTML = this.gameResults
   }
+
+  /**
+   * Clears item in localStorage and the list with guessed numbers
+   */
+  resetGuessedList() {
+    localStorage.removeItem('guessedNumber')
+    this.list = []
+    let ul = document.getElementById("guessedNumbersFromPlayer")
+    ul.innerHTML = ""
+  }
+
 }

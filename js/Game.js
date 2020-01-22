@@ -58,6 +58,8 @@ class Game {
     goToGamePlayPage() {
         this.gameController.createPlayerTurns(this.gameSetupController.getNumberOfAIPlayers())
         this.gameController.setupInitialGameState()
+        this.gameController.resetGuessedList()
+        document.getElementById("gameResponse").innerHTML = ""
         this.showPage('game-play-container')
     }
 
