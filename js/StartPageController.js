@@ -6,6 +6,56 @@ class StartPageController{
         this.rulesT.addEventListener('click', this.rulesToggle.bind(this))
         this.highScoreButton = document.getElementById('highScoreButton')
         this.highScoreButton.addEventListener('click', this.highScoreToggle.bind(this))
+        this.startGameButton = document.querySelector('.start-container .start-game')
+        this.userNameInput = document.querySelector('.start-container input')
+    }
+
+    addStartGameEvent() {
+        this.startGameButton.addEventListener('click', () => {
+            if (this.userNameInput.value === "") {
+                this.generateEmptyUserNameMessage()
+            }
+            else {
+                this.proceedToStartGame()
+            }
+        })
+    }
+
+    addUserNameInputEvent() {
+        this.userNameInput.addEventListener('keyup', ()=> {
+            let disabled;
+            if (this.userNameInput.value != "") {
+                disabled = true
+                this.manageStartButtonColor(disabled)
+            }
+            else {
+                disabled = false
+                this.manageStartButtonColor(disabled)                
+            }
+        })
+    }
+
+    manageStartButtonColor(disabled) {
+        if (disabled && this.startGameButton.classList.contains('inactive-start')) {
+            this.startGameButton.classList.remove('inactive-start')
+            this.startGameButton.classList.add('active-start')
+        }
+        else if (!disabled) {
+            this.startGameButton.classList.remove('active-start')
+            this.startGameButton.classList.add('inactive-start')
+        }
+        else {
+            console.log('do nothing');
+            
+        }
+    }
+    
+    generateEmptyUserNameMessage() {
+        console.log('pls choose name');
+    }
+    
+    proceedToStartGame() {
+        this.game.gotoSetupPage()             
     }
 
 
