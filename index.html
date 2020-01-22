@@ -28,7 +28,6 @@
     <script defer src="./js/Player.js"></script>
     <script defer src="./js/HumanPlayer.js"></script>
     <script defer src="./js/BotPlayer.js"></script>
-    <!-- <script defer src="./js/SelectPage.js"></script> -->
     <script defer src="./js/StartPageController.js"></script>
     <script defer src="./js/GameSetupController.js"></script>
     <title>Super Quizz</title>
@@ -90,11 +89,16 @@
             </ul>
         </div>
         <div class="game-winner-container pageHolder">
-            <!---->
-            <h1>You are a winner!</h1>
-            <!-- <!-- <h6>game-winner-container, output in console</h6> --> -->
-            <button id="backToStart">Start Page</button>
-            <button id="playAgain">Play Again</button>
+            <div>
+                <p>Winning number:</p>
+                <h1 class="win-con"></h1>
+                <h2>You are a winner!</h2>
+                <p>is the winner!</p>
+                <div>
+                    <button id="backToStart">Start Page</button>
+                    <button id="playAgain">Play Again</button>
+                </div>
+            </div>
         </div>
         <div class="statistics-container pageHolder">
             <!---->
