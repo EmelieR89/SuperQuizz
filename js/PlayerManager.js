@@ -1,14 +1,19 @@
+//Saves users as Player objects in local storage.
+//To get current logged in player, use getCurrentHumanPlayer().
+//To get all players list array, use getAllPlayerList().
+//When changes to player have been made, save changes with saveAllPlayerList().
+
 class PlayerManager{
     constructor() {
         /**
          * @type {Player}
          */
-        this.currentHumanPlayer //nuvarande vald spelare
+        this.currentHumanPlayer
 
         /**
          * @type {string}
          */
-        this.playerListLSName = 'playerList' //localStorage namn
+        this.playerListLSName = 'playerList'
         
         /**
          * @type {Array<Player>}
@@ -17,7 +22,6 @@ class PlayerManager{
 
         //runs when the constructor start.
         this.startLocalStorage()
-
     }
 
     /**
@@ -71,7 +75,7 @@ class PlayerManager{
     }
 
     /**
-     * 
+     * Creates a new player if input name can not be found in player list.
      * @param {string} inPlayerName
      */
     createPlayer(inPlayerName){
@@ -106,9 +110,21 @@ class PlayerManager{
     }
 
     //input player object to set current logged in player from start page.
+
+    /**
+     * Takes a player obj input and loads it into currentHumanPlayer.
+     * @param {Player} inputHumanPlayer 
+     */
     setCurrentHumanPlayer(inputHumanPlayer){
         this.currentHumanPlayer = inputHumanPlayer
         //console.log(this.currentHumanPlayer)
+    }
+
+    /**
+     * returns an array of all player objects.
+     */
+    getAllPlayerList(){
+        return this.allPlayerList
     }
 
 
