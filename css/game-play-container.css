@@ -1,6 +1,5 @@
 .game-play-container input{
-    outline: none;
-    /* background-color: aqua; */
+    outline: 0;
 }
 
 .game-play-container{

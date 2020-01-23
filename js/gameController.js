@@ -15,12 +15,31 @@ class GameController {
     this.turn = 0
     this.gameOver = false
   }
+/**
+ * Makes enter key work in game-play-container. But the game stops after the first round.
+ */
+//   addEventToInput() {
+//     this.userInput.addEventListener('keyup', (event) => {
+//         if(event.key === 'Enter') {
+//             if(this.userInput.value === ''){
+//             }
+//             else {
+//                 let numberGuessed = this.userInput.value
+//                 this.checkPlayerInput(numberGuessed)
+//                 this.setListGuessedNumber(numberGuessed)
+//                 this.userInput.value = ""
+//             }
+//             console.log(this.userInput.length)
+//         }
+//     })
+//   }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
     this.updateActivePlayer()
+    // this.addEventToInput()
   }
 
   /**

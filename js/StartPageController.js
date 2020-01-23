@@ -27,6 +27,9 @@ class StartPageController{
             if (this.userNameInput.value != "") {
                 disabled = true
                 this.manageStartButtonColor(disabled)
+                if (event.key === 'Enter') {
+                    this.proceedToStartGame()
+                } 
             }
             else {
                 disabled = false
@@ -43,11 +46,6 @@ class StartPageController{
         else if (!disabled) {
             this.startGameButton.classList.remove('active-start')
             this.startGameButton.classList.add('inactive-start')
-        }
-        else {
-            if (event.key === 'Enter') {
-                this.proceedToStartGame()
-            } 
         }
     }
     
