@@ -1,31 +1,34 @@
-.game-play-container input{
-    outline: none;
-    /* background-color: aqua; */
-}
-
 .game-play-container{
-    padding: 3rem 1rem;
     max-width: 14.1rem;
 }
 
-button{
-    background: #bf00ff;
-    color: #fbefff;
-    border: none;
-    border-radius: 30%; 
-    padding:0.5rem;
-    font-size: 0.9rem;
-    outline: none;
+.bot-active {
+    background-color: #76647d;
+    color: #262028
 }
 
-input{
-    background: #47354e;
-    border: none;
-    color: #fbefff;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    border-radius: 4rem; 
-    margin-bottom: 1rem;
+.human-active {
+    background-color: #bf00ff;
+    color: #fbefff
+}
+
+.game-play-container > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-play-container .player-turn {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.game-play-container input{
+    outline: none;
+    /* background-color: aqua; */
 }
 
 .guessedNumbersShown {
