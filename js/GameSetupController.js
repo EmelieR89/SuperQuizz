@@ -51,12 +51,14 @@ class GameSetupController{
     //Om aktiv, lägg till bot i array 
     addBotToPlay(bot) {
         this.activeBots.push(bot)
+        console.log(this.activeBots)
+
     }
     removeBotFromPlay(bot) {
         this.activeBots.shift(bot)
 
+        console.log(this.activeBots)
     }
-
 }
 
 
