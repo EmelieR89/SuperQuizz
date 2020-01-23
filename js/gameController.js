@@ -101,11 +101,11 @@ class GameController {
    */
   createPlayerTurns(nOfPlayers) {
     let playerArray = []
-    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers + 1))
+    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1))
     console.log(humanPlayerTurn);
 
 
-    for (let i = 0; i < nOfPlayers + 1; i++) {
+    for (let i = 0; i < nOfPlayers.length + 1; i++) {
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer('hooman'))
       }
