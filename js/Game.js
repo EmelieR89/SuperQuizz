@@ -44,6 +44,9 @@ class Game {
             //this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             //this.gameSetupController.getNumberOfAIPlayers())
         }
+        if (this.currentPageState === 'game-play-container') {
+            this.gameController.userInput.focus()  
+        }
     }
 
     getCurrentGameState() {
