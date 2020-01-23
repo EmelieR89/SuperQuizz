@@ -11,7 +11,7 @@ class StartPageController{
     }
 
     addStartGameEvent() {
-        this.startGameButton.addEventListener('click', () => {
+        this.startGameButton.addEventListener('click',() => {
             if (this.userNameInput.value === "") {
                 this.generateEmptyUserNameMessage()
             }
@@ -20,6 +20,17 @@ class StartPageController{
             }
         })
     }
+
+    // addEnterpress() {
+    //     this.startGameButton.addEventListener('keydown',(event) => {
+    //         const enter = event.key === 'Enter'
+    //         if (enter === true) {
+               
+    //             this.proceedToStartGame()
+    //             return
+    //         }
+    //     })
+    // }
 
     addUserNameInputEvent() {
         this.userNameInput.addEventListener('keyup', ()=> {
@@ -45,8 +56,11 @@ class StartPageController{
             this.startGameButton.classList.add('inactive-start')
         }
         else {
-            console.log('do nothing');
-            
+             console.log('do nothing');
+            // this.startGameButton.addEventListener('keydown',(event) => {
+            //     if (event.key === 'Enter') {
+            //         this.proceedToStartGame()
+            //     } 
         }
     }
     
