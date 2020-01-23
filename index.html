@@ -43,9 +43,12 @@
             <h1 class="gameTitel">Super Quizz</h1>
 
             <div id="showRules" style="display: none;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum accusamus deleniti quod! Autem eaque
-                reprehenderit possimus? Accusamus harum nesciunt nam enim voluptate odio tenetur quod maxime omnis.
-                Ducimus, natus!
+                In this game you take a guess at a randomly generated number between 1-100.
+                After you have guessed, the game leader instructs you to either go higher or lower.
+                You will get to choose how many bots you want to play against in the next step.
+                One of the players is randomly chosen to start answering. All the current players previous answers will
+                be shown as a list.
+                Who ever guesses the right number first wins. Good luck!
             </div>
             <input type="text" name="" id="startNameInput" placeholder="Enter Name">
             <button class="start-game inactive-start">Start Game</button>
@@ -73,10 +76,15 @@
             <!---->
             <h1>Game Setup</h1>
             <h2>Select AI players</h2>
+                <ul class=bots>
+                    <li id=bot1><img src="./img/bot.jpg" alt="Smiley face" height="42" width="42"><p>Joey</p></li>
+                    <li id=bot2><img src="./img/bot.jpg" alt="Smiley face" height="42" width="42"><p>Ross</p></li>
+                    <li id=bot3><img src="./img/bot.jpg" alt="Smiley face" height="42" width="42"><p>Chandler</p></li>
+                </ul>
             <h2>Read AI player info</h2>
             <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players">
-            <button id="backToStart">&larr;Start</button>
-            <button id="gameSetupButton">Play&rarr;</button>
+            <br><button id="backToStart">&larr; &nbsp;Start</button>
+            <button id="gameSetupButton">Play&nbsp; &rarr;</button>
         </div>
         <div class="game-play-container pageHolder">
             <!---->
