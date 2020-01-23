@@ -26,12 +26,12 @@
 }
 
 .game-winner-container > div > div {
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .game-winner-container > div > div button {
-    margin-left: 0;
+    margin: 0 0 1rem 0;
 }
 
 
