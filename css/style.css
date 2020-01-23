@@ -1,11 +1,14 @@
 *{
     margin: 0;
-    outline:none;
 }
 
+
+input:focus{
+    outline:none;
+    border:1px solid #bf00ff;
+}
 .hiddenPage{
-    display: none;
-   
+    display: none; 
 }
 html{
     font-family: 'Open Sans', sans-serif;  
