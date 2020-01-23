@@ -7,25 +7,19 @@ class Game {
         this.currentPageState = ""
 
         //Add Events
-        this.gameSetupButton = document.getElementById('startPageButton')
-        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
-            this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
-        }
-        
-        this.gamePlayButton = document.getElementById('gameSetupButton')
-        if(this.gamePlayButton !== null){
-            this.gamePlayButton.addEventListener('click' || 'keydown', function(event) {
-                if (event.key === "Enter"){
-                    this.goToGamePlayPage.bind(this)
-                }
-            })
         // this.gameSetupButton = document.getElementById('startPageButton')
         // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
         //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         // }
-        // this.gamePlayButton = document.getElementById('gameSetupButton')
-        // if (this.gamePlayButton !== null) {
-        //     this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
+        
+    
+        this.gameSetupButton = document.getElementById('startPageButton')
+        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
+            this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
+        }
+        this.gamePlayButton = document.getElementById('gameSetupButton')
+         if (this.gamePlayButton !== null) {
+            this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
         this.playAgainButton = document.getElementById('playAgain')
         if (this.playAgainButton !== null) {
