@@ -3,7 +3,8 @@
 }
 
 
-* input:focus{
+input:focus{
+
     outline:0;
     border:1px solid #bf00ff;
 }
