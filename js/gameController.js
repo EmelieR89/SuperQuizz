@@ -71,6 +71,7 @@ class GameController {
     if (this.activePlayer instanceof BotPlayer) {
       const activeBot = this.activePlayer
       this.retrieveAnswerFromBot(activeBot)
+      this.activePlayer.addToGuess()
     }
   }
   
@@ -119,6 +120,7 @@ class GameController {
    * @param {Number} nOfPlayers Number of AI players inputed
    */
   createPlayerTurns(nOfPlayers) {
+    this.nOfPlayers = nOfPlayers
     let playerArray = []
     let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1))
     console.log(humanPlayerTurn);
@@ -169,6 +171,11 @@ class GameController {
       this.updateGameResponse(input, "Lower")
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true
+      if (this.activePlayer instanceof BotPlayer) {
+        this.activePlayer.addToWins()
+        const stats = this.activePlayer.getStatistics(this.nOfPlayers)
+        console.log(stats, this.activePlayer.totalWins, this.activePlayer.totalGuess);
+      }
       this.goToWinnerPage()
     }
   }
