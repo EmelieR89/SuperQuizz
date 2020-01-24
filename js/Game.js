@@ -1,7 +1,8 @@
 // Detta är klassen som kör hela spelet, som alla andra klasser utgår ifrån
 class Game {
     constructor() {
-        this.startPageController = new StartPageController(this)
+        this.playerManager = new PlayerManager()
+        this.startPageController = new StartPageController(this, this.playerManager)
         this.gameSetupController = new GameSetupController()
         this.gameController = new GameController(this)
         this.currentPageState = ""
@@ -11,8 +12,14 @@ class Game {
         // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
         //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         // }
+        
+    
+        this.gameSetupButton = document.getElementById('startPageButton')
+        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
+            this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
+        }
         this.gamePlayButton = document.getElementById('gameSetupButton')
-        if (this.gamePlayButton !== null) {
+         if (this.gamePlayButton !== null) {
             this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
         this.playAgainButton = document.getElementById('playAgain')
@@ -44,6 +51,9 @@ class Game {
             //this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             //this.gameSetupController.getNumberOfAIPlayers())
         }
+        if (this.currentPageState === 'game-play-container') {
+            this.gameController.userInput.focus()  
+        }
     }
 
     getCurrentGameState() {
@@ -53,6 +63,16 @@ class Game {
     //Start click functions.
     gotoSetupPage() {
         this.showPage('game-setup-container')
+
+        //test save new player info to local storage.
+        if(this.playerManager.currentHumanPlayer != null){
+            this.playerManager.currentHumanPlayer.gamesPlayed ++
+            console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
+            this.playerManager.saveAllPlayerList()
+            this.playerManager.addPlayerToList(new BotPlayer('addBot'))
+            //this.playerManager.saveAllPlayerList()
+            console.log(this.playerManager.getAllPlayerList())
+        }
     }
 
     goToGamePlayPage() {

@@ -1,13 +1,17 @@
 //code for start page
 class StartPageController{
-    constructor(game){
+    constructor(game, playerManager){
         this.game = game
+        this.playerManager = playerManager
         this.rulesT = document.getElementById('readRulesButton')
         this.rulesT.addEventListener('click', this.rulesToggle.bind(this))
         this.highScoreButton = document.getElementById('highScoreButton')
         this.highScoreButton.addEventListener('click', this.highScoreToggle.bind(this))
         this.startGameButton = document.querySelector('.start-container .start-game')
         this.userNameInput = document.querySelector('.start-container input')
+        this.loginCreateButton = document.getElementById('login-create')
+        //add events
+        this.loginCreateButton.addEventListener('click', this.loginCreateEvent.bind(this))
     }
 
     addStartGameEvent() {
@@ -22,15 +26,27 @@ class StartPageController{
     }
 
     addUserNameInputEvent() {
-        this.userNameInput.addEventListener('keyup', ()=> {
+        this.userNameInput.addEventListener('keyup', () => {
             let disabled;
             if (this.userNameInput.value != "") {
                 disabled = true
+                
+                //change login/create button text if player is found or not.
+                if(!this.playerManager.findPlayer(this.userNameInput.value)){
+                    this.loginCreateButton.innerHTML = 'New User'
+                }else{
+                    this.loginCreateButton.innerHTML = 'Login'
+                }//end login code.
+
                 this.manageStartButtonColor(disabled)
+                if (event.key === 'Enter') {
+                    this.proceedToStartGame()
+                } 
             }
             else {
                 disabled = false
-                this.manageStartButtonColor(disabled)                
+                this.manageStartButtonColor(disabled) 
+                this.loginCreateButton.innerHTML = 'Login/Create'               
             }
         })
     }
@@ -44,10 +60,21 @@ class StartPageController{
             this.startGameButton.classList.remove('active-start')
             this.startGameButton.classList.add('inactive-start')
         }
-        else {
-            console.log('do nothing');
-            
+    }
+
+    //run when login button is clicked
+    loginCreateEvent(){
+        if(!this.playerManager.findPlayer(this.userNameInput.value)){
+            this.playerManager.createPlayer(this.userNameInput.value)
+            this.playerManager.setCurrentHumanPlayer(this.playerManager.findPlayer(this.userNameInput.value))
+            //console.log(this.playerManager.findPlayer(this.userNameInput.value))
         }
+        else{
+            this.playerManager.setCurrentHumanPlayer(this.playerManager.findPlayer(this.userNameInput.value))
+        }
+
+        this.loginCreateButton.innerHTML = this.playerManager.getCurrentHumanPlayer().name
+
     }
     
     generateEmptyUserNameMessage() {

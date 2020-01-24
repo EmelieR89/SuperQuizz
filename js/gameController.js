@@ -15,12 +15,46 @@ class GameController {
     this.turn = 0
     this.gameOver = false
   }
+/**
+ * Makes enter key work in game-play-container. But the game stops after the first round.
+ */
+//   addEventToInput() {
+//     this.userInput.addEventListener('keyup', (event) => {
+//         if(event.key === 'Enter') {
+//             if(this.userInput.value === ''){
+//             }
+//             else {
+//                 let numberGuessed = this.userInput.value
+//                 this.checkPlayerInput(numberGuessed)
+//                 this.setListGuessedNumber(numberGuessed)
+//                 this.userInput.value = ""
+//             }
+//             console.log(this.userInput.length)
+//         }
+//     })
+//   }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
-    this.updateActivePlayer()
+
+    this.cyclePlayerTurns()
+  }
+  
+  /**
+   * Logic for cycling player turns
+   */
+  cyclePlayerTurns() {
+    if (this.turn > this.playerTurns.length - 1) {
+      this.turn = 0
+    }
+    if (!this.gameOver) {
+      this.updateActivePlayer()
+      this.updatePlayerTurnVisuals()
+      this.checkIfBotTurn()
+      this.turn++
+    }
   }
 
   /**
@@ -28,10 +62,8 @@ class GameController {
    */
   updateActivePlayer() {
     this.activePlayer = this.playerTurns[this.turn]
-    this.updatePlayerTurnTitle()
-    this.checkIfBotTurn()
   }
-
+  
   /**
    * Checks if active player is a bot and retrieves answer if it is
    */
@@ -39,6 +71,31 @@ class GameController {
     if (this.activePlayer instanceof BotPlayer) {
       const activeBot = this.activePlayer
       this.retrieveAnswerFromBot(activeBot)
+      this.activePlayer.addToGuess()
+    }
+  }
+  
+  /**
+   * Updates the title based on turn
+   */
+  updatePlayerTurnVisuals() {
+    this.activePlayerTitle.innerHTML = this.activePlayer.name
+    if (this.activePlayer instanceof BotPlayer) {
+      console.log(`${this.activePlayer.name} painting bot stuff`);
+      this.userInput.disabled = true
+      this.userInput.style.opacity = .4
+      this.playButton.disabled = true
+      this.playButton.classList.add('bot-active')
+      this.playButton.classList.remove('human-active')
+    }
+    else {
+      console.log(`${this.activePlayer.name} painting human stuff`);
+      this.userInput.disabled = false;
+      this.userInput.style.opacity = 1
+      this.playButton.disabled = false;
+      this.userInput.focus()
+      this.playButton.classList.remove('bot-active')
+      this.playButton.classList.add('human-active')
     }
   }
 
@@ -63,12 +120,13 @@ class GameController {
    * @param {Number} nOfPlayers Number of AI players inputed
    */
   createPlayerTurns(nOfPlayers) {
+    this.nOfPlayers = nOfPlayers
     let playerArray = []
-    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers + 1))
+    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1))
     console.log(humanPlayerTurn);
 
 
-    for (let i = 0; i < nOfPlayers + 1; i++) {
+    for (let i = 0; i < nOfPlayers.length + 1; i++) {
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer('hooman'))
       }
@@ -77,13 +135,6 @@ class GameController {
       }
     }
     this.playerTurns = playerArray
-  }
-
-  /**
-   * Updates the title based on turn
-   */
-  updatePlayerTurnTitle() {
-    this.activePlayerTitle.innerHTML = this.activePlayer.name
   }
 
   /**
@@ -110,19 +161,6 @@ class GameController {
   }
 
   /**
-   * Logic for cycling player turns
-   */
-  cyclePlayerTurns() {
-    this.turn++
-    if (this.turn > this.playerTurns.length - 1) {
-      this.turn = 0
-    }
-    if (!this.gameOver) {
-      this.updateActivePlayer()
-    }
-  }
-
-  /**
    * Checks the user input with the winning number
    * @param {Number} input User input
    */
@@ -133,6 +171,11 @@ class GameController {
       this.updateGameResponse(input, "Lower")
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true
+      if (this.activePlayer instanceof BotPlayer) {
+        this.activePlayer.addToWins()
+        const stats = this.activePlayer.getStatistics(this.nOfPlayers)
+        console.log(stats, this.activePlayer.totalWins, this.activePlayer.totalGuess);
+      }
       this.goToWinnerPage()
     }
   }

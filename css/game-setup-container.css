@@ -1,9 +1,10 @@
-#backToStart{
-    border-radius: 10%;
-    /* margin-left: 1.5rem; */
+.bots {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+}
+.bots .active {
+    opacity: 50%;
 }
 
-#gameSetupButton{
-    border-radius: 10%;
-    margin-left: 1.5rem;
-}
