@@ -71,6 +71,7 @@ class GameController {
     for (let i = 0; i < nOfPlayers + 1; i++) {
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer('hooman'))
+        localStorage.setItem('humanName', JSON.stringify(playerArray[0]))
       }
       else {
         playerArray.push(new BotPlayer(`Bot ${i}`))
@@ -90,8 +91,11 @@ class GameController {
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    //return 75 för buggfix
-    return parseInt(Math.random() * 100);
+    //return 75 för buggfix 
+    //Provar att spara slumpnumret
+    let rndnum = parseInt(Math.random() * 100)
+    localStorage.setItem('rndnum', JSON.stringify(rndnum))
+    return rndnum;
 
   }
 
@@ -134,7 +138,12 @@ class GameController {
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true
       this.goToWinnerPage()
+      HighScore.this.checkGameStatus()
     }
+  }
+
+  getGameOver(){
+    return(this.gameOver)
   }
 
   /**
