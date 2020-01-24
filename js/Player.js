@@ -2,12 +2,13 @@
 // användarens spelare samt botar kommer att utgå ifrån
 
 class Player {
-    constructor(name) {
+    constructor(name, score) {
         /**
          * @type {string}
          */
         this.name = name
         this.gamesPlayed = 0
+        this.score = score
     }
     
     /**

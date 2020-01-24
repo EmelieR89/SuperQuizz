@@ -6,6 +6,7 @@ class Game {
         this.gameSetupController = new GameSetupController()
         this.gameController = new GameController(this)
         this.currentPageState = ""
+        this.highScore = new HighScore(this.playerManager)
 
         //Add Events
         // this.gameSetupButton = document.getElementById('startPageButton')
@@ -69,7 +70,7 @@ class Game {
             this.playerManager.currentHumanPlayer.gamesPlayed ++
             console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
             this.playerManager.saveAllPlayerList()
-            this.playerManager.addPlayerToList(new BotPlayer('addBot'))
+            this.playerManager.addPlayerToList(new BotPlayer('addBot', 8))
             //this.playerManager.saveAllPlayerList()
             console.log(this.playerManager.getAllPlayerList())
         }

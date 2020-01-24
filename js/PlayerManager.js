@@ -40,8 +40,8 @@ class PlayerManager{
             //create localStorage
             //console.log("Did not find player list, will create a new with a testPlayer")
             let playerList = []
-            playerList.push(new HumanPlayer('test'))
-            playerList.push(new BotPlayer('testBot'))
+            playerList.push(new HumanPlayer('test', 10))
+            playerList.push(new BotPlayer('testBot', 20))
             //console.log(playerList)
             localStorage.setItem(this.playerListLSName, JSON.stringify(playerList))
             this.allPlayerList = playerList
@@ -83,7 +83,7 @@ class PlayerManager{
         // new player
         if(!this.findPlayer(inPlayerName)){
             //console.log('player name not in list, will add.')
-            let humanPlayer = new HumanPlayer(inPlayerName)
+            let humanPlayer = new HumanPlayer(inPlayerName,parseInt(Math.random()*10))
             this.allPlayerList.push(humanPlayer)
 
         }else{
