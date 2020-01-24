@@ -71,6 +71,7 @@ class GameController {
     if (this.activePlayer instanceof BotPlayer) {
       const activeBot = this.activePlayer
       this.retrieveAnswerFromBot(activeBot)
+      this.activePlayer.addToGuess()
     }
   }
   
@@ -175,9 +176,7 @@ class GameController {
         const stats = this.activePlayer.getStatistics(this.nOfPlayers)
         console.log(stats, this.activePlayer.totalWins, this.activePlayer.totalGuess);
       }
-      this.winnerTitle.innerHTML = `${this.activePlayer.name} is the winner!`
-      
-      this.game.showPage('game-winner-container')
+      this.goToWinnerPage()
     }
   }
 
