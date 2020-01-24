@@ -1,3 +1,7 @@
+
+.game-play-container input{
+    outline: 0;
+}
 .game-play-container{
     max-width: 14.1rem;
 }
