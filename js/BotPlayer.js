@@ -47,8 +47,11 @@ class BotPlayer extends Player {
         }
     }
 
+    /**
+     * This returns the optimal value
+     */
     activate() {
-        console.log(`Bot ${this.name} returns ${this.optimalValue}`);
+        console.log(`${this.name} returns ${this.optimalValue}`);
         return this.optimalValue
     }
 
@@ -57,14 +60,14 @@ class BotPlayer extends Player {
      * @param {Number} guess The last made guess
      * @param {String} status The result of the last made guess
      */
-    calculateAndReturnNewGuess(guess, status) {
+    calculateNewOptimalGuess(guess, status) {
         this.findPlausibleValues(guess, status)
 
         const guessArray = this.previousGuesses;
-        console.log(guessArray);
+        // console.log(guessArray);
         
         this.optimalValue = Math.floor((guessArray[0]+guessArray[1])/2);
-        console.log(`Bot ${this.name} would like to enter ${this.optimalValue}`);
+        // console.log(`Bot ${this.name} would like to enter ${this.optimalValue}`);
           
     }
 }

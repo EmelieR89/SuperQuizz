@@ -1,0 +1,40 @@
+.game-winner-container > div {
+    position: absolute;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-winner-container .win-con {
+    padding: 0;
+    font-size: 80px;
+}
+
+.game-winner-container > div > h2 {
+    padding: .5rem 1rem 0 1rem;
+    text-align: center;
+    font-size: 40px;
+}
+
+.game-winner-container > div > p:last-of-type {
+    padding: 0 0 1rem 0;
+}
+
+.game-winner-container > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-winner-container > div > div button {
+    margin: 0 0 1rem 0;
+}
+
+
+.game-winner-container p{
+    font-size: .8rem;
+}
