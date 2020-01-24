@@ -1,7 +1,8 @@
 // Detta är klassen som kör hela spelet, som alla andra klasser utgår ifrån
 class Game {
     constructor() {
-        this.startPageController = new StartPageController(this)
+        this.playerManager = new PlayerManager()
+        this.startPageController = new StartPageController(this, this.playerManager)
         this.gameSetupController = new GameSetupController()
         this.gameController = new GameController(this)
         this.currentPageState = ""
@@ -62,6 +63,16 @@ class Game {
     //Start click functions.
     gotoSetupPage() {
         this.showPage('game-setup-container')
+
+        //test save new player info to local storage.
+        if(this.playerManager.currentHumanPlayer != null){
+            this.playerManager.currentHumanPlayer.gamesPlayed ++
+            console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
+            this.playerManager.saveAllPlayerList()
+            this.playerManager.addPlayerToList(new BotPlayer('addBot'))
+            //this.playerManager.saveAllPlayerList()
+            console.log(this.playerManager.getAllPlayerList())
+        }
     }
 
     goToGamePlayPage() {
