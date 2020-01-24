@@ -2,6 +2,7 @@
 //To get current logged in player, use getCurrentHumanPlayer().
 //To get all players list array, use getAllPlayerList().
 //When changes to player have been made, save changes with saveAllPlayerList().
+//To add a bot or player use, addPlayerToList(Player obj).
 
 class PlayerManager{
     constructor() {
@@ -125,6 +126,22 @@ class PlayerManager{
      */
     getAllPlayerList(){
         return this.allPlayerList
+    }
+
+    /**
+     * Add bot or human player to list if name is not in list and save to LS.
+     * @param {{Player}} inputPlayer 
+     */
+    addPlayerToList(inputPlayer){
+        //console.log(inputPlayer.name + ' add player name ')
+        if(!this.findPlayer(inputPlayer.name)){
+            this.allPlayerList.push(inputPlayer)
+            //save list to LS after added to playerList array.
+            this.saveAllPlayerList()
+        }
+        else{
+            //console.log(' player in list, will not add ')
+        }
     }
 
 

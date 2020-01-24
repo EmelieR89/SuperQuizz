@@ -60,6 +60,9 @@ class Game {
             this.playerManager.currentHumanPlayer.gamesPlayed ++
             console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
             this.playerManager.saveAllPlayerList()
+            this.playerManager.addPlayerToList(new BotPlayer('addBot'))
+            //this.playerManager.saveAllPlayerList()
+            console.log(this.playerManager.getAllPlayerList())
         }
     }
 
