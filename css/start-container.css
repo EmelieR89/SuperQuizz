@@ -33,12 +33,22 @@
     /* margin: -20rem 0 0 10rem; */
 } 
 
+.gameUnderTitel{
+    font-family: 'Bangers', cursive;
+    color: #d14ffc;
+}
+
 
 #showRules {
     display:none;
     max-width: 19rem;
     padding-bottom: 2rem;
-    margin-top: 20px;
   }
+
+#showHighScore {
+    display: none;
+    max-width: 19rem;
+    padding-bottom: 2rem;
+}
 
  
