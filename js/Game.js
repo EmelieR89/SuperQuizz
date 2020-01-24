@@ -12,8 +12,14 @@ class Game {
         // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
         //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         // }
+        
+    
+        this.gameSetupButton = document.getElementById('startPageButton')
+        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
+            this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
+        }
         this.gamePlayButton = document.getElementById('gameSetupButton')
-        if (this.gamePlayButton !== null) {
+         if (this.gamePlayButton !== null) {
             this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
         this.playAgainButton = document.getElementById('playAgain')
@@ -44,6 +50,9 @@ class Game {
             console.log("run winner code " + this.gameController.gameResults)
             //this.startPageController.getHumanPlayerName() + " player name and AI player number " + 
             //this.gameSetupController.getNumberOfAIPlayers())
+        }
+        if (this.currentPageState === 'game-play-container') {
+            this.gameController.userInput.focus()  
         }
     }
 

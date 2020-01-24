@@ -4,6 +4,7 @@
 
 
 input:focus{
+
     outline:0;
     border:1px solid #bf00ff;
 }
@@ -29,4 +30,25 @@ body{
 
 h1{
     padding: 1rem 0;
+}
+
+
+button {
+    background-color: #bf00ff;
+    color: #fbefff;
+    border: none;
+    border-radius: 1rem; 
+    padding:0.5rem;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+input {
+    background-color: #262028;
+    color: #fbefff;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 4rem; 
+    margin-bottom: 1rem;
 }

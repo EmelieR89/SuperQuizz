@@ -26,7 +26,7 @@ class StartPageController{
     }
 
     addUserNameInputEvent() {
-        this.userNameInput.addEventListener('keyup', ()=> {
+        this.userNameInput.addEventListener('keyup', () => {
             let disabled;
             if (this.userNameInput.value != "") {
                 disabled = true
@@ -39,6 +39,9 @@ class StartPageController{
                 }//end login code.
 
                 this.manageStartButtonColor(disabled)
+                if (event.key === 'Enter') {
+                    this.proceedToStartGame()
+                } 
             }
             else {
                 disabled = false
@@ -56,10 +59,6 @@ class StartPageController{
         else if (!disabled) {
             this.startGameButton.classList.remove('active-start')
             this.startGameButton.classList.add('inactive-start')
-        }
-        else {
-            //console.log('do nothing');
-            
         }
     }
 
