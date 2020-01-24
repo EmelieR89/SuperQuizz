@@ -4,8 +4,8 @@
 // GameController needs more work before implementation is ready
 
 class BotPlayer extends Player {
-    constructor(name) {
-        super(name)
+    constructor(name, score) {
+        super(name, score)
         this.previousGuesses = [0, 100]
         this.optimalValue = (this.previousGuesses[0]+this.previousGuesses[1])/2
         this.totalWins = 0 // || localstorage

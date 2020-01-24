@@ -1,12 +1,16 @@
 // Denna klassen håller koll på vem som vann och hur många gånger de har vunnit
 class HighScore { 
-    constructor(){
+    constructor(playerManager){
+        this.playerManager = playerManager
         this.names = []
-        this.highScore = []
         this.tempHighScore = []
         this.tempNamesHistory = []
         this.highScore = JSON.parse(localStorage.getItem('highScoreHistory'))
         this.names = JSON.parse(localStorage.getItem('namesHistory'))
+        this.highScoreArray = this.playerManager.getAllPlayerList()
+        console.log(this.highScoreArray)
+        this.sessionSort()
+        console.log(this.highScoreArray)
     }
 
     /**
@@ -35,21 +39,27 @@ class HighScore {
      * Sorts high score high to low and adjusts the player names accordingly
      */
     sessionSort(){
-        this.highScore.sort(
+        this.highScoreArray.sort(
             function(a,b){
-                return b-a
+                if (a.score > b.score) {
+                    return -1
+                }
+                else if (a.score < b.score){
+                    return 1
+                }
+                return 0
         })
 
-        for (i = 0; i < this.highScore.length; i++){
-           if (this.highScore[i] != this.tempHighScore[i]){
-                var tempStorage = this.names[i]
-                this.names[i] = this.names[i++]
-                this.names[i++] = tempStorage
-                tempStorage = this.tempHighScore [i]
-                this.tempHighScore [i] = this.tempHighScore [i++]
-                this.tempHighScore [i++] = tempStorage
-           }
-        }
+        // for (i = 0; i < this.highScore.length; i++){
+        //    if (this.highScore[i] != this.tempHighScore[i]){
+        //         var tempStorage = this.names[i]
+        //         this.names[i] = this.names[i++]
+        //         this.names[i++] = tempStorage
+        //         tempStorage = this.tempHighScore [i]
+        //         this.tempHighScore [i] = this.tempHighScore [i++]
+        //         this.tempHighScore [i++] = tempStorage
+        //    }
+        // }
     }
 
     /**
