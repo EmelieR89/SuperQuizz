@@ -3,6 +3,22 @@
 
 class Player {
     constructor(name) {
+        /**
+         * @type {string}
+         */
         this.name = name
+        this.gamesPlayed = 0
+    }
+    
+    /**
+     * 
+     * @param {number} inNumber 
+     */
+    setGamesPlayed(inNumber){
+        this.gamesPlayed = inNumber
+    }
+
+    getGamesPlayed(){
+        return this.gamesPlayed
     }
 }

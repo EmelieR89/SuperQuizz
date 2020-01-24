@@ -35,8 +35,10 @@
 
 
 #showRules {
+    display:none;
     max-width: 19rem;
     padding-bottom: 2rem;
-    border:pink;
     margin-top: 20px;
   }
+
+ 

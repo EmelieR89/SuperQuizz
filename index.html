@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="./css/start-container.css">
     <link rel="stylesheet" href="./css/login-container.css">
     <link rel="stylesheet" href="./css/high-score-container.css">
-    <link rel="stylesheet" href="./css/rules-container.css">
     <link rel="stylesheet" href="./css/game-setup-container.css">
     <link rel="stylesheet" href="./css/game-play-container.css">
     <link rel="stylesheet" href="./css/game-winner-container.css">
@@ -30,6 +29,7 @@
     <script defer src="./js/BotPlayer.js"></script>
     <script defer src="./js/StartPageController.js"></script>
     <script defer src="./js/GameSetupController.js"></script>
+    <script defer src="./js/PlayerManager.js"></script>
     <title>Super Quizz</title>
 
 </head>
@@ -42,13 +42,17 @@
             <button id="highScoreButton">Top10</button>
             <h1 class="gameTitel">Super Quizz</h1>
 
-            <div id="showRules" style="display: none;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum accusamus deleniti quod! Autem eaque
-                reprehenderit possimus? Accusamus harum nesciunt nam enim voluptate odio tenetur quod maxime omnis.
-                Ducimus, natus!
+            <div id="showRules">
+                In this game you take a guess at a randomly generated number between 1-100.
+                After you have guessed, the game leader instructs you to either go higher or lower.
+                You will get to choose how many bots you want to play against in the next step.
+                One of the players is randomly chosen to start answering. All the current players previous answers will
+                be shown as a list.
+                Who ever guesses the right number first wins. Good luck!
             </div>
             <input type="text" name="" id="startNameInput" placeholder="Enter Name">
             <button class="start-game inactive-start">Start Game</button>
+            <button id="login-create">Login/Create</button>
         </div>
         <div class="login-container pageHolder">
             <!---->
@@ -63,29 +67,35 @@
                 <button id="backToStart">Start Page</button>
             </ol>
         </div>
-        <div class="rules-container pageHolder">
-            <!---->
-            <h1>Rules</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum, incidunt!</p>
-            <button id="backToStart">Start Page</button>
-        </div>
         <div class="game-setup-container pageHolder">
             <!---->
             <h1>Game Setup</h1>
             <h2>Select AI players</h2>
-            <h2>Read AI player info</h2>
-            <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players">
-            <button id="backToStart">&larr;Start</button>
-            <button id="gameSetupButton">Play&rarr;</button>
+            <ul class=bots>
+                <li id=bot1><img src="./img/joey.png" alt="Smiley face" height="42" width="42">
+                    <p>Joey</p>
+                </li>
+                <li id=bot2><img src="./img/elaine.png" alt="Smiley face" height="42" width="42">
+                    <p>Elaine</p>
+                </li>
+                <li id=bot3><img src="./img/amy.png" alt="Smiley face" height="42" width="42">
+                    <p>Amy</p>
+                </li>
+            </ul>
+            <!-- <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players"> -->
+            <br><button id="backToStart">&larr; &nbsp;Start</button>
+            <button id="gameSetupButton">Play&nbsp; &rarr;</button>
         </div>
         <div class="game-play-container pageHolder">
             <!---->
-            <h1 class="player-turn"></h1>
-            <input id="numberGuessed" type="text" placeholder="pick a number" pattern="\d*">
-            <button id="play">Play</button>
-            <h1 id="gameResponse"></h1>
-            <ul id="guessedNumbersFromPlayer">
-            </ul>
+            <div>
+                <h1 class="player-turn"></h1>
+                <input id="numberGuessed" type="text" placeholder="pick a number" pattern="\d*">
+                <button id="play">Play</button>
+                <h1 id="gameResponse"></h1>
+                <ul id="guessedNumbersFromPlayer">
+                </ul>
+            </div>
         </div>
         <div class="game-winner-container pageHolder">
             <div>
