@@ -1,12 +1,3 @@
-#backToStart{
-    border-radius: 10%;
-    /* margin-left: 1.5rem; */
-}
-
-#gameSetupButton{
-    border-radius: 10%;
-    margin-left: 1.5rem;
-}
 .bots {
     list-style: none;
     display: flex;
@@ -16,3 +7,4 @@
 .bots .active {
     opacity: 50%;
 }
+

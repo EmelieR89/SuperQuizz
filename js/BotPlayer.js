@@ -47,10 +47,10 @@ class BotPlayer extends Player {
         this.findPlausibleValues(guess, status)
 
         const guessArray = this.previousGuesses;
-        console.log(guessArray);
+        // console.log(guessArray);
         
         this.optimalValue = Math.floor((guessArray[0]+guessArray[1])/2);
-        console.log(`Bot ${this.name} would like to enter ${this.optimalValue}`);
+        // console.log(`Bot ${this.name} would like to enter ${this.optimalValue}`);
           
     }
 }
