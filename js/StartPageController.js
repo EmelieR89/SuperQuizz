@@ -5,13 +5,14 @@ class StartPageController{
         this.playerManager = playerManager
         this.rulesT = document.getElementById('readRulesButton')
         this.rulesT.addEventListener('click', this.rulesToggle.bind(this))
-        this.highScoreButton = document.getElementById('highScoreButton')
-        this.highScoreButton.addEventListener('click', this.highScoreToggle.bind(this))
+        this.highScoreT = document.getElementById('highScoreButton')
+        this.highScoreT.addEventListener('click', this.highScoreToggle.bind(this))
         this.startGameButton = document.querySelector('.start-container .start-game')
         this.userNameInput = document.querySelector('.start-container input')
         this.loginCreateButton = document.getElementById('login-create')
         //add events
         this.loginCreateButton.addEventListener('click', this.loginCreateEvent.bind(this))
+        // document.getElementById('showHighScore').style.display = 'none'
     }
 
     addStartGameEvent() {
@@ -85,26 +86,37 @@ class StartPageController{
         this.game.gotoSetupPage()             
     }
 
-
+   /**
+    * toggles rules button. gets element by id and adds a eventlistener in cunstructor this.rulesT 
+    */
     rulesToggle(){
         let rules = document.getElementById('showRules')
+        let highScore = document.getElementById('showHighScore')
         console.log(rules.style.display)
-        if (rules.style.display === 'none') {
-            rules.style.display = 'block'
+        if (rules.style.display == 'block' || highScore.style.display == 'block') {
+            rules.style.display = 'none'  
+            highScore.style.display = 'none'
         } else{
-            rules.style.display = 'none'
-        }
-       
+            rules.style.display = 'block' || highScore.style.display == 'block'
+        } 
     }
-
+    /**
+     * toggles highscore button. gets element by id and adds a eventlistener in cunstructor this.highScoreT
+     */
+    
     highScoreToggle(){
-        this.game.showPage('start-container')
-     
-        if (this.game.getCurrentGameState() === 'start-container') {
-            this.game.showPage('high-score-container')
+        let rules = document.getElementById('showRules')
+        let highScore = document.getElementById('showHighScore')
+        console.log(highScore.style.display)
+        if (highScore.style.display == 'block' || rules.style.display == 'block') {
+            highScore.style.display = 'none'
+            rules.style.display = 'none'  
         } else{
-            this.game.showPage('start-container')
+            highScore.style.display = 'block' || rules.style.display == 'block'
         }
-        const highscoreElem = document.querySelector("#highscore-list")
+      
     }
+    
+
+
 }
