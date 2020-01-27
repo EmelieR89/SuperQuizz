@@ -69,10 +69,13 @@ class Game {
         if(this.playerManager.currentHumanPlayer != null){
             this.playerManager.currentHumanPlayer.gamesPlayed ++
             console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
-            this.playerManager.saveAllPlayerList()
+            this.playerManager.saveAllPlayerAndBotsList()
             this.playerManager.addPlayerToList(new BotPlayer('addBot', 8))
+            this.playerManager.addBotToList(new BotPlayer('addBotList', 3))
             //this.playerManager.saveAllPlayerList()
             console.log(this.playerManager.getAllPlayerList())
+            console.log(this.playerManager.getAllBotsList())
+            //this.playerManager.getAllBotPlayers()
         }
     }
 

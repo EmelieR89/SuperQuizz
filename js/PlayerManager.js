@@ -1,13 +1,15 @@
 //Saves users as Player objects in local storage.
 //To get current logged in player, use getCurrentHumanPlayer().
 //To get all players list array, use getAllPlayerList().
+//To get all Bots list array, use getAllBotsList().
 //When changes to player have been made, save changes with saveAllPlayerList().
-//To add a bot or player use, addPlayerToList(Player obj).
+//To add a human player use, addPlayerToList(Player obj).
+//To add a bot use, addBotToList(BotPlayer)
 
 class PlayerManager{
     constructor() {
         /**
-         * @type {Player}
+         * @type {HumanPlayer}
          */
         this.currentHumanPlayer
 
@@ -15,11 +17,21 @@ class PlayerManager{
          * @type {string}
          */
         this.playerListLSName = 'playerList'
+
+        /**
+         * @type {string}
+         */
+        this.botsListLSName = 'botsList'
         
         /**
-         * @type {Array<Player>}
+         * @type {Array<HumanPlayer>}
          */
         this.allPlayerList = []
+
+        /**
+         * @type {Array<BotPlayer>}
+         */
+        this.allBotsList = []
 
         //runs when the constructor start.
         this.startLocalStorage()
@@ -34,17 +46,34 @@ class PlayerManager{
         if(localStorage.getItem(this.playerListLSName) !== null){
 
             this.allPlayerList = JSON.parse(localStorage.getItem(this.playerListLSName))
-            //console.log(this.allPlayerList)
         }
         else{
             //create localStorage
             //console.log("Did not find player list, will create a new with a testPlayer")
             let playerList = []
+
+            playerList.push(new HumanPlayer('Admin', 1))
             playerList.push(new HumanPlayer('test', 10))
-            playerList.push(new BotPlayer('testBot', 20))
-            //console.log(playerList)
+
             localStorage.setItem(this.playerListLSName, JSON.stringify(playerList))
             this.allPlayerList = playerList
+        }
+
+        //Create bots local storage.
+        if(localStorage.getItem(this.botsListLSName) !== null){
+            this.allBotsList = JSON.parse(localStorage.getItem(this.botsListLSName))
+        }
+        else{
+            //create localStorage
+            let botsList = []
+            
+            botsList.push(new BotPlayer('testBot', 1))
+            botsList.push(new BotPlayer('Joey', 3))
+            botsList.push(new BotPlayer('Elaine', 7))
+            botsList.push(new BotPlayer('Amy', 18))
+
+            localStorage.setItem(this.botsListLSName, JSON.stringify(botsList))
+            this.allBotsList = botsList
         }
     }
 
@@ -75,6 +104,33 @@ class PlayerManager{
         }
     }
 
+        /**
+     * Takes a string name input and returns a player obj if found, else returns a bool false.
+     * @param {string} inBotName 
+     * @return {(BotPlayer|false)}
+     */
+    findBot(inBotName){
+        //return player or "false"
+        let botFound = false
+        let botObjReturn
+        for (let bot of this.allBotsList) {
+            //console.log(player.name)
+            if(bot.name.toUpperCase() === inBotName.toUpperCase()){
+                //console.log('bot found---------------')
+                botFound = true
+                botObjReturn = bot
+            }else{
+                //console.log(inBotName + ' not found ' + bot.name)
+            }
+        }
+
+        if(botFound){
+            return botObjReturn
+        }else{
+            return false
+        }
+    }
+
     /**
      * Creates a new player if input name can not be found in player list.
      * @param {string} inPlayerName
@@ -88,16 +144,14 @@ class PlayerManager{
 
         }else{
             let foundPlayer = this.findPlayer(inPlayerName)
-            //console.log('foundPlayer')
         }
-        //console.log(this.allPlayerList)
         
         //save new player to LocalStorage
-        this.saveAllPlayerList()
+        this.saveAllPlayerAndBotsList()
     }
 
     /**
-     * @return {Player} Player
+     * @return {HumanPlayer} Player
      */
     getCurrentHumanPlayer(){
         return this.currentHumanPlayer
@@ -106,8 +160,9 @@ class PlayerManager{
     /**
      * Save player list including current player to LocalStorage
      */
-    saveAllPlayerList(){
+    saveAllPlayerAndBotsList(){
         localStorage.setItem(this.playerListLSName, JSON.stringify(this.allPlayerList))
+        localStorage.setItem(this.botsListLSName, JSON.stringify(this.allBotsList))
     }
 
     //input player object to set current logged in player from start page.
@@ -129,20 +184,40 @@ class PlayerManager{
     }
 
     /**
-     * Add bot or human player to list if name is not in list and save to LS.
-     * @param {{Player}} inputPlayer 
+     * Add human player to list if name is not in list, and save to LS.
+     * @param {{HumanPlayer}} inputPlayer 
      */
     addPlayerToList(inputPlayer){
         //console.log(inputPlayer.name + ' add player name ')
         if(!this.findPlayer(inputPlayer.name)){
             this.allPlayerList.push(inputPlayer)
             //save list to LS after added to playerList array.
-            this.saveAllPlayerList()
+            this.saveAllPlayerAndBotsList()
         }
         else{
             //console.log(' player in list, will not add ')
         }
     }
 
+    /**
+     * Add bot to list if name is not in list, and save to LS.
+     * @param {{BotPlayer}} inputBot 
+     */
+    addBotToList(inputBot){
+        //console.log(inputPlayer.name + ' add player name ')
+        if(!this.findBot(inputBot.name)){
+            this.allBotsList.push(inputBot)
+            //save list to LS after added to playerList array.
+            this.saveAllPlayerAndBotsList()
+        }
+        else{
+            //console.log(' bot in list, will not add ')
+        }
+        //TODO type check bots only.
+    }
+
+    getAllBotsList(){
+        return this.allBotsList
+    }
 
 }
