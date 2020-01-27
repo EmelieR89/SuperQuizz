@@ -15,24 +15,24 @@ class GameController {
     this.turn = 0
     this.gameOver = false
   }
-/**
- * Makes enter key work in game-play-container. But the game stops after the first round.
- */
-//   addEventToInput() {
-//     this.userInput.addEventListener('keyup', (event) => {
-//         if(event.key === 'Enter') {
-//             if(this.userInput.value === ''){
-//             }
-//             else {
-//                 let numberGuessed = this.userInput.value
-//                 this.checkPlayerInput(numberGuessed)
-//                 this.setListGuessedNumber(numberGuessed)
-//                 this.userInput.value = ""
-//             }
-//             console.log(this.userInput.length)
-//         }
-//     })
-//   }
+  /**
+   * Makes enter key work in game-play-container. But the game stops after the first round.
+   */
+  //   addEventToInput() {
+  //     this.userInput.addEventListener('keyup', (event) => {
+  //         if(event.key === 'Enter') {
+  //             if(this.userInput.value === ''){
+  //             }
+  //             else {
+  //                 let numberGuessed = this.userInput.value
+  //                 this.checkPlayerInput(numberGuessed)
+  //                 this.setListGuessedNumber(numberGuessed)
+  //                 this.userInput.value = ""
+  //             }
+  //             console.log(this.userInput.length)
+  //         }
+  //     })
+  //   }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
@@ -41,7 +41,7 @@ class GameController {
 
     this.cyclePlayerTurns()
   }
-  
+
   /**
    * Logic for cycling player turns
    */
@@ -63,7 +63,7 @@ class GameController {
   updateActivePlayer() {
     this.activePlayer = this.playerTurns[this.turn]
   }
-  
+
   /**
    * Checks if active player is a bot and retrieves answer if it is
    */
@@ -74,7 +74,7 @@ class GameController {
       this.activePlayer.addToGuess()
     }
   }
-  
+
   /**
    * Updates the title based on turn
    */
@@ -147,7 +147,6 @@ class GameController {
     let rndnum = parseInt(Math.random() * 100)
     localStorage.setItem('rndnum', JSON.stringify(rndnum))
     return rndnum;
-
   }
 
   /**
@@ -157,11 +156,34 @@ class GameController {
     this.playButton.addEventListener('click', () => {
       const numberGuessed = parseInt(this.userInput.value)
       this.checkPlayerInput(numberGuessed)
+      this.clearPlayerInput()
+      if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+        this.wrongInputFormat(numberGuessed)
+        return
+      }
+
       this.setListGuessedNumber(numberGuessed)
-      this.userInput.value = ""
       if (!this.gameOver)
         this.cyclePlayerTurns()
     })
+  }
+
+  /**
+   * Runs if wrong format on input, or if it's higher then 100 or lower then 0
+   */
+  wrongInputFormat() {
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
+    wrongFormatOnInput.innerHTML = "Pick a number between 1-100"
+    wrongFormatOnInput.className = "wrongInputMessage"
+  }
+
+  /**
+   * Clears input
+   */
+  clearPlayerInput() {
+    this.userInput.value = ""
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
+    wrongFormatOnInput.innerHTML = ""
   }
 
   /**
@@ -185,8 +207,8 @@ class GameController {
     }
   }
 
-  getGameOver(){
-    return(this.gameOver)
+  getGameOver() {
+    return (this.gameOver)
   }
 
   /**
