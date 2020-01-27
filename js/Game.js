@@ -43,6 +43,7 @@ class Game {
         this.startPageController.addStartGameEvent()
         this.startPageController.addUserNameInputEvent()
         this.gameController.addEventToPlay()
+        this.gameController.addEventToInput()
     }
 
     //runs after showPage changes pages, 
