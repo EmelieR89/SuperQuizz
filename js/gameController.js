@@ -16,25 +16,26 @@ class GameController {
     this.list = [];
     this.turn = 0;
     this.gameOver = false;
+    // this.addTimerToAnswer()
   }
+
   /**
-   * Makes enter key work in game-play-container. But the game stops after the first round.
+   * Makes enter key work in game-play-container.
    */
-  //   addEventToInput() {
-  //     this.userInput.addEventListener('keyup', (event) => {
-  //         if(event.key === 'Enter') {
-  //             if(this.userInput.value === ''){
-  //             }
-  //             else {
-  //                 let numberGuessed = this.userInput.value
-  //                 this.checkPlayerInput(numberGuessed)
-  //                 this.setListGuessedNumber(numberGuessed)
-  //                 this.userInput.value = ""
-  //             }
-  //             console.log(this.userInput.length)
-  //         }
-  //     })
-  //   }
+    addEventToInput() {
+      this.userInput.addEventListener('keyup', (event) => {
+          if(event.key === 'Enter') {
+              if(this.userInput.value === ''){
+              }
+              else {
+                  let numberGuessed = parseInt(this.userInput.value)
+                  this.checkPlayerInput(numberGuessed)
+                  this.setListGuessedNumber(numberGuessed)
+                  this.userInput.value = ""
+              }
+          }
+      })
+    }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
@@ -52,10 +53,29 @@ class GameController {
     }
     if (!this.gameOver) {
       this.updateActivePlayer();
+      this.addTimerToAnswer()
       this.updatePlayerTurnVisuals();
       this.checkIfBotTurn();
       this.turn++;
     }
+  }
+
+  /**
+   * Adds a timer to the answer event and times out player if time runs out (10 seconds)
+   */
+  addTimerToAnswer() {
+    const activePlayer = this.activePlayer
+    let time = 100;
+    let answerTimer = setInterval(() => {
+      time--
+      
+      if (time === 0 || activePlayer != this.activePlayer || this.gameOver){
+        clearInterval(answerTimer)
+        if (time === 0) {
+          this.checkPlayerInput('Timeout!')
+        }
+      }
+    }, 100)
   }
 
   /**
@@ -109,15 +129,12 @@ class GameController {
     setTimeout(() => {
       this.checkPlayerInput(numberGuessed);
       this.setListGuessedNumber(numberGuessed);
-      if (!this.gameOver) {
-        this.cyclePlayerTurns();
-      }
     }, generateRandomDelay);
   }
 
   /**
-   * Creates an array of players based of the number inputed in Game Setup
-   * @param {Number} nOfPlayers Number of AI players inputed
+   * Creates an array of players based of the number input in Game Setup
+   * @param {Number} nOfPlayers Number of AI players input
    */
   createPlayerTurns(nOfPlayers) {
     this.nOfPlayers = nOfPlayers;
@@ -156,7 +173,6 @@ class GameController {
       this.checkPlayerInput(numberGuessed);
       this.setListGuessedNumber(numberGuessed);
       this.userInput.value = "";
-      if (!this.gameOver) this.cyclePlayerTurns();
     });
   }
 
@@ -174,14 +190,12 @@ class GameController {
       if (this.activePlayer instanceof BotPlayer) {
         this.activePlayer.addToWins();
         const stats = this.activePlayer.getStatistics(this.nOfPlayers);
-        console.log(
-          stats,
-          this.activePlayer.totalWins,
-          this.activePlayer.totalGuess
-        );
       }
       this.goToWinnerPage();
       HighScore.this.checkGameStatus();
+    }
+    else if (input === 'Timeout!') {
+      this.updateGameResponse(input)
     }
   }
 
@@ -227,7 +241,6 @@ class GameController {
       li.innerHTML = guess;
       ul.appendChild(li);
     }
-
     ul.className = "guessedNumbersShown";
   }
 
@@ -237,13 +250,21 @@ class GameController {
    * @param {String} status The result of the input
    */
   updateGameResponse(newGuess, status) {
-    this.playerTurns.forEach(player => {
-      if (player instanceof BotPlayer) {
-        player.calculateNewOptimalGuess(newGuess, status);
-      }
-    });
-    this.gameResults = "Go " + status + "!";
+    if (newGuess === "Timeout!") {
+      this.gameResults = newGuess
+    }
+    else {
+      this.playerTurns.forEach(player => {
+        if (player instanceof BotPlayer) {
+          player.calculateNewOptimalGuess(newGuess, status);
+        }
+      });
+      this.gameResults = "Go " + status + "!";
+    }
     document.getElementById("gameResponse").innerHTML = this.gameResults;
+    if (!this.gameOver) {
+      this.cyclePlayerTurns()
+    }
   }
 
   /**
