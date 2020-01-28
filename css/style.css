@@ -1,20 +1,18 @@
 *{
     margin: 0;
     font-family: 'Ropa Sans', sans-serif;
+    
 }
 
 
 input:focus{
-
     outline:0;
     border:1px solid #bf00ff;
 }
 .hiddenPage{
     display: none; 
 }
-html{
-   
-}
+
 body{
     background: -webkit-linear-gradient(top, rgba(41,38,42,1) 0%, rgba(92,84,95,1) 100%);
     background-repeat: no-repeat;
@@ -35,6 +33,7 @@ h1{
 
 
 button {
+    cursor: pointer;
     color: #fbefff; 
     border: none;
     border-radius: 1rem; 
@@ -46,6 +45,7 @@ button {
 .secondaryButton {
     background: none;
     border: 0.05rem solid  #bf00ff;
+    cursor: pointer;
 }
 
 input {
