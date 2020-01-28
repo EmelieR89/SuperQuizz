@@ -33,13 +33,13 @@ h1{
 
 
 button {
+    cursor: pointer;
     color: #fbefff; 
     border: none;
     border-radius: 1rem; 
     padding:0.5rem;
     font-size: 0.9rem;
     outline: 0;
-    cursor: pointer;
 }
 
 .secondaryButton {
