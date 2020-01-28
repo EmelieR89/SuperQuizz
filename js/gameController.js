@@ -20,24 +20,6 @@ class GameController {
   }
 
   /**
-   * Makes enter key work in game-play-container.
-   */
-    addEventToInput() {
-      this.userInput.addEventListener('keyup', (event) => {
-          if(event.key === 'Enter') {
-              if(this.userInput.value === ''){
-              }
-              else {
-                  let numberGuessed = parseInt(this.userInput.value)
-                  this.checkPlayerInput(numberGuessed)
-                  this.setListGuessedNumber(numberGuessed)
-                  this.userInput.value = ""
-              }
-          }
-      })
-    }
-
-  /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
@@ -68,9 +50,10 @@ class GameController {
     let time = 100;
     let answerTimer = setInterval(() => {
       time--
-      
-      if (time === 0 || activePlayer != this.activePlayer || this.gameOver){
+
+      if (time === 0 || activePlayer != this.activePlayer || this.gameOver) {
         clearInterval(answerTimer)
+        this.clearPlayerInput()
         if (time === 0) {
           this.checkPlayerInput('Timeout!')
         }
@@ -168,7 +151,6 @@ class GameController {
    * Adds an eventlistener to the input button
    */
   addEventToPlay() {
-
     this.playButton.addEventListener('click', () => {
       const numberGuessed = parseInt(this.userInput.value)
       this.checkPlayerInput(numberGuessed)
@@ -181,6 +163,25 @@ class GameController {
       this.setListGuessedNumber(numberGuessed)
       if (!this.gameOver)
         this.cyclePlayerTurns()
+    })
+  }
+
+  /**
+ * Makes enter key work in game-play-container.
+ */
+  addEventToInput() {
+    this.userInput.addEventListener('keyup', (event) => {
+      const numberGuessed = parseInt(this.userInput.value)
+      if (event.key === 'Enter') {
+        this.clearPlayerInput()
+        if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+          this.wrongInputFormat(numberGuessed)
+          return
+        }
+        this.setListGuessedNumber(numberGuessed)
+        if (!this.gameOver)
+          this.cyclePlayerTurns()
+      }
     })
   }
 
