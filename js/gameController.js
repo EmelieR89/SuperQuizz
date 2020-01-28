@@ -1,28 +1,3 @@
-// // Detta är klassen som kontrollerar användarens input
-// // och matchar mot det vinnande värdet
-
-// class GameController {
-//   constructor(game) {
-//     this.game = game;
-//     this.randomGeneratedNumber = this.generateRandomNumber();
-//     this.playButton = document.querySelector(".game-play-container button");
-//     this.userInput = document.querySelector(".game-play-container input");
-//     this.activePlayerTitle = document.querySelector(".player-turn");
-//     this.winnerPlayerTitle = document.querySelector(
-//       ".game-winner-container h2"
-//     );
-//     this.winnerNumberTitle = document.querySelector(".win-con");
-//     this.gameResults = "";
-//     this.list = [];
-//     this.turn = 0;
-//     this.gameOver = false;
-//     // this.addTimerToAnswer()
-//   }
-//       this.updatePlayerTurnVisuals();
-//       this.checkIfBotTurn();
-// Detta är klassen som kontrollerar användarens input
-// och matchar mot det vinnande värdet
-
 class GameController {
   constructor(game) {
     this.game = game;
@@ -33,7 +8,7 @@ class GameController {
     this.winnerPlayerTitle = document.querySelector(
       ".game-winner-container h2"
     );
-    this.timerCircle = document.querySelector('.timer-circle');
+    this.timerCircle = document.querySelector('.timer-circle path');
     this.winnerNumberTitle = document.querySelector(".win-con");
     this.gameResults = "";
     this.list = [];
@@ -88,17 +63,18 @@ class GameController {
       timerValue++
       this.updateTimerVisuals(timerValue)
       
-      if (timerValue === 100 || activePlayer != this.activePlayer || this.gameOver){
+      if (timerValue === 1000 || activePlayer != this.activePlayer || this.gameOver){
         clearInterval(answerTimer)
-        if (timerValue === 100) {
+        if (timerValue === 1000) {
           this.checkPlayerInput('Timeout!')
         }
       }
-    }, 100);
+    }, 10);
   }
   
   updateTimerVisuals(timerValue) {
-    console.log(timerValue);
+    timerValue = timerValue/10
+    this.timerCircle.setAttribute("stroke-dasharray", `${timerValue}, 100`)
   }
 
   /**
