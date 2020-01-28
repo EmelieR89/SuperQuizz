@@ -89,6 +89,17 @@
             <!---->
             <div>
                 <h1 class="player-turn"></h1>
+                <svg class="timer-circle" viewBox="0 0 36 36">
+                    <path
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#BF00FF";
+                      stroke-width="1";
+                      stroke-dasharray="50, 100"
+                    />
+                </svg>
                 <input id="numberGuessed" type="text" placeholder="pick a number" pattern="\d*">
                 <h5 id="messageIfInputIsWrong"></h5>
                 <button id="play">Play</button>
