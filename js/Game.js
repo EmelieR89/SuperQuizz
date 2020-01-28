@@ -27,6 +27,10 @@ class Game {
         if (this.playAgainButton !== null) {
             this.playAgainButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
+        this.gameResultsButton = document.getElementById('goToResult')
+        if (this.gameResultsButton !== null) {
+            this.gameResultsButton.addEventListener('click', this.goToResults.bind(this))
+        }
 
         //Add events for all back to start buttons.
         this.startPageButtonList = document.querySelectorAll('#backToStart')
@@ -94,6 +98,9 @@ class Game {
 
     goToHighScore() {
         this.showPage('high-score-container')
+    }
+    goToResults() {
+        this.showPage('game-result-container')
     }
     //End click functions.
 
