@@ -107,6 +107,7 @@ class StartPageController{
     highScoreToggle(){
         let rules = document.getElementById('showRules')
         let highScore = document.getElementById('showHighScore')
+        this.updateHighScoreList()
         console.log(highScore.style.display)
         if (highScore.style.display == 'block' || rules.style.display == 'block') {
             highScore.style.display = 'none'
@@ -116,7 +117,44 @@ class StartPageController{
         }
       
     }
-    
+
+    /**
+     * Runs when hihScoreToggle() is clicked, divs are added for name and score
+     * for css styling in start-container.css .playerHolder or .nameHolder, scoreHolder.
+     */
+    updateHighScoreList(){
+        let highScoreOLel = document.querySelector('.high-score-list')
+        //console.log(highScoreOLel.innerHTML)
+        let playerList = this.playerManager.getAllPlayerList()
+        highScoreOLel.innerHTML = ""
+        
+        for (const player of playerList) {
+            let liEl = document.createElement('li')
+            liEl.classList.add('highScoreLi')
+            
+            let liDivEl = document.createElement('div')
+            liDivEl.classList.add('playerHolder')
+            
+            let nameDivEl = document.createElement('div')
+            nameDivEl.classList.add('nameHolder')
+            
+            let scoreDivEl = document.createElement('div')
+            scoreDivEl.classList.add('scoreHolder')
 
 
+            let nameTextNode = document.createTextNode(player.name)
+            let scoreTextNode = document.createTextNode(player.score)
+
+            nameDivEl.appendChild(nameTextNode)
+            scoreDivEl.appendChild(scoreTextNode)
+
+            liDivEl.appendChild(nameDivEl)
+            liDivEl.appendChild(scoreDivEl)
+
+            liEl.appendChild(liDivEl)
+
+            highScoreOLel.appendChild(liEl)
+            //console.log(highScoreOLel.innerHTML)
+        }
+    }
 }
