@@ -119,12 +119,13 @@ class StartPageController{
     }
 
     /**
-     * Runs when hihScoreToggle() is clicked, divs are added for name and score
-     * for css styling in start-container.css .playerHolder or .nameHolder, scoreHolder.
+     * Runs when hihScoreToggle() is clicked, divs are added for name and score.
+     * Css styling in start-container.css .playerHolder or .nameHolder, scoreHolder.
      */
     updateHighScoreList(){
         let highScoreOLel = document.querySelector('.high-score-list')
         //console.log(highScoreOLel.innerHTML)
+        this.game.runHighScoreSort() // runs sort before list is gotten.
         let playerList = this.playerManager.getAllPlayerList()
         highScoreOLel.innerHTML = ""
         

@@ -136,4 +136,12 @@ class Game {
     this.currentPageState = classStringIn;
     this.updateState();
   }
+
+  /**
+   * Runs session sort in HighScore class.
+   * TODO add sort to bots list also. 
+   */
+  runHighScoreSort(){
+    this.highScore.sessionSort()
+  }
 }
