@@ -7,8 +7,12 @@
 
 .active-start {
     background-color: #bf00ff;
-    color: #fbefff
+    color: #fbefff;
+    transition: all 0.5s;
+    cursor: pointer;
 }
+
+
 
 .start-container  {
     border-radius: 1rem;
