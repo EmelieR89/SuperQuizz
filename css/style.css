@@ -35,13 +35,17 @@ h1{
 
 
 button {
-    background-color: #bf00ff;
-    color: #fbefff;
+    color: #fbefff; 
     border: none;
     border-radius: 1rem; 
     padding:0.5rem;
     font-size: 0.9rem;
     outline: 0;
+}
+
+.secondaryButton {
+    background: none;
+    border: 0.05rem solid  #bf00ff;
 }
 
 input {
