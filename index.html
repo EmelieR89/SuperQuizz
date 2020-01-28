@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
     <!--CSS files-->
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/start-container.css">
-    <link rel="stylesheet" href="./css/login-container.css">
-    <link rel="stylesheet" href="./css/high-score-container.css">
-    <link rel="stylesheet" href="./css/game-setup-container.css">
-    <link rel="stylesheet" href="./css/game-play-container.css">
-    <link rel="stylesheet" href="./css/game-winner-container.css">
-    <link rel="stylesheet" href="./css/statistics-container.css">
-    <link rel="stylesheet" href="./css/user-suggestion-container.css">
-    <link rel="stylesheet" href="./css/admin-container.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/start-container.css" />
+    <link rel="stylesheet" href="./css/login-container.css" />
+    <link rel="stylesheet" href="./css/high-score-container.css" />
+    <link rel="stylesheet" href="./css/game-setup-container.css" />
+    <link rel="stylesheet" href="./css/game-play-container.css" />
+    <link rel="stylesheet" href="./css/game-winner-container.css" />
+    <link rel="stylesheet" href="./css/statistics-container.css" />
+    <link rel="stylesheet" href="./css/user-suggestion-container.css" />
+    <link rel="stylesheet" href="./css/admin-container.css" />
     <!--JS files-->
     <script defer src="./js/main.js"></script>
     <script defer src="./js/Game.js"></script>
@@ -31,106 +36,136 @@
     <script defer src="./js/GameSetupController.js"></script>
     <script defer src="./js/PlayerManager.js"></script>
     <title>Super Quizz</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="wrapper">
-        <div class="start-container pageHolder">
-            <!---->
-            <button id="readRulesButton">Rules</button>
-            <button id="highScoreButton">Top10</button>
-            <h1 class="gameTitel">Super Quizz</h1>
+      <div class="start-container pageHolder">
+        <!---->
+        <button class="secondaryButton" id="readRulesButton">Rules</button>
+        <button class="secondaryButton" id="highScoreButton">Top10</button>
+        <h1 class="gameTitel">Super Quizz</h1>
 
-            <div id="showRules">
-                <h1 class="gameUnderTitel">Rules</h1>
-                In this game you take a guess at a randomly generated number between 1-100.
-                After you have guessed, the game leader instructs you to either go higher or lower.
-                You will get to choose how many bots you want to play against in the next step.
-                One of the players is randomly chosen to start answering. All the current players previous answers will
-                be shown as a list.
-                Who ever guesses the right number first wins. Good luck!
-            </div>
-            <div id="showHighScore">
-                <h1 class="gameUnderTitel">High Score <br>Top 10</h1>
-                <ol>
-                    <li>Abc 1234</li>
-                    <li>Bcd 123 </li>
-                    <li>Cde 12</li>
-                </ol>
-            </div>
-            <input type="text" name="" id="startNameInput" placeholder="Enter Name">
-            <button class="start-game inactive-start">Start Game</button>
-            <button id="login-create">Login/Create</button>
+        <div id="showRules">
+          <h1 class="gameUnderTitel">Rules</h1>
+          In this game you take a guess at a randomly generated number between
+          1-100. After you have guessed, the game leader instructs you to either
+          go higher or lower. You will get to choose how many bots you want to
+          play against in the next step. One of the players is randomly chosen
+          to start answering. All the current players previous answers will be
+          shown as a list. Who ever guesses the right number first wins. Good
+          luck!
         </div>
-        <div class="login-container pageHolder">
-            <!---->
+        <div id="showHighScore">
+          <h1 class="gameUnderTitel">High Score</h1>
+          <ol>
+            <li>Abc 1234</li>
+            <li>Bcd 123</li>
+            <li>Cde 12</li>
+          </ol>
         </div>
-        <div class="game-setup-container pageHolder">
-            <!---->
-            <h1>Game Setup</h1>
-            <h2>Select AI players</h2>
-            <ul class=bots>
-                <li id=bot1><img src="./img/joey.png" alt="Smiley face" height="42" width="42">
-                    <p>Joey</p>
-                </li>
-                <li id=bot2><img src="./img/elaine.png" alt="Smiley face" height="42" width="42">
-                    <p>Elaine</p>
-                </li>
-                <li id=bot3><img src="./img/amy.png" alt="Smiley face" height="42" width="42">
-                    <p>Amy</p>
-                </li>
-            </ul>
-            <!-- <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players"> -->
-            <br><button id="backToStart">&larr; &nbsp;Start</button>
-            <button id="gameSetupButton">Play&nbsp; &rarr;</button>
+        <input
+          type="text"
+          name=""
+          id="startNameInput"
+          placeholder="Enter Name"
+        />
+        <button class="start-game inactive-start">Start Game</button>
+        <button class="secondaryButton" id="login-create">Login/Create</button>
+      </div>
+      <div class="login-container pageHolder">
+        <!---->
+      </div>
+      <div class="game-setup-container pageHolder">
+        <!---->
+        <h2 class="gameTitel">Choose your <br />opponents</h2>
+        <!-- <h2>Choose your opponents</h2> -->
+        <ul class="bots">
+          <li id="bot1">
+            <img
+              src="./img/joey.png"
+              alt="Smiley face"
+              height="42"
+              width="42"
+            />
+            <p>Joey</p>
+          </li>
+          <li id="bot2">
+            <img
+              src="./img/elaine.png"
+              alt="Smiley face"
+              height="42"
+              width="42"
+            />
+            <p>Elaine</p>
+          </li>
+          <li id="bot3">
+            <img src="./img/amy.png" alt="Smiley face" height="42" width="42" />
+            <p>Amy</p>
+          </li>
+        </ul>
+        <!-- <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players"> -->
+        <br /><button class="secondaryButton" id="backToStart">
+          &larr; &nbsp;Start
+        </button>
+        <button class="active-start " id="gameSetupButton">
+          Play&nbsp; &rarr;
+        </button>
+      </div>
+      <div class="game-play-container pageHolder">
+        <!---->
+        <div>
+          <h1 class="player-turn"></h1>
+          <input
+            id="numberGuessed"
+            type="text"
+            placeholder="pick a number"
+            pattern="\d*"
+          />
+          <h5 id="messageIfInputIsWrong"></h5>
+          <button id="play">Play</button>
+          <h1 id="gameResponse"></h1>
+          <ul id="guessedNumbersFromPlayer"></ul>
         </div>
-        <div class="game-play-container pageHolder">
-            <!---->
-            <div>
-                <h1 class="player-turn"></h1>
-                <svg class="timer-circle" viewBox="0 0 36 36">
-                    <path
-                      d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                      fill="none"
-                      stroke="#BF00FF";
-                      stroke-width="1";
-                      stroke-dasharray="50, 100"
-                    />
-                </svg>
-                <input id="numberGuessed" type="text" placeholder="pick a number" pattern="\d*">
-                <h5 id="messageIfInputIsWrong"></h5>
-                <button id="play">Play</button>
-                <h1 id="gameResponse"></h1>
-                <ul id="guessedNumbersFromPlayer">
-                </ul>
-            </div>
+      </div>
+      <div class="game-winner-container pageHolder">
+        <div>
+          <p>Winning number:</p>
+          <h1 class="win-con"></h1>
+          <h2>You are a winner!</h2>
+          <p>is the winner!</p>
+          <div>
+            <button class="secondaryButton" id="goToResult">Next</button>
+          </div>
         </div>
-        <div class="game-winner-container pageHolder">
-            <div>
-                <p>Winning number:</p>
-                <h1 class="win-con"></h1>
-                <h2>You are a winner!</h2>
-                <p>is the winner!</p>
-                <div>
-                    <button id="backToStart">Start Page</button>
-                    <button id="playAgain">Play Again</button>
-                </div>
-            </div>
+      </div>
+      <div class="game-result-container pageHolder">
+        <div>
+          <h2>Your Score</h2>
+          <p>238</p>
+          <h2>Number of guesses</h2>
+          <p>6</p>
+          <h2>Your Ranking</h2>
+          <ul>
+            <li>12 - Pelleri</li>
+            <li>13 - Olivia</li>
+            <li>14 - You</li>
+            <li>15 - Jöns</li>
+            <li>16 - Kent-Gunnar</li>
+          </ul>
+          <button class="secondaryButton" id="backToStart">Start Page</button>
+          <button class="secondaryButton" id="playAgain">Play Again</button>
         </div>
-        <div class="statistics-container pageHolder">
-            <!---->
-        </div>
-        <div class="user-suggestion-container pageHolder">
-            <!---->
-        </div>
-        <div class="admin-container pageHolder">
-            <!---->
-        </div>
+      </div>
+      <div class="statistics-container pageHolder">
+        <!---->
+      </div>
+      <div class="user-suggestion-container pageHolder">
+        <!---->
+      </div>
+      <div class="admin-container pageHolder">
+        <!---->
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>

@@ -1,3 +1,25 @@
+// // Detta är klassen som kontrollerar användarens input
+// // och matchar mot det vinnande värdet
+
+// class GameController {
+//   constructor(game) {
+//     this.game = game;
+//     this.randomGeneratedNumber = this.generateRandomNumber();
+//     this.playButton = document.querySelector(".game-play-container button");
+//     this.userInput = document.querySelector(".game-play-container input");
+//     this.activePlayerTitle = document.querySelector(".player-turn");
+//     this.winnerPlayerTitle = document.querySelector(
+//       ".game-winner-container h2"
+//     );
+//     this.winnerNumberTitle = document.querySelector(".win-con");
+//     this.gameResults = "";
+//     this.list = [];
+//     this.turn = 0;
+//     this.gameOver = false;
+//     // this.addTimerToAnswer()
+//   }
+//       this.updatePlayerTurnVisuals();
+//       this.checkIfBotTurn();
 // Detta är klassen som kontrollerar användarens input
 // och matchar mot det vinnande värdet
 
@@ -19,32 +41,7 @@ class GameController {
     this.gameOver = false;
     // this.addTimerToAnswer()
   }
-  
-  /**
-   * Sets up the turn-based logic, meant for everything necessary when starting up a game
-   */
-  setupInitialGameState() {
-    this.cyclePlayerTurns();
-  }
-  
-  /**
-   * Makes enter key work in game-play-container.
-   */
-  addEventToInput() {
-    this.userInput.addEventListener('keyup', (event) => {
-      if(event.key === 'Enter') {
-        if(this.userInput.value === ''){
-        }
-        else {
-          let numberGuessed = parseInt(this.userInput.value)
-          this.checkPlayerInput(numberGuessed)
-          this.setListGuessedNumber(numberGuessed)
-          this.userInput.value = ""
-        }
-      }
-    })
-  }
-  
+
   /**
    * Adds an eventlistener to the input button
    */
@@ -74,7 +71,7 @@ class GameController {
     }
     if (!this.gameOver) {
       this.updateActivePlayer();
-      this.addTimerToAnswer()
+      this.addTimerToAnswer();
       this.updatePlayerTurnVisuals();
       this.checkIfBotTurn();
       this.turn++;
@@ -97,7 +94,7 @@ class GameController {
           this.checkPlayerInput('Timeout!')
         }
       }
-    }, 100)
+    }, 100);
   }
   
   updateTimerVisuals(timerValue) {
@@ -190,23 +187,59 @@ class GameController {
     return rndnum;
   }
 
+  /**
+   * Adds an eventlistener to the input button
+   */
+  addEventToPlay() {
+    this.playButton.addEventListener("click", () => {
+      const numberGuessed = parseInt(this.userInput.value);
+      this.clearPlayerInput();
+      if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+        this.wrongInputFormat(numberGuessed);
+        return;
+      } else {
+        this.checkPlayerInput(numberGuessed);
+        this.setListGuessedNumber(numberGuessed);
+      }
+    });
+  }
+
+  /**
+   * Makes enter key work in game-play-container.
+   */
+  addEventToInput() {
+    this.userInput.addEventListener("keyup", event => {
+      const numberGuessed = parseInt(this.userInput.value);
+      if (event.key === "Enter") {
+        this.clearPlayerInput();
+        if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+          this.wrongInputFormat(numberGuessed);
+          return;
+        } else {
+          this.checkPlayerInput(numberGuessed);
+          this.setListGuessedNumber(numberGuessed);
+        }
+        // if (!this.gameOver) this.cyclePlayerTurns();
+      }
+    });
+  }
 
   /**
    * Runs if wrong format on input, or if it's higher then 100 or lower then 0
    */
   wrongInputFormat() {
-    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
-    wrongFormatOnInput.innerHTML = "Pick a number between 1-100"
-    wrongFormatOnInput.className = "wrongInputMessage"
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong");
+    wrongFormatOnInput.innerHTML = "Pick a number between 1-100";
+    wrongFormatOnInput.className = "wrongInputMessage";
   }
 
   /**
    * Clears input
    */
   clearPlayerInput() {
-    this.userInput.value = ""
-    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
-    wrongFormatOnInput.innerHTML = ""
+    this.userInput.value = "";
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong");
+    wrongFormatOnInput.innerHTML = "";
   }
 
   /**
@@ -226,14 +259,13 @@ class GameController {
       }
       this.goToWinnerPage();
       HighScore.this.checkGameStatus();
-    }
-    else if (input === 'Timeout!') {
-      this.updateGameResponse(input)
+    } else if (input === "Timeout!") {
+      this.updateGameResponse(input);
     }
   }
 
   getGameOver() {
-    return (this.gameOver)
+    return this.gameOver;
   }
 
   /**
@@ -265,11 +297,11 @@ class GameController {
    */
   setListGuessedNumber(numberInput) {
     this.list.push(numberInput);
-    localStorage.setItem("guessedNumber", JSON.stringify(this.list));
-    let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
+    // localStorage.setItem("guessedNumber", JSON.stringify(this.list));
+    // let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
     let ul = document.getElementById("guessedNumbersFromPlayer");
     ul.innerHTML = "";
-    for (let guess of userGuesses) {
+    for (let guess of this.list) {
       let li = document.createElement("li");
       li.innerHTML = guess;
       ul.appendChild(li);
@@ -284,9 +316,8 @@ class GameController {
    */
   updateGameResponse(newGuess, status) {
     if (newGuess === "Timeout!") {
-      this.gameResults = newGuess
-    }
-    else {
+      this.gameResults = newGuess;
+    } else {
       this.playerTurns.forEach(player => {
         if (player instanceof BotPlayer) {
           player.calculateNewOptimalGuess(newGuess, status);
@@ -296,17 +327,7 @@ class GameController {
     }
     document.getElementById("gameResponse").innerHTML = this.gameResults;
     if (!this.gameOver) {
-      this.cyclePlayerTurns()
+      this.cyclePlayerTurns();
     }
-  }
-
-  /**
-   * Clears item in localStorage and the list with guessed numbers
-   */
-  resetGuessedList() {
-    localStorage.removeItem("guessedNumber");
-    this.list = [];
-    let ul = document.getElementById("guessedNumbersFromPlayer");
-    ul.innerHTML = "";
   }
 }

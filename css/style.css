@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: 'Ropa Sans', sans-serif;
 }
 
 
@@ -12,7 +13,7 @@ input:focus{
     display: none; 
 }
 html{
-    font-family: 'Open Sans', sans-serif;  
+   
 }
 body{
     background: -webkit-linear-gradient(top, rgba(41,38,42,1) 0%, rgba(92,84,95,1) 100%);
@@ -34,13 +35,17 @@ h1{
 
 
 button {
-    background-color: #bf00ff;
-    color: #fbefff;
+    color: #fbefff; 
     border: none;
     border-radius: 1rem; 
     padding:0.5rem;
     font-size: 0.9rem;
-    outline: none;
+    outline: 0;
+}
+
+.secondaryButton {
+    background: none;
+    border: 0.05rem solid  #bf00ff;
 }
 
 input {
