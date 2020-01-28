@@ -168,12 +168,37 @@ class GameController {
    * Adds an eventlistener to the input button
    */
   addEventToPlay() {
-    this.playButton.addEventListener("click", () => {
-      const numberGuessed = parseInt(this.userInput.value);
-      this.checkPlayerInput(numberGuessed);
-      this.setListGuessedNumber(numberGuessed);
-      this.userInput.value = "";
-    });
+    this.playButton.addEventListener('click', () => {
+      const numberGuessed = parseInt(this.userInput.value)
+      this.checkPlayerInput(numberGuessed)
+      this.clearPlayerInput()
+      if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+        this.wrongInputFormat(numberGuessed)
+        return
+      }
+
+      this.setListGuessedNumber(numberGuessed)
+      if (!this.gameOver)
+        this.cyclePlayerTurns()
+    })
+  }
+
+  /**
+   * Runs if wrong format on input, or if it's higher then 100 or lower then 0
+   */
+  wrongInputFormat() {
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
+    wrongFormatOnInput.innerHTML = "Pick a number between 1-100"
+    wrongFormatOnInput.className = "wrongInputMessage"
+  }
+
+  /**
+   * Clears input
+   */
+  clearPlayerInput() {
+    this.userInput.value = ""
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
+    wrongFormatOnInput.innerHTML = ""
   }
 
   /**
@@ -200,7 +225,7 @@ class GameController {
   }
 
   getGameOver() {
-    return this.gameOver;
+    return (this.gameOver)
   }
 
   /**
