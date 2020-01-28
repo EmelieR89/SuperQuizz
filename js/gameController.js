@@ -3,43 +3,45 @@
 
 class GameController {
   constructor(game) {
-    this.game = game
-    this.randomGeneratedNumber = this.generateRandomNumber()
-    this.playButton = document.querySelector('.game-play-container button')
-    this.userInput = document.querySelector('.game-play-container input')
-    this.activePlayerTitle = document.querySelector('.player-turn')
-    this.winnerPlayerTitle = document.querySelector('.game-winner-container h2')
-    this.winnerNumberTitle = document.querySelector('.win-con')
-    this.gameResults = ""
-    this.list = []
-    this.turn = 0
-    this.gameOver = false
+    this.game = game;
+    this.randomGeneratedNumber = this.generateRandomNumber();
+    this.playButton = document.querySelector(".game-play-container button");
+    this.userInput = document.querySelector(".game-play-container input");
+    this.activePlayerTitle = document.querySelector(".player-turn");
+    this.winnerPlayerTitle = document.querySelector(
+      ".game-winner-container h2"
+    );
+    this.winnerNumberTitle = document.querySelector(".win-con");
+    this.gameResults = "";
+    this.list = [];
+    this.turn = 0;
+    this.gameOver = false;
+    // this.addTimerToAnswer()
   }
+
   /**
-   * Makes enter key work in game-play-container. But the game stops after the first round.
+   * Makes enter key work in game-play-container.
    */
-  //   addEventToInput() {
-  //     this.userInput.addEventListener('keyup', (event) => {
-  //         if(event.key === 'Enter') {
-  //             if(this.userInput.value === ''){
-  //             }
-  //             else {
-  //                 let numberGuessed = this.userInput.value
-  //                 this.checkPlayerInput(numberGuessed)
-  //                 this.setListGuessedNumber(numberGuessed)
-  //                 this.userInput.value = ""
-  //             }
-  //             console.log(this.userInput.length)
-  //         }
-  //     })
-  //   }
+    addEventToInput() {
+      this.userInput.addEventListener('keyup', (event) => {
+          if(event.key === 'Enter') {
+              if(this.userInput.value === ''){
+              }
+              else {
+                  let numberGuessed = parseInt(this.userInput.value)
+                  this.checkPlayerInput(numberGuessed)
+                  this.setListGuessedNumber(numberGuessed)
+                  this.userInput.value = ""
+              }
+          }
+      })
+    }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
-
-    this.cyclePlayerTurns()
+    this.cyclePlayerTurns();
   }
 
   /**
@@ -47,21 +49,40 @@ class GameController {
    */
   cyclePlayerTurns() {
     if (this.turn > this.playerTurns.length - 1) {
-      this.turn = 0
+      this.turn = 0;
     }
     if (!this.gameOver) {
-      this.updateActivePlayer()
-      this.updatePlayerTurnVisuals()
-      this.checkIfBotTurn()
-      this.turn++
+      this.updateActivePlayer();
+      this.addTimerToAnswer()
+      this.updatePlayerTurnVisuals();
+      this.checkIfBotTurn();
+      this.turn++;
     }
+  }
+
+  /**
+   * Adds a timer to the answer event and times out player if time runs out (10 seconds)
+   */
+  addTimerToAnswer() {
+    const activePlayer = this.activePlayer
+    let time = 100;
+    let answerTimer = setInterval(() => {
+      time--
+      
+      if (time === 0 || activePlayer != this.activePlayer || this.gameOver){
+        clearInterval(answerTimer)
+        if (time === 0) {
+          this.checkPlayerInput('Timeout!')
+        }
+      }
+    }, 100)
   }
 
   /**
    * Updates the active player based from turn and checks if that player is a bot
    */
   updateActivePlayer() {
-    this.activePlayer = this.playerTurns[this.turn]
+    this.activePlayer = this.playerTurns[this.turn];
   }
 
   /**
@@ -69,9 +90,9 @@ class GameController {
    */
   checkIfBotTurn() {
     if (this.activePlayer instanceof BotPlayer) {
-      const activeBot = this.activePlayer
-      this.retrieveAnswerFromBot(activeBot)
-      this.activePlayer.addToGuess()
+      const activeBot = this.activePlayer;
+      this.retrieveAnswerFromBot(activeBot);
+      this.activePlayer.addToGuess();
     }
   }
 
@@ -79,23 +100,22 @@ class GameController {
    * Updates the title based on turn
    */
   updatePlayerTurnVisuals() {
-    this.activePlayerTitle.innerHTML = this.activePlayer.name
+    this.activePlayerTitle.innerHTML = this.activePlayer.name;
     if (this.activePlayer instanceof BotPlayer) {
       console.log(`${this.activePlayer.name} painting bot stuff`);
-      this.userInput.disabled = true
-      this.userInput.style.opacity = .4
-      this.playButton.disabled = true
-      this.playButton.classList.add('bot-active')
-      this.playButton.classList.remove('human-active')
-    }
-    else {
+      this.userInput.disabled = true;
+      this.userInput.style.opacity = 0.4;
+      this.playButton.disabled = true;
+      this.playButton.classList.add("bot-active");
+      this.playButton.classList.remove("human-active");
+    } else {
       console.log(`${this.activePlayer.name} painting human stuff`);
       this.userInput.disabled = false;
-      this.userInput.style.opacity = 1
+      this.userInput.style.opacity = 1;
       this.playButton.disabled = false;
-      this.userInput.focus()
-      this.playButton.classList.remove('bot-active')
-      this.playButton.classList.add('human-active')
+      this.userInput.focus();
+      this.playButton.classList.remove("bot-active");
+      this.playButton.classList.add("human-active");
     }
   }
 
@@ -104,48 +124,43 @@ class GameController {
    * @param {BotPlayer} activeBot The active BotPlayer
    */
   retrieveAnswerFromBot(activeBot) {
-    const numberGuessed = activeBot.activate()
-    const generateRandomDelay = parseInt((Math.random() * 4000) + 500)
+    const numberGuessed = activeBot.activate();
+    const generateRandomDelay = parseInt(Math.random() * 4000 + 500);
     setTimeout(() => {
-      this.checkPlayerInput(numberGuessed)
-      this.setListGuessedNumber(numberGuessed)
-      if (!this.gameOver) {
-        this.cyclePlayerTurns()
-      }
-    }, generateRandomDelay)
+      this.checkPlayerInput(numberGuessed);
+      this.setListGuessedNumber(numberGuessed);
+    }, generateRandomDelay);
   }
 
   /**
-   * Creates an array of players based of the number inputed in Game Setup
-   * @param {Number} nOfPlayers Number of AI players inputed
+   * Creates an array of players based of the number input in Game Setup
+   * @param {Number} nOfPlayers Number of AI players input
    */
   createPlayerTurns(nOfPlayers) {
-    this.nOfPlayers = nOfPlayers
-    let playerArray = []
-    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1))
+    this.nOfPlayers = nOfPlayers;
+    let playerArray = [];
+    let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1));
     console.log(humanPlayerTurn);
-
 
     for (let i = 0; i < nOfPlayers.length + 1; i++) {
       if (i === humanPlayerTurn) {
-        playerArray.push(new HumanPlayer('hooman'))
-        localStorage.setItem('humanName', JSON.stringify(playerArray[0]))
-      }
-      else {
-        playerArray.push(new BotPlayer(`Bot ${i}`))
+        playerArray.push(new HumanPlayer("hooman"));
+        localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
+      } else {
+        playerArray.push(new BotPlayer(`Bot ${i}`));
       }
     }
-    this.playerTurns = playerArray
+    this.playerTurns = playerArray;
   }
 
   /**
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    //return 75 för buggfix 
+    //return 75 för buggfix
     //Provar att spara slumpnumret
-    let rndnum = parseInt(Math.random() * 100)
-    localStorage.setItem('rndnum', JSON.stringify(rndnum))
+    let rndnum = parseInt(Math.random() * 100);
+    localStorage.setItem("rndnum", JSON.stringify(rndnum));
     return rndnum;
   }
 
@@ -153,6 +168,7 @@ class GameController {
    * Adds an eventlistener to the input button
    */
   addEventToPlay() {
+
     this.playButton.addEventListener('click', () => {
       const numberGuessed = parseInt(this.userInput.value)
       this.checkPlayerInput(numberGuessed)
@@ -192,18 +208,20 @@ class GameController {
    */
   checkPlayerInput(input) {
     if (input < this.randomGeneratedNumber) {
-      this.updateGameResponse(input, "Higher")
+      this.updateGameResponse(input, "Higher");
     } else if (input > this.randomGeneratedNumber) {
-      this.updateGameResponse(input, "Lower")
+      this.updateGameResponse(input, "Lower");
     } else if (input === this.randomGeneratedNumber) {
-      this.gameOver = true
+      this.gameOver = true;
       if (this.activePlayer instanceof BotPlayer) {
-        this.activePlayer.addToWins()
-        const stats = this.activePlayer.getStatistics(this.nOfPlayers)
-        console.log(stats, this.activePlayer.totalWins, this.activePlayer.totalGuess);
+        this.activePlayer.addToWins();
+        const stats = this.activePlayer.getStatistics(this.nOfPlayers);
       }
-      this.goToWinnerPage()
-      HighScore.this.checkGameStatus()
+      this.goToWinnerPage();
+      HighScore.this.checkGameStatus();
+    }
+    else if (input === 'Timeout!') {
+      this.updateGameResponse(input)
     }
   }
 
@@ -215,23 +233,23 @@ class GameController {
    * Shows game state to over and presents the winner
    */
   goToWinnerPage() {
-    this.updateWinnerPlayerTitle()
-    this.updateWinnerNumberTitle()
-    this.game.showPage('game-winner-container')
+    this.updateWinnerPlayerTitle();
+    this.updateWinnerNumberTitle();
+    this.game.showPage("game-winner-container");
   }
 
   /**
    * Updates the winning player title
    */
   updateWinnerPlayerTitle() {
-    this.winnerPlayerTitle.innerHTML = `${this.activePlayer.name}`
+    this.winnerPlayerTitle.innerHTML = `${this.activePlayer.name}`;
   }
 
   /**
    * Updates the winning number
    */
   updateWinnerNumberTitle() {
-    this.winnerNumberTitle.innerHTML = `${this.randomGeneratedNumber}`
+    this.winnerNumberTitle.innerHTML = `${this.randomGeneratedNumber}`;
   }
 
   /**
@@ -239,18 +257,17 @@ class GameController {
    * @param {Number} numberInput User input
    */
   setListGuessedNumber(numberInput) {
-    this.list.push(numberInput)
-    localStorage.setItem('guessedNumber', JSON.stringify(this.list))
-    let userGuesses = JSON.parse(localStorage.getItem('guessedNumber'))
-    let ul = document.getElementById("guessedNumbersFromPlayer")
-    ul.innerHTML = ""
+    this.list.push(numberInput);
+    localStorage.setItem("guessedNumber", JSON.stringify(this.list));
+    let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
+    let ul = document.getElementById("guessedNumbersFromPlayer");
+    ul.innerHTML = "";
     for (let guess of userGuesses) {
-      let li = document.createElement("li")
-      li.innerHTML = guess
-      ul.appendChild(li)
+      let li = document.createElement("li");
+      li.innerHTML = guess;
+      ul.appendChild(li);
     }
-
-    ul.className = "guessedNumbersShown"
+    ul.className = "guessedNumbersShown";
   }
 
   /**
@@ -259,23 +276,30 @@ class GameController {
    * @param {String} status The result of the input
    */
   updateGameResponse(newGuess, status) {
-    this.playerTurns.forEach(player => {
-      if (player instanceof BotPlayer) {
-        player.calculateNewOptimalGuess(newGuess, status)
-      }
-    });
-    this.gameResults = "Go " + status + "!"
-    document.getElementById("gameResponse").innerHTML = this.gameResults
+    if (newGuess === "Timeout!") {
+      this.gameResults = newGuess
+    }
+    else {
+      this.playerTurns.forEach(player => {
+        if (player instanceof BotPlayer) {
+          player.calculateNewOptimalGuess(newGuess, status);
+        }
+      });
+      this.gameResults = "Go " + status + "!";
+    }
+    document.getElementById("gameResponse").innerHTML = this.gameResults;
+    if (!this.gameOver) {
+      this.cyclePlayerTurns()
+    }
   }
 
   /**
    * Clears item in localStorage and the list with guessed numbers
    */
   resetGuessedList() {
-    localStorage.removeItem('guessedNumber')
-    this.list = []
-    let ul = document.getElementById("guessedNumbersFromPlayer")
-    ul.innerHTML = ""
+    localStorage.removeItem("guessedNumber");
+    this.list = [];
+    let ul = document.getElementById("guessedNumbersFromPlayer");
+    ul.innerHTML = "";
   }
-
 }
