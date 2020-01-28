@@ -13,14 +13,14 @@ class Game {
         // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
         //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         // }
-        
-    
+
+
         this.gameSetupButton = document.getElementById('startPageButton')
-        if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
+        if (this.gameSetupButton !== null) {//if button is removed, dont add eventlistener.
             this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
         }
         this.gamePlayButton = document.getElementById('gameSetupButton')
-         if (this.gamePlayButton !== null) {
+        if (this.gamePlayButton !== null) {
             this.gamePlayButton.addEventListener('click', this.goToGamePlayPage.bind(this))
         }
         this.playAgainButton = document.getElementById('playAgain')
@@ -54,7 +54,7 @@ class Game {
             //this.gameSetupController.getNumberOfAIPlayers())
         }
         if (this.currentPageState === 'game-play-container') {
-            this.gameController.userInput.focus()  
+            this.gameController.userInput.focus()
         }
     }
 
@@ -67,8 +67,8 @@ class Game {
         this.showPage('game-setup-container')
 
         //test save new player info to local storage.
-        if(this.playerManager.currentHumanPlayer != null){
-            this.playerManager.currentHumanPlayer.gamesPlayed ++
+        if (this.playerManager.currentHumanPlayer != null) {
+            this.playerManager.currentHumanPlayer.gamesPlayed++
             console.log(this.playerManager.currentHumanPlayer.gamesPlayed)
             this.playerManager.saveAllPlayerAndBotsList()
             this.playerManager.addPlayerToList(new BotPlayer('addBot', 8))
