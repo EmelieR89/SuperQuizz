@@ -11,6 +11,7 @@ class GameController {
     this.winnerPlayerTitle = document.querySelector(
       ".game-winner-container h2"
     );
+    this.timerCircle = document.querySelector('.timer-circle');
     this.winnerNumberTitle = document.querySelector(".win-con");
     this.gameResults = "";
     this.list = [];
@@ -18,31 +19,51 @@ class GameController {
     this.gameOver = false;
     // this.addTimerToAnswer()
   }
-
-  /**
-   * Makes enter key work in game-play-container.
-   */
-    addEventToInput() {
-      this.userInput.addEventListener('keyup', (event) => {
-          if(event.key === 'Enter') {
-              if(this.userInput.value === ''){
-              }
-              else {
-                  let numberGuessed = parseInt(this.userInput.value)
-                  this.checkPlayerInput(numberGuessed)
-                  this.setListGuessedNumber(numberGuessed)
-                  this.userInput.value = ""
-              }
-          }
-      })
-    }
-
+  
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
    */
   setupInitialGameState() {
     this.cyclePlayerTurns();
   }
+  
+  /**
+   * Makes enter key work in game-play-container.
+   */
+  addEventToInput() {
+    this.userInput.addEventListener('keyup', (event) => {
+      if(event.key === 'Enter') {
+        if(this.userInput.value === ''){
+        }
+        else {
+          let numberGuessed = parseInt(this.userInput.value)
+          this.checkPlayerInput(numberGuessed)
+          this.setListGuessedNumber(numberGuessed)
+          this.userInput.value = ""
+        }
+      }
+    })
+  }
+  
+  /**
+   * Adds an eventlistener to the input button
+   */
+  addEventToPlay() {
+    this.playButton.addEventListener('click', () => {
+      const numberGuessed = parseInt(this.userInput.value)
+      this.checkPlayerInput(numberGuessed)
+      this.clearPlayerInput()
+      if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+        this.wrongInputFormat(numberGuessed)
+        return
+      }
+
+      this.setListGuessedNumber(numberGuessed)
+      if (!this.gameOver)
+        this.cyclePlayerTurns()
+    })
+  }
+  
 
   /**
    * Logic for cycling player turns
@@ -65,17 +86,22 @@ class GameController {
    */
   addTimerToAnswer() {
     const activePlayer = this.activePlayer
-    let time = 100;
+    let timerValue = 0;
     let answerTimer = setInterval(() => {
-      time--
+      timerValue++
+      this.updateTimerVisuals(timerValue)
       
-      if (time === 0 || activePlayer != this.activePlayer || this.gameOver){
+      if (timerValue === 100 || activePlayer != this.activePlayer || this.gameOver){
         clearInterval(answerTimer)
-        if (time === 0) {
+        if (timerValue === 100) {
           this.checkPlayerInput('Timeout!')
         }
       }
     }, 100)
+  }
+  
+  updateTimerVisuals(timerValue) {
+    console.log(timerValue);
   }
 
   /**
@@ -164,24 +190,6 @@ class GameController {
     return rndnum;
   }
 
-  /**
-   * Adds an eventlistener to the input button
-   */
-  addEventToPlay() {
-    this.playButton.addEventListener('click', () => {
-      const numberGuessed = parseInt(this.userInput.value)
-      this.checkPlayerInput(numberGuessed)
-      this.clearPlayerInput()
-      if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
-        this.wrongInputFormat(numberGuessed)
-        return
-      }
-
-      this.setListGuessedNumber(numberGuessed)
-      if (!this.gameOver)
-        this.cyclePlayerTurns()
-    })
-  }
 
   /**
    * Runs if wrong format on input, or if it's higher then 100 or lower then 0
