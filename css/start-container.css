@@ -4,12 +4,13 @@
     flex-direction: column; */
 }
 
+
 .active-start {
     background-color: #bf00ff;
     color: #fbefff
 }
 
-.start-container .start-button {
+.start-container  {
     border-radius: 1rem;
 }
 
