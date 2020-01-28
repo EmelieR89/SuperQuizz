@@ -106,7 +106,7 @@ class Game {
       this.gameSetupController.getNumberOfAIPlayers()
     );
     this.gameController.setupInitialGameState();
-    this.gameController.resetGuessedList();
+    // this.gameController.resetGuessedList();
     document.getElementById("gameResponse").innerHTML = "";
     this.showPage("game-play-container");
   }

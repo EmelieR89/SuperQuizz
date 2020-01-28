@@ -1,3 +1,25 @@
+// // Detta är klassen som kontrollerar användarens input
+// // och matchar mot det vinnande värdet
+
+// class GameController {
+//   constructor(game) {
+//     this.game = game;
+//     this.randomGeneratedNumber = this.generateRandomNumber();
+//     this.playButton = document.querySelector(".game-play-container button");
+//     this.userInput = document.querySelector(".game-play-container input");
+//     this.activePlayerTitle = document.querySelector(".player-turn");
+//     this.winnerPlayerTitle = document.querySelector(
+//       ".game-winner-container h2"
+//     );
+//     this.winnerNumberTitle = document.querySelector(".win-con");
+//     this.gameResults = "";
+//     this.list = [];
+//     this.turn = 0;
+//     this.gameOver = false;
+//     // this.addTimerToAnswer()
+//   }
+//       this.updatePlayerTurnVisuals();
+//       this.checkIfBotTurn();
 // Detta är klassen som kontrollerar användarens input
 // och matchar mot det vinnande värdet
 
@@ -17,23 +39,6 @@ class GameController {
     this.turn = 0;
     this.gameOver = false;
     // this.addTimerToAnswer()
-  }
-
-  /**
-   * Makes enter key work in game-play-container.
-   */
-  addEventToInput() {
-    this.userInput.addEventListener("keyup", event => {
-      if (event.key === "Enter") {
-        if (this.userInput.value === "") {
-        } else {
-          let numberGuessed = parseInt(this.userInput.value);
-          this.checkPlayerInput(numberGuessed);
-          this.setListGuessedNumber(numberGuessed);
-          this.userInput.value = "";
-        }
-      }
-    });
   }
 
   /**
@@ -70,6 +75,7 @@ class GameController {
 
       if (time === 0 || activePlayer != this.activePlayer || this.gameOver) {
         clearInterval(answerTimer);
+        this.clearPlayerInput();
         if (time === 0) {
           this.checkPlayerInput("Timeout!");
         }
@@ -169,15 +175,34 @@ class GameController {
   addEventToPlay() {
     this.playButton.addEventListener("click", () => {
       const numberGuessed = parseInt(this.userInput.value);
-      this.checkPlayerInput(numberGuessed);
       this.clearPlayerInput();
       if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
         this.wrongInputFormat(numberGuessed);
         return;
+      } else {
+        this.checkPlayerInput(numberGuessed);
+        this.setListGuessedNumber(numberGuessed);
       }
+    });
+  }
 
-      this.setListGuessedNumber(numberGuessed);
-      if (!this.gameOver) this.cyclePlayerTurns();
+  /**
+   * Makes enter key work in game-play-container.
+   */
+  addEventToInput() {
+    this.userInput.addEventListener("keyup", event => {
+      const numberGuessed = parseInt(this.userInput.value);
+      if (event.key === "Enter") {
+        this.clearPlayerInput();
+        if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+          this.wrongInputFormat(numberGuessed);
+          return;
+        } else {
+          this.checkPlayerInput(numberGuessed);
+          this.setListGuessedNumber(numberGuessed);
+        }
+        // if (!this.gameOver) this.cyclePlayerTurns();
+      }
     });
   }
 
@@ -254,11 +279,11 @@ class GameController {
    */
   setListGuessedNumber(numberInput) {
     this.list.push(numberInput);
-    localStorage.setItem("guessedNumber", JSON.stringify(this.list));
-    let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
+    // localStorage.setItem("guessedNumber", JSON.stringify(this.list));
+    // let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
     let ul = document.getElementById("guessedNumbersFromPlayer");
     ul.innerHTML = "";
-    for (let guess of userGuesses) {
+    for (let guess of this.list) {
       let li = document.createElement("li");
       li.innerHTML = guess;
       ul.appendChild(li);
@@ -286,15 +311,5 @@ class GameController {
     if (!this.gameOver) {
       this.cyclePlayerTurns();
     }
-  }
-
-  /**
-   * Clears item in localStorage and the list with guessed numbers
-   */
-  resetGuessedList() {
-    localStorage.removeItem("guessedNumber");
-    this.list = [];
-    let ul = document.getElementById("guessedNumbersFromPlayer");
-    ul.innerHTML = "";
   }
 }
