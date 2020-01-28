@@ -22,20 +22,19 @@ class GameController {
   /**
    * Makes enter key work in game-play-container.
    */
-    addEventToInput() {
-      this.userInput.addEventListener('keyup', (event) => {
-          if(event.key === 'Enter') {
-              if(this.userInput.value === ''){
-              }
-              else {
-                  let numberGuessed = parseInt(this.userInput.value)
-                  this.checkPlayerInput(numberGuessed)
-                  this.setListGuessedNumber(numberGuessed)
-                  this.userInput.value = ""
-              }
-          }
-      })
-    }
+  addEventToInput() {
+    this.userInput.addEventListener("keyup", event => {
+      if (event.key === "Enter") {
+        if (this.userInput.value === "") {
+        } else {
+          let numberGuessed = parseInt(this.userInput.value);
+          this.checkPlayerInput(numberGuessed);
+          this.setListGuessedNumber(numberGuessed);
+          this.userInput.value = "";
+        }
+      }
+    });
+  }
 
   /**
    * Sets up the turn-based logic, meant for everything necessary when starting up a game
@@ -53,7 +52,7 @@ class GameController {
     }
     if (!this.gameOver) {
       this.updateActivePlayer();
-      this.addTimerToAnswer()
+      this.addTimerToAnswer();
       this.updatePlayerTurnVisuals();
       this.checkIfBotTurn();
       this.turn++;
@@ -64,18 +63,18 @@ class GameController {
    * Adds a timer to the answer event and times out player if time runs out (10 seconds)
    */
   addTimerToAnswer() {
-    const activePlayer = this.activePlayer
+    const activePlayer = this.activePlayer;
     let time = 100;
     let answerTimer = setInterval(() => {
-      time--
-      
-      if (time === 0 || activePlayer != this.activePlayer || this.gameOver){
-        clearInterval(answerTimer)
+      time--;
+
+      if (time === 0 || activePlayer != this.activePlayer || this.gameOver) {
+        clearInterval(answerTimer);
         if (time === 0) {
-          this.checkPlayerInput('Timeout!')
+          this.checkPlayerInput("Timeout!");
         }
       }
-    }, 100)
+    }, 100);
   }
 
   /**
@@ -168,38 +167,36 @@ class GameController {
    * Adds an eventlistener to the input button
    */
   addEventToPlay() {
-
-    this.playButton.addEventListener('click', () => {
-      const numberGuessed = parseInt(this.userInput.value)
-      this.checkPlayerInput(numberGuessed)
-      this.clearPlayerInput()
+    this.playButton.addEventListener("click", () => {
+      const numberGuessed = parseInt(this.userInput.value);
+      this.checkPlayerInput(numberGuessed);
+      this.clearPlayerInput();
       if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
-        this.wrongInputFormat(numberGuessed)
-        return
+        this.wrongInputFormat(numberGuessed);
+        return;
       }
 
-      this.setListGuessedNumber(numberGuessed)
-      if (!this.gameOver)
-        this.cyclePlayerTurns()
-    })
+      this.setListGuessedNumber(numberGuessed);
+      if (!this.gameOver) this.cyclePlayerTurns();
+    });
   }
 
   /**
    * Runs if wrong format on input, or if it's higher then 100 or lower then 0
    */
   wrongInputFormat() {
-    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
-    wrongFormatOnInput.innerHTML = "Pick a number between 1-100"
-    wrongFormatOnInput.className = "wrongInputMessage"
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong");
+    wrongFormatOnInput.innerHTML = "Pick a number between 1-100";
+    wrongFormatOnInput.className = "wrongInputMessage";
   }
 
   /**
    * Clears input
    */
   clearPlayerInput() {
-    this.userInput.value = ""
-    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong")
-    wrongFormatOnInput.innerHTML = ""
+    this.userInput.value = "";
+    let wrongFormatOnInput = document.getElementById("messageIfInputIsWrong");
+    wrongFormatOnInput.innerHTML = "";
   }
 
   /**
@@ -219,14 +216,13 @@ class GameController {
       }
       this.goToWinnerPage();
       HighScore.this.checkGameStatus();
-    }
-    else if (input === 'Timeout!') {
-      this.updateGameResponse(input)
+    } else if (input === "Timeout!") {
+      this.updateGameResponse(input);
     }
   }
 
   getGameOver() {
-    return (this.gameOver)
+    return this.gameOver;
   }
 
   /**
@@ -277,9 +273,8 @@ class GameController {
    */
   updateGameResponse(newGuess, status) {
     if (newGuess === "Timeout!") {
-      this.gameResults = newGuess
-    }
-    else {
+      this.gameResults = newGuess;
+    } else {
       this.playerTurns.forEach(player => {
         if (player instanceof BotPlayer) {
           player.calculateNewOptimalGuess(newGuess, status);
@@ -289,7 +284,7 @@ class GameController {
     }
     document.getElementById("gameResponse").innerHTML = this.gameResults;
     if (!this.gameOver) {
-      this.cyclePlayerTurns()
+      this.cyclePlayerTurns();
     }
   }
 
