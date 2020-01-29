@@ -1,16 +1,37 @@
 .game-setup-container {
-    width: 80%;
+    width: 100%;
     max-width: 30rem;
 }
+
 .bots {
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 0;
     margin: 1.5rem 0 0 0;
 }
-.bots .active {
-    opacity: 50%;
+
+.bots li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bots li p {
+    margin-top: .5rem;
+    text-align: center;
+}
+
+.bots img {
+    padding: .3rem;
+    width: 70%;
+    height: auto;
+}
+
+.bots .active img{
+    padding: 0;
+    border-radius: 50%;
+    border: solid .3rem #bf00ff;
 }
 
 .game-setup-container h2{
@@ -21,7 +42,7 @@
 }
 
 .gameSetupButtons {
-    margin: 1.5rem 0 0 0;
+    margin-top: 4rem;
 
     display: flex;
     justify-content: space-evenly;
