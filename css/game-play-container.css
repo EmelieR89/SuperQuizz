@@ -13,7 +13,8 @@
 
 .human-active {
     background-color: #bf00ff;
-    color: #fbefff
+    color: #fbefff;
+    margin: 1rem 0 0 0;
 }
 
 .game-play-container > div {
@@ -23,12 +24,12 @@
     align-items: center;
 }
 
-.game-play-container .player-turn {
+/* .game-play-container .player-turn {
     position: absolute;
     top: 5rem;
     left: 50%;
     transform: translateX(-50%);
-}
+} */
 
 .game-play-container input{
     outline: none;
@@ -37,6 +38,7 @@
 
 .guessedNumbersShown {
     list-style-type: none;
-    margin-top: 1rem
+    margin-top: 1rem;
+    padding: 0
 
 }
