@@ -2,13 +2,30 @@
 // användarens spelare samt botar kommer att utgå ifrån
 
 class Player {
-  constructor(name, score) {
+  constructor(name) {
     /**
      * @type {string}
      */
     this.name = name;
     this.gamesPlayed = 0;
-    this.score = score;
+    this.totalWins = 0 // || localstorage
+    this.totalGuess = 0 // || localstorage
+    this.score = 0 // localstorage
+  }
+
+  getStatistics(){   
+    // this.score = Math.round(((4 * Math.log(this.wins)) / 1.6 ) + ((this.wins) - (this.bot1amount * 0.3) - (this.bot2amount * 0.2) - (this.bot3amount * 0.1) / (this.amountguesses) * 100)
+    // const score = ((4 * Math.log(this.totalWins) / 1.6) + (this.totalWins - 1 * .2)) / this.totalGuess
+    this.score = this.gamesPlayed * (this.totalWins / this.totalGuess)
+    return this.score
+  }
+
+  addToGuess() {
+    this.totalGuess++
+  }
+
+  addToWins() {
+    this.totalWins++
   }
 
   /**

@@ -102,9 +102,7 @@ class Game {
   }
 
   goToGamePlayPage() {
-    this.gameController.createPlayerTurns(
-      this.gameSetupController.getNumberOfAIPlayers()
-    );
+    this.gameController.createPlayerTurns(this.gameSetupController.getNumberOfAIPlayers());
     this.gameController.setupInitialGameState();
     this.gameController.resetGuessedList();
     document.getElementById("gameResponse").innerHTML = "";
@@ -120,6 +118,7 @@ class Game {
   }
   goToResults() {
     this.showPage("game-result-container");
+    this.showScore();
   }
   //End click functions.
 
@@ -135,5 +134,15 @@ class Game {
     }
     this.currentPageState = classStringIn;
     this.updateState();
+  }
+  //Display score and statistics
+  showScore(){
+      const player = this.gameController.returnHumanPlayer()
+      const score = player.getStatistics()
+      const scoreElement = document.querySelector('.gamescore');
+      scoreElement.innerHTML = score
+      console.log(score);
+      
+
   }
 }

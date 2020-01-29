@@ -91,7 +91,6 @@ class GameController {
     if (this.activePlayer instanceof BotPlayer) {
       const activeBot = this.activePlayer;
       this.retrieveAnswerFromBot(activeBot);
-      this.activePlayer.addToGuess();
     }
   }
 
@@ -149,6 +148,9 @@ class GameController {
         playerArray.push(new BotPlayer(`Bot ${i}`));
       }
     }
+    playerArray.forEach(player => {
+      player.setGamesPlayed(1)
+    });
     this.playerTurns = playerArray;
   }
 
@@ -210,15 +212,13 @@ class GameController {
       this.updateGameResponse(input, "Lower");
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true;
-      if (this.activePlayer instanceof BotPlayer) {
-        this.activePlayer.addToWins();
-        const stats = this.activePlayer.getStatistics(this.nOfPlayers);
-      }
+      this.activePlayer.addToWins();
       this.goToWinnerPage();
-      HighScore.this.checkGameStatus();
+      // HighScore.this.checkGameStatus();
     } else if (input === "Timeout!") {
       this.updateGameResponse(input);
     }
+    this.activePlayer.addToGuess();
   }
 
   getGameOver() {
@@ -296,5 +296,16 @@ class GameController {
     this.list = [];
     let ul = document.getElementById("guessedNumbersFromPlayer");
     ul.innerHTML = "";
+  }
+
+  returnHumanPlayer() {
+    let humanPlayer
+    this.playerTurns.forEach(player => {
+      console.log(player)
+      if (player instanceof HumanPlayer){
+        humanPlayer = player
+      }
+    });
+    return humanPlayer
   }
 }
