@@ -1,5 +1,7 @@
 *{
     margin: 0;
+    font-family: 'Ropa Sans', sans-serif;
+    
 }
 
 .wrapper {
@@ -10,7 +12,6 @@
 }
 
 input:focus{
-
     outline:0;
     border:1px solid #bf00ff;
 }
@@ -41,14 +42,26 @@ h1{
 
 
 button {
-    background-color: #bf00ff;
-    color: #fbefff;
+    cursor: pointer;
+    color: #fbefff; 
     border: none;
     border-radius: 1rem; 
     padding:0.5rem;
     font-size: 0.9rem;
-    outline: none;
+    outline: 0;
 }
+
+.secondaryButton {
+    background: none;
+    border: 0.05rem solid  #bf00ff;
+    cursor: pointer;
+}
+
+.secondaryButton .buttonPosition {
+    padding-left: 33rem;
+    position: 0;
+}
+
 
 input {
     background-color: #262028;

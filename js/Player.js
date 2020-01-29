@@ -1,25 +1,28 @@
-// Detta är en abstrakt spelarklass som 
+// Detta är en abstrakt spelarklass som
 // användarens spelare samt botar kommer att utgå ifrån
 
 class Player {
-    constructor(name, score) {
-        /**
-         * @type {string}
-         */
-        this.name = name
-        this.gamesPlayed = 0
-        this.score = score
-    }
-    
+  constructor(name, score) {
     /**
-     * 
-     * @param {number} inNumber 
+     * @type {string}
      */
-    setGamesPlayed(inNumber){
-        this.gamesPlayed = inNumber
-    }
+    this.name = name;
+    this.gamesPlayed = 0;
+    this.score = score;
+  }
 
-    getGamesPlayed(){
-        return this.gamesPlayed
-    }
+  /**
+   * Sets the total games played
+   * @param {number} inNumber
+   */
+  setGamesPlayed(inNumber) {
+    this.gamesPlayed = inNumber;
+  }
+
+  /**
+   * Gets the total games played
+   */
+  getGamesPlayed() {
+    return this.gamesPlayed;
+  }
 }
