@@ -2,6 +2,7 @@ class GameController {
   constructor(game) {
     this.game = game;
     this.randomGeneratedNumber = this.generateRandomNumber();
+    // this.quitButton = document.querySelector(".buttonPosition button")
     this.playButton = document.querySelector(".game-play-container button");
     this.userInput = document.querySelector(".game-play-container input");
     this.activePlayerTitle = document.querySelector(".player-turn");
@@ -122,6 +123,8 @@ class GameController {
       this.playButton.classList.add("human-active");
     }
   }
+
+
 
   /**
    * Retrieves the answer from the active BotPlayer with a delay
