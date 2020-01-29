@@ -67,8 +67,10 @@
           id="startNameInput"
           placeholder="Enter Name"
         />
-        <button class="start-game inactive-start">Start Game</button>
-        <button class="secondaryButton" id="login-create">Login/Create</button>
+        <div>
+            <button class="start-game inactive-start">Start Game</button>
+            <button class="secondaryButton" id="login-create">Login/Create</button>
+        </div>
       </div>
       <div class="login-container pageHolder">
         <!---->
@@ -102,12 +104,14 @@
           </li>
         </ul>
         <!-- <input type="number" name="playerNumber" id="NumberOfAIPlayers" placeholder="Number of AI players"> -->
-        <br /><button class="secondaryButton" id="backToStart">
-          &larr; &nbsp;Start
-        </button>
-        <button class="active-start" id="gameSetupButton">
-          Play&nbsp; &rarr;
-        </button>
+        <div class="gameSetupButtons">
+            <button class="secondaryButton" id="backToStart">
+              &larr; &nbsp;Start
+            </button>
+            <button class="active-start" id="gameSetupButton">
+              Play&nbsp; &rarr;
+            </button>
+        </div>
       </div>
       <div class="game-play-container pageHolder">
         <!---->
