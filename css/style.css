@@ -57,11 +57,6 @@ button {
     cursor: pointer;
 }
 
-.secondaryButton .buttonPosition {
-    padding-left: 33rem;
-    position: 0;
-}
-
 
 input {
     background-color: #262028;
