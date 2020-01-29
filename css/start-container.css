@@ -57,4 +57,10 @@
     
 }
 
+/* For js generated div in updateHighScoreList() StartPageController. */
+.high-score-list .playerHolder {
+    display: flex;
+    justify-content: space-between;
+}
+
  
