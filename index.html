@@ -131,17 +131,21 @@
             />
         </svg>
         <h3 class="time-left"></h3>
-          <input
-            id="numberGuessed"
-            type="text"
-            placeholder="pick a number"
-            pattern="\d*"
-          />
-          <h5 id="messageIfInputIsWrong"></h5>
-          <button id="play">Play</button> 
-          <button class="secondaryButton buttonPosition" id="backToStart"> Quit</button>
-          <h1 id="gameResponse"></h1>
-          <ul id="guessedNumbersFromPlayer"></ul>
+          <div class="player-input">
+              <input
+                id="numberGuessed"
+                type="text"
+                placeholder="pick a number"
+                pattern="\d*"
+              />
+              <h5 id="messageIfInputIsWrong"></h5>
+              <div>
+                  <button id="play">Play</button> 
+                  <button class="secondaryButton buttonPosition" id="backToStart"> Quit</button>
+              </div>
+              <h1 id="gameResponse"></h1>
+              <ul id="guessedNumbersFromPlayer"></ul>
+          </div>
         </div>
       </div>
       <div class="game-winner-container pageHolder">
@@ -169,8 +173,8 @@
             <li>15 - Jöns</li>
             <li>16 - Kent-Gunnar</li>
           </ul>
-          <button class="secondaryButton" id="backToStart">Start Page</button>
-          <button class="active-start" id="playAgain">Play Again</button>
+              <button class="secondaryButton" id="backToStart">Start Page</button>
+              <button class="active-start" id="playAgain">Play Again</button>
         </div>
       </div>
       <div class="statistics-container pageHolder">
