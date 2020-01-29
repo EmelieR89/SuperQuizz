@@ -24,7 +24,24 @@
     align-items: center;
 }
 
-/* .game-play-container .player-turn {
+.game-play-container .timer-circle {
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+}
+
+.game-play-container .time-left {
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 1.3rem;
+}
+
+.game-play-container .player-turn {
     position: absolute;
     top: 5rem;
     left: 50%;
