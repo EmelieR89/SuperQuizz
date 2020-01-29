@@ -2,6 +2,12 @@
     margin: 0;
 }
 
+.wrapper {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
 
 input:focus{
 
@@ -12,16 +18,17 @@ input:focus{
     display: none; 
 }
 html{
-    font-family: 'Open Sans', sans-serif;  
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;  
 }
 body{
     background: -webkit-linear-gradient(top, rgba(41,38,42,1) 0%, rgba(92,84,95,1) 100%);
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 90%;
     color: #fbefff;
     display: flex;
-    justify-content: center;
-    padding: 3rem;
+    /* justify-content: center; */
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,3 +59,4 @@ input {
     border-radius: 4rem; 
     margin-bottom: 1rem;
 }
+
