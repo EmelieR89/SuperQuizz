@@ -1,9 +1,24 @@
  .start-container{
-    max-width: 600px;
+    width: auto;
+    max-width: 35rem;
+    min-width: 15rem;
     /* display: flex;
     flex-direction: column; */
 }
 
+.start-container > div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.start-container > div > div {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
 
 .active-start {
     background-color: #bf00ff;
@@ -29,13 +44,13 @@
 } */
 
 #startNameInput{
-    max-width: 12rem;
+    min-width: 16rem;
 }
 
 .gameTitel{
     font-family: 'Bangers', cursive;
     font-size: 4rem;
-    /* margin: -20rem 0 0 10rem; */
+    text-align: center;
 } 
 
 .gameUnderTitel{
