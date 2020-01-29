@@ -105,7 +105,7 @@ class Game {
     this.gameController.createPlayerTurns(
       this.gameSetupController.getNumberOfAIPlayers()
     );
-    this.gameController.setupInitialGameState();
+    this.gameController.cyclePlayerTurns();
     // this.gameController.resetGuessedList();
     document.getElementById("gameResponse").innerHTML = "";
     this.showPage("game-play-container");
