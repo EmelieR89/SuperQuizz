@@ -14,7 +14,6 @@
 .human-active {
     background-color: #bf00ff;
     color: #fbefff;
-    margin: 1rem 0 0 0;
 }
 
 .game-play-container > div {
@@ -24,7 +23,24 @@
     align-items: center;
 }
 
-/* .game-play-container .player-turn {
+.game-play-container .timer-circle {
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+}
+
+.game-play-container .time-left {
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 1.3rem;
+}
+
+.game-play-container .player-turn {
     position: absolute;
     top: 5rem;
     left: 50%;
@@ -39,10 +55,26 @@
 .guessedNumbersShown {
     list-style-type: none;
     margin-top: 1rem;
-    padding: 0
+    padding: 0 
 
 }
 
 .wrongInputMessage {
     margin-bottom: 1rem;
+}
+
+.player-input{
+    position: absolute;
+    top: 15rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-input div{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-evenly;
 }
