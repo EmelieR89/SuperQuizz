@@ -10,6 +10,7 @@ class GameController {
     );
     this.timerCircle = document.querySelector('.timer-circle path');
     this.winnerNumberTitle = document.querySelector(".win-con");
+    this.timeLeftText = document.querySelector('.time-left');
     this.gameResults = "";
     this.list = [];
     this.turn = 0;
@@ -59,9 +60,11 @@ class GameController {
   addTimerToAnswer() {
     const activePlayer = this.activePlayer
     let timerValue = 0;
+    let timerText = 1000
     let answerTimer = setInterval(() => {
       timerValue++
-      this.updateTimerVisuals(timerValue)
+      timerText--
+      this.updateTimerVisuals(timerValue, timerText)
       
       if (timerValue === 1000 || activePlayer != this.activePlayer || this.gameOver){
         clearInterval(answerTimer)
@@ -72,8 +75,10 @@ class GameController {
     }, 10);
   }
   
-  updateTimerVisuals(timerValue) {
+  updateTimerVisuals(timerValue, timerText) {
     timerValue = timerValue/10
+    timerText = parseFloat(timerText/100).toFixed(1)
+    this.timeLeftText.innerHTML = timerText
     this.timerCircle.setAttribute("stroke-dasharray", `${timerValue}, 100`)
   }
 
