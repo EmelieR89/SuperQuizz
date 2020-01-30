@@ -251,10 +251,9 @@ class GameController {
       this.setListGuessedNumber(input);
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true;
-      if (this.activePlayer instanceof BotPlayer) {
-        this.activePlayer.addToWins();
+      this.activePlayer.addToWins();
         // const stats = this.activePlayer.getStatistics(this.nOfPlayers);
-      }
+      
       this.goToWinnerPage();
       // HighScore.this.checkGameStatus();
     } else if (input === "Timeout!") {

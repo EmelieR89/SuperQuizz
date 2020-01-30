@@ -139,11 +139,13 @@ class Game {
       const player = this.gameController.returnHumanPlayer()
       const score = player.getStatistics()
       const scoreElement = document.querySelector('.gamescore');
-      scoreElement.innerHTML = score
-      const totalGuess = player.getStatistics()
+      scoreElement.innerHTML = parseFloat(score).toFixed(1)
+      
+      
+      const totalGuesses = this.gameController.returnHumanPlayer()
       const guessElement = document.querySelector('.totalguess');
-      guessElement.innerHTML = totalGuess
-      console.log(score, totalGuess);
+      guessElement.innerHTML = totalGuesses.totalGuess
+      
   } 
       
 
