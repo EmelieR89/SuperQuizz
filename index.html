@@ -2,36 +2,39 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet" />
-  <!--CSS files-->
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/start-container.css" />
-  <link rel="stylesheet" href="./css/login-container.css" />
-  <link rel="stylesheet" href="./css/high-score-container.css" />
-  <link rel="stylesheet" href="./css/game-setup-container.css" />
-  <link rel="stylesheet" href="./css/game-play-container.css" />
-  <link rel="stylesheet" href="./css/game-winner-container.css" />
-  <link rel="stylesheet" href="./css/statistics-container.css" />
-  <link rel="stylesheet" href="./css/user-suggestion-container.css" />
-  <link rel="stylesheet" href="./css/admin-container.css" />
-  <link rel="stylesheet" href="./css/desktop.css" media="(min-width: 700px)"/>
-  <!--JS files-->
-  <script defer src="./js/main.js"></script>
-  <script defer src="./js/Game.js"></script>
-  <script defer src="./js/gameController.js"></script>
-  <script defer src="./js/HighScore.js"></script>
-  <script defer src="./js/Player.js"></script>
-  <script defer src="./js/HumanPlayer.js"></script>
-  <script defer src="./js/BotPlayer.js"></script>
-  <script defer src="./js/StartPageController.js"></script>
-  <script defer src="./js/GameSetupController.js"></script>
-  <script defer src="./js/PlayerManager.js"></script>
-  <title>Super Quizz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <!--CSS files-->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/start-container.css">
+    <link rel="stylesheet" href="./css/login-container.css">
+    <link rel="stylesheet" href="./css/high-score-container.css">
+    <link rel="stylesheet" href="./css/game-setup-container.css">
+    <link rel="stylesheet" href="./css/game-play-container.css">
+    <link rel="stylesheet" href="./css/game-winner-container.css">
+    <link rel="stylesheet" href="./css/statistics-container.css">
+    <link rel="stylesheet" href="./css/user-suggestion-container.css">
+    <link rel="stylesheet" href="./css/admin-container.css">
+    <link rel="stylesheet" href="./css/desktop.css" media="(min-width: 700px)"/>
+    <!--JS files-->
+    <script defer src="./js/main.js"></script>
+    <script defer src="./js/Game.js"></script>
+    <script defer src="./js/GameController.js"></script>
+    <script defer src="./js/HighScore.js"></script>
+    <script defer src="./js/Player.js"></script>
+    <script defer src="./js/HumanPlayer.js"></script>
+    <script defer src="./js/HardBot.js"></script>
+    <script defer src="./js/EasyBot.js"></script>
+    <script defer src="./js/MediumBot.js"></script>
+    <script defer src="./js/StartPageController.js"></script>
+    <script defer src="./js/GameSetupController.js"></script>
+    <script defer src="./js/PlayerManager.js"></script>
+    <title>Super Quizz</title>
+
 </head>
 
 <body>
@@ -70,7 +73,7 @@
       <!---->
       <h2 class="gameTitel">Choose your <br />opponents</h2>
         <ul class="bots">
-                <li id="bot1">
+                <li id="bot1" class="easyBot">
                     <img src="./img/joey.png" alt="Smiley face" height="42" width="42"/>
                 <div class="container">
                     <h2 class="gameUnderTitel">Joey</h2>
@@ -83,7 +86,7 @@
               </div>
             </li>
 
-            <li id="bot2">
+            <li id="bot2" class="mediumBot">
                 <img src="./img/elaine.png" alt="Smiley face" height="42" width="42"/>
             <div class="container">
                 <h2 class="gameUnderTitel">Elaine</h2>
@@ -96,7 +99,7 @@
           </div>
         </li>
 
-        <li id="bot3">
+        <li id="bot3" class="hardBot">
             <img src="./img/amy.png" alt="Smiley face" height="42" width="42" />
         <div class="container">
             <h2 class="gameUnderTitel">Amy</h2>
@@ -137,9 +140,8 @@
         
         <div class="user-input-field">
           <!-- Här läggs de element som skapas i gameController.js-->
-          <button class="secondaryButton buttonPosition" id="backToStart"> Quit</button>
-        
         </div>
+        
         <h1 id="gameResponse"></h1>
         <ul id="guessedNumbersFromPlayer"></ul>
       </div>

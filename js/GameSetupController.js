@@ -22,19 +22,19 @@ class GameSetupController {
 
   selectBot1() {
     bot1.classList.toggle("active");
-    this.checkIfBotIsActive(this.bot1);
+    this.checkIfBotIsActive();
   }
   selectBot2() {
     bot2.classList.toggle("active");
-    this.checkIfBotIsActive(this.bot2);
+    this.checkIfBotIsActive();
   }
   selectBot3() {
     bot3.classList.toggle("active");
-    this.checkIfBotIsActive(this.bot3);
+    this.checkIfBotIsActive();
   }
 
   //Här kollar vi om boten är aktiv
-  checkIfBotIsActive(bot) {
+  checkIfBotIsActive() {
     this.activeBots = [];
     const botArray = document.querySelectorAll(".bots li");
     botArray.forEach(bot => {
@@ -43,5 +43,6 @@ class GameSetupController {
       }
     });
     console.log(this.activeBots);
+    // modules.export = this.activeBots;
   }
 }

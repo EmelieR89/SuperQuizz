@@ -108,7 +108,7 @@ class GameController {
    * Checks if active player is a bot and retrieves answer if it is
    */
   checkIfBotTurn() {
-    if (this.activePlayer instanceof BotPlayer) {
+    if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
       const activeBot = this.activePlayer;
       this.retrieveAnswerFromBot(activeBot);
       this.activePlayer.addToGuess();
@@ -120,15 +120,13 @@ class GameController {
    */
   updatePlayerTurnVisuals() {
     this.activePlayerTitle.innerHTML = this.activePlayer.name;
-    if (this.activePlayer instanceof BotPlayer) {
-      console.log(`${this.activePlayer.name} painting bot stuff`);
+    if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
       this.userInput.disabled = true;
       this.userInput.style.opacity = 0.4;
       this.playButton.disabled = true;
       this.playButton.classList.add("bot-active");
       this.playButton.classList.remove("human-active");
     } else {
-      console.log(`${this.activePlayer.name} painting human stuff`);
       this.userInput.disabled = false;
       this.userInput.style.opacity = 1;
       this.playButton.disabled = false;
@@ -139,8 +137,8 @@ class GameController {
   }
 
   /**
-   * Retrieves the answer from the active BotPlayer with a delay
-   * @param {BotPlayer} activeBot The active BotPlayer
+   * Retrieves the answer from the active HardBot with a delay
+   * @param {HardBot} activeBot The active HardBot
    */
   retrieveAnswerFromBot(activeBot) {
     const numberGuessed = activeBot.activate();
@@ -155,18 +153,35 @@ class GameController {
    * @param {Number} nOfPlayers Number of AI players input
    */
   createPlayerTurns(nOfPlayers) {
+  const humanPlayer = new HumanPlayer('hooman')
+    
     this.nOfPlayers = nOfPlayers;
     let playerArray = [];
     let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1));
 
-    for (let i = 0; i < nOfPlayers.length + 1; i++) {
-      if (i === humanPlayerTurn) {
-        playerArray.push(new HumanPlayer("hooman"));
-        // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
-      } else {
-        playerArray.push(new BotPlayer(`Bot ${i}`));
+    nOfPlayers.forEach(bot => {
+      if (bot.classList.contains("easyBot")) {
+        playerArray.push(new EasyBot("EasyBot"));
+      } 
+      if (bot.classList.contains("mediumBot")) {
+        playerArray.push(new MediumBot(`MediumBot`));
       }
-    }
+      if (bot.classList.contains("hardBot")) {
+        playerArray.push(new HardBot(`hardBot`));
+      }
+    });
+
+playerArray.splice(humanPlayerTurn, 0, humanPlayer)
+console.log(playerArray);
+
+    // for (let i = 0; i < nOfPlayers.length + 1; i++) {
+    //   if (i === humanPlayerTurn) {
+    //     playerArray.push(new HumanPlayer("hooman"));
+    //     // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
+    //   } else {
+    //     playerArray.push(new HardBot(`Bot ${i}`));
+    //   }
+    // }
     this.playerTurns = playerArray;
     console.log(this.playerTurns);
   }
@@ -203,7 +218,6 @@ class GameController {
    */
   addEventToInput() {
     this.userInput.addEventListener("keyup", event => {
-      console.log(this.version);
       const numberGuessed = parseInt(this.userInput.value);
       if (event.key === "Enter") {
         this.clearPlayerInput();
@@ -240,7 +254,6 @@ class GameController {
    * @param {Number} input User input
    */
   checkPlayerInput(input) {
-    console.log('nu år du hr')
     if (input < this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Higher");
       this.setListGuessedNumber(input);
@@ -249,7 +262,7 @@ class GameController {
       this.setListGuessedNumber(input);
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true;
-      if (this.activePlayer instanceof BotPlayer) {
+      if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
         this.activePlayer.addToWins();
         // const stats = this.activePlayer.getStatistics(this.nOfPlayers);
       }
@@ -258,6 +271,12 @@ class GameController {
     } else if (input === "Timeout!") {
       this.updateGameResponse(input);
     }
+
+    else if (this.activePlayer instanceof EasyBot) {
+      this.updateGameResponse(input, "Joey...");
+      this.setListGuessedNumber(input)
+    }
+
   }
 
   getGameOver() {
@@ -312,11 +331,28 @@ class GameController {
   updateGameResponse(newGuess, status) {
     if (newGuess === "Timeout!") {
       this.gameResults = newGuess;
-    } else {
+    } 
+    else if (isNaN(newGuess)) {
+      this.gameResults = status 
+    }
+    else {
       this.playerTurns.forEach(player => {
-        if (player instanceof BotPlayer) {
-          player.calculateNewOptimalGuess(newGuess, status);
+        switch (true) {
+          case player instanceof HardBot:
+            player.calculateNewOptimalGuess(newGuess, status);
+            break;
+          case player instanceof EasyBot:
+          player.calculateNewEasyGuess(newGuess, status);
+          break;
+          case player instanceof MediumBot:
+          player.calculateNewMediumGuess(newGuess, status);
+          break;
         }
+
+
+        // if (player instanceof HardBot) {
+        //   player.calculateNewOptimalGuess(newGuess, status);
+        // }
       });
       this.gameResults = "Go " + status + "!";
     }
