@@ -89,7 +89,7 @@ class GameController {
    * Checks if active player is a bot and retrieves answer if it is
    */
   checkIfBotTurn() {
-    if (this.activePlayer instanceof BotPlayer) {
+    if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
       const activeBot = this.activePlayer;
       this.retrieveAnswerFromBot(activeBot);
       this.activePlayer.addToGuess();
@@ -101,7 +101,7 @@ class GameController {
    */
   updatePlayerTurnVisuals() {
     this.activePlayerTitle.innerHTML = this.activePlayer.name;
-    if (this.activePlayer instanceof BotPlayer) {
+    if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
       console.log(`${this.activePlayer.name} painting bot stuff`);
       this.userInput.disabled = true;
       this.userInput.style.opacity = 0.4;
@@ -120,12 +120,12 @@ class GameController {
   }
 
   /**
-   * Retrieves the answer from the active BotPlayer with a delay
-   * @param {BotPlayer} activeBot The active BotPlayer
+   * Retrieves the answer from the active HardBot with a delay
+   * @param {HardBot} activeBot The active HardBot
    */
   retrieveAnswerFromBot(activeBot) {
     const numberGuessed = activeBot.activate();
-    const generateRandomDelay = parseInt(Math.random() * 4000 + 500);
+    const generateRandomDelay = 100; //parseInt(Math.random() * 4000 + 500);
     setTimeout(() => {
       this.checkPlayerInput(numberGuessed);
       this.setListGuessedNumber(numberGuessed);
@@ -137,19 +137,36 @@ class GameController {
    * @param {Number} nOfPlayers Number of AI players input
    */
   createPlayerTurns(nOfPlayers) {
+  const humanPlayer = new HumanPlayer('hooman')
+    
     this.nOfPlayers = nOfPlayers;
     let playerArray = [];
     let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1));
     console.log(humanPlayerTurn);
 
-    for (let i = 0; i < nOfPlayers.length + 1; i++) {
-      if (i === humanPlayerTurn) {
-        playerArray.push(new HumanPlayer("hooman"));
-        localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
-      } else {
-        playerArray.push(new BotPlayer(`Bot ${i}`));
+    nOfPlayers.forEach(bot => {
+      if (bot.classList.contains("easyBot")) {
+        playerArray.push(new EasyBot("EasyBot"));
+      } 
+      if (bot.classList.contains("mediumBot")) {
+        playerArray.push(new MediumBot(`MediumBot`));
       }
-    }
+      if (bot.classList.contains("hardBot")) {
+        playerArray.push(new HardBot(`hardBot`));
+      }
+    });
+
+playerArray.splice(humanPlayerTurn, 0, humanPlayer)
+console.log(playerArray);
+
+    // for (let i = 0; i < nOfPlayers.length + 1; i++) {
+    //   if (i === humanPlayerTurn) {
+    //     playerArray.push(new HumanPlayer("hooman"));
+    //     // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
+    //   } else {
+    //     playerArray.push(new HardBot(`Bot ${i}`));
+    //   }
+    // }
     this.playerTurns = playerArray;
   }
 
@@ -213,7 +230,7 @@ class GameController {
       this.updateGameResponse(input, "Lower");
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true;
-      if (this.activePlayer instanceof BotPlayer) {
+      if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
         this.activePlayer.addToWins();
         const stats = this.activePlayer.getStatistics(this.nOfPlayers);
       }
@@ -281,9 +298,22 @@ class GameController {
     }
     else {
       this.playerTurns.forEach(player => {
-        if (player instanceof BotPlayer) {
-          player.calculateNewOptimalGuess(newGuess, status);
+        switch (true) {
+          case player instanceof HardBot:
+            player.calculateNewOptimalGuess(newGuess, status);
+            break;
+          case player instanceof EasyBot:
+          player.calculateNewEasyGuess(newGuess, status);
+          break;
+          case player instanceof MediumBot:
+          player.calculateNewMediumGuess(newGuess, status);
+          break;
         }
+
+
+        // if (player instanceof HardBot) {
+        //   player.calculateNewOptimalGuess(newGuess, status);
+        // }
       });
       this.gameResults = "Go " + status + "!";
     }

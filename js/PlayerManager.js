@@ -4,7 +4,7 @@
 //To get all Bots list array, use getAllBotsList().
 //When changes to player have been made, save changes with saveAllPlayerList().
 //To add a human player use, addPlayerToList(Player obj).
-//To add a bot use, addBotToList(BotPlayer)
+//To add a bot use, addBotToList(BotPlayer), where BotPlayer represents any of the following: EasyBot, MediumBot, Hardbot.
 
 class PlayerManager{
     constructor() {
@@ -67,10 +67,10 @@ class PlayerManager{
             //create localStorage
             let botsList = []
             
-            botsList.push(new BotPlayer('testBot', 1))
-            botsList.push(new BotPlayer('Joey', 3))
-            botsList.push(new BotPlayer('Elaine', 7))
-            botsList.push(new BotPlayer('Amy', 18))
+            botsList.push(new HardBot('testBot', 1))
+            botsList.push(new EasyBot('Joey', 3))
+            botsList.push(new MediumBot('Elaine', 7))
+            botsList.push(new HardBot('Amy', 18))
 
             localStorage.setItem(this.botsListLSName, JSON.stringify(botsList))
             this.allBotsList = botsList
