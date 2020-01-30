@@ -121,14 +121,12 @@ class GameController {
   updatePlayerTurnVisuals() {
     this.activePlayerTitle.innerHTML = this.activePlayer.name;
     if (this.activePlayer instanceof HardBot || this.activePlayer instanceof EasyBot || this.activePlayer instanceof MediumBot) {
-      console.log(`${this.activePlayer.name} painting bot stuff`);
       this.userInput.disabled = true;
       this.userInput.style.opacity = 0.4;
       this.playButton.disabled = true;
       this.playButton.classList.add("bot-active");
       this.playButton.classList.remove("human-active");
     } else {
-      console.log(`${this.activePlayer.name} painting human stuff`);
       this.userInput.disabled = false;
       this.userInput.style.opacity = 1;
       this.playButton.disabled = false;
@@ -144,7 +142,7 @@ class GameController {
    */
   retrieveAnswerFromBot(activeBot) {
     const numberGuessed = activeBot.activate();
-    const generateRandomDelay = 100; //parseInt(Math.random() * 4000 + 500);
+    const generateRandomDelay = parseInt(Math.random() * 4000 + 500);
     setTimeout(() => {
       this.checkPlayerInput(numberGuessed);
     }, generateRandomDelay);
@@ -220,7 +218,6 @@ console.log(playerArray);
    */
   addEventToInput() {
     this.userInput.addEventListener("keyup", event => {
-      console.log(this.version);
       const numberGuessed = parseInt(this.userInput.value);
       if (event.key === "Enter") {
         this.clearPlayerInput();
@@ -257,7 +254,6 @@ console.log(playerArray);
    * @param {Number} input User input
    */
   checkPlayerInput(input) {
-    console.log('nu år du hr')
     if (input < this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Higher");
       this.setListGuessedNumber(input);
@@ -275,6 +271,12 @@ console.log(playerArray);
     } else if (input === "Timeout!") {
       this.updateGameResponse(input);
     }
+
+    else if (this.activePlayer instanceof EasyBot) {
+      this.updateGameResponse(input, "Joey...");
+      this.setListGuessedNumber(input)
+    }
+
   }
 
   getGameOver() {
@@ -329,7 +331,11 @@ console.log(playerArray);
   updateGameResponse(newGuess, status) {
     if (newGuess === "Timeout!") {
       this.gameResults = newGuess;
-    } else {
+    } 
+    else if (isNaN(newGuess)) {
+      this.gameResults = status 
+    }
+    else {
       this.playerTurns.forEach(player => {
         switch (true) {
           case player instanceof HardBot:
