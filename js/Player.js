@@ -10,7 +10,7 @@ class Player {
     this.gamesPlayed = 0;
     this.totalWins = 0 // || localstorage
     this.totalGuess = 0 // || localstorage
-    this.score = 0 // localstorage
+    this.score = 1 // localstorage
   }
 
   getStatistics(){   

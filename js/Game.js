@@ -140,7 +140,11 @@ class Game {
       const score = player.getStatistics()
       const scoreElement = document.querySelector('.gamescore');
       scoreElement.innerHTML = score
-      console.log(score);
+      const totalGuess = player.getStatistics()
+      const guessElement = document.querySelector('.totalguess');
+      guessElement.innerHTML = totalGuess
+      console.log(score, totalGuess);
+  } 
       
 
 
