@@ -16,13 +16,6 @@ class GameSetupController {
     this.activeBots = [];
   }
 
-//   printNumberOfAIPlayers() {
-//     this.numberOfAIPlayers = this.numberOfAIPlayersEl.value;
-//     document
-//       .querySelector(".game-setup-container")
-//       .append(this.numberOfAIPlayers);
-//   }
-
   getNumberOfAIPlayers() {
     return this.activeBots;
   }

@@ -1,10 +1,102 @@
+.game-setup-container {
+    width: 100%;
+    max-width: 30rem;
+}
+
 .bots {
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 0;
-}
-.bots .active {
-    opacity: 50%;
+    margin: 1.5rem 0 0 0;
 }
 
+.bots li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bots li p {
+    margin-top: .5rem;
+    text-align: center;
+}
+
+.bots img {
+    padding: .3rem;
+    width: 70%;
+    height: auto;
+}
+
+.bots .active img{
+    padding: 0;
+    border-radius: 50%;
+    border: solid .3rem #bf00ff;
+}
+
+.game-setup-container h2{
+    text-align: center;
+}
+.game-setup-container h1{
+    text-align: center;
+}
+
+.gameSetupButtons {
+    margin-top: 4rem;
+
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.gameSetupButtons > button {
+    width: 5rem;
+}
+
+.backToStart {
+    margin: 0 0 0 1rem;
+}
+
+/* BotINFO */
+.container {
+    position: relative;
+    width: 50%;
+  }
+
+  .container > span{
+      display: flex;
+  
+      margin-top:1rem;
+  }
+  
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    margin-left:-2rem;
+    top:10%;
+    background-color:#bf00ff;
+    overflow: hidden;
+    width: 11rem;
+    height: 12rem;
+    transform: scale(0);
+    transition: .3s ease;
+  }
+
+  .container:hover .overlay {
+    transform: scale(1);
+  }
+  
+  .text {
+    color: #fbefff;
+    font-size: 1.6vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
