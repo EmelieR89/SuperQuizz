@@ -1,46 +1,18 @@
-// Detta är klassen som kontrollerar användarens input
-// och matchar mot det vinnande värdet
-
 class GameController {
   constructor(game) {
     this.game = game;
     this.randomGeneratedNumber = this.generateRandomNumber();
-    this.playButton = document.querySelector(".game-play-container button");
-    this.userInput = document.querySelector(".game-play-container input");
     this.activePlayerTitle = document.querySelector(".player-turn");
     this.winnerPlayerTitle = document.querySelector(
       ".game-winner-container h2"
     );
+    this.timerCircle = document.querySelector('.timer-circle path');
     this.winnerNumberTitle = document.querySelector(".win-con");
+    this.timeLeftText = document.querySelector('.time-left');
     this.gameResults = "";
     this.list = [];
     this.turn = 0;
     this.gameOver = false;
-    // this.addTimerToAnswer()
-  }
-
-  /**
-   * Makes enter key work in game-play-container.
-   */
-  addEventToInput() {
-    this.userInput.addEventListener("keyup", event => {
-      if (event.key === "Enter") {
-        if (this.userInput.value === "") {
-        } else {
-          let numberGuessed = parseInt(this.userInput.value);
-          this.checkPlayerInput(numberGuessed);
-          this.setListGuessedNumber(numberGuessed);
-          this.userInput.value = "";
-        }
-      }
-    });
-  }
-
-  /**
-   * Sets up the turn-based logic, meant for everything necessary when starting up a game
-   */
-  setupInitialGameState() {
-    this.cyclePlayerTurns();
   }
 
   /**
@@ -63,18 +35,66 @@ class GameController {
    * Adds a timer to the answer event and times out player if time runs out (10 seconds)
    */
   addTimerToAnswer() {
-    const activePlayer = this.activePlayer;
-    let time = 100;
+    const activePlayer = this.activePlayer
+    let timerValue = 0;
+    let timerText = 1000
     let answerTimer = setInterval(() => {
-      time--;
+      timerValue++
+      timerText--
+      this.updateTimerVisuals(timerValue, timerText)
 
-      if (time === 0 || activePlayer != this.activePlayer || this.gameOver) {
-        clearInterval(answerTimer);
-        if (time === 0) {
-          this.checkPlayerInput("Timeout!");
+      if (timerValue === 1000 || activePlayer != this.activePlayer || this.gameOver) {
+        clearInterval(answerTimer)
+        if (timerValue === 1000) {
+          this.checkPlayerInput('Timeout!')
         }
       }
-    }, 100);
+    }, 10);
+  }
+
+  /**
+   * Creates elements for the player input div.
+   */
+  createPlayInputs() {
+    const div = document.querySelector('.user-input-field')
+    const button = document.createElement('button')
+    const error = document.createElement('h5')
+    const input = document.createElement('input')
+
+    button.setAttribute('id', 'play')
+    button.innerHTML = 'Play'
+
+    error.setAttribute('id', 'messageIfInputIsWrong')
+
+    input.setAttribute('id', 'numberGuessed')
+    input.setAttribute('type', 'text')
+    input.setAttribute('placeholder', 'pick a number')
+    input.setAttribute('pattern', '\d*')
+
+    div.appendChild(input)
+    div.appendChild(error)
+    div.appendChild(button)
+    this.playButton = button
+    this.errorMsg = error
+    this.userInput = input
+  }
+
+  /**
+   * Removes the elements in input div so they can be replaced when new GameController
+   */
+  destroyTheElementsInInputDiv() {
+    const div = document.querySelector('.user-input-field')
+    div.removeChild(this.playButton)
+    div.removeChild(this.userInput)
+    div.removeChild(this.errorMsg)
+  }
+
+
+  updateTimerVisuals(timerValue, timerText) {
+    timerValue = timerValue / 10
+    timerText = parseFloat(timerText / 100).toFixed(1)
+    this.timeLeftText.innerHTML = timerText
+    this.timerCircle.setAttribute("stroke-dasharray", `${timerValue}, 100`)
   }
 
   /**
@@ -126,7 +146,6 @@ class GameController {
     const generateRandomDelay = parseInt(Math.random() * 4000 + 500);
     setTimeout(() => {
       this.checkPlayerInput(numberGuessed);
-      this.setListGuessedNumber(numberGuessed);
     }, generateRandomDelay);
   }
 
@@ -138,12 +157,11 @@ class GameController {
     this.nOfPlayers = nOfPlayers;
     let playerArray = [];
     let humanPlayerTurn = parseInt(Math.random() * (nOfPlayers.length + 1));
-    console.log(humanPlayerTurn);
 
     for (let i = 0; i < nOfPlayers.length + 1; i++) {
       if (i === humanPlayerTurn) {
         playerArray.push(new HumanPlayer("hooman"));
-        localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
+        // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
       } else {
         playerArray.push(new BotPlayer(`Bot ${i}`));
       }
@@ -152,14 +170,13 @@ class GameController {
       player.setGamesPlayed(1)
     });
     this.playerTurns = playerArray;
+    console.log(this.playerTurns);
   }
 
   /**
    * Returns a random number between 1 and 100
    */
   generateRandomNumber() {
-    //return 75 för buggfix
-    //Provar att spara slumpnumret
     let rndnum = parseInt(Math.random() * 100);
     localStorage.setItem("rndnum", JSON.stringify(rndnum));
     return rndnum;
@@ -170,16 +187,35 @@ class GameController {
    */
   addEventToPlay() {
     this.playButton.addEventListener("click", () => {
+      console.log(this.version);
+
       const numberGuessed = parseInt(this.userInput.value);
-      this.checkPlayerInput(numberGuessed);
       this.clearPlayerInput();
       if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
         this.wrongInputFormat(numberGuessed);
         return;
+      } else {
+        this.checkPlayerInput(numberGuessed);
       }
+    });
+  }
 
-      this.setListGuessedNumber(numberGuessed);
-      if (!this.gameOver) this.cyclePlayerTurns();
+  /**
+   * Makes enter key work in game-play-container.
+   */
+  addEventToInput() {
+    this.userInput.addEventListener("keyup", event => {
+      console.log(this.version);
+      const numberGuessed = parseInt(this.userInput.value);
+      if (event.key === "Enter") {
+        this.clearPlayerInput();
+        if (numberGuessed > 100 || isNaN(numberGuessed) || numberGuessed <= 0) {
+          this.wrongInputFormat(numberGuessed);
+          return;
+        } else {
+          this.checkPlayerInput(numberGuessed);
+        }
+      }
     });
   }
 
@@ -206,13 +242,19 @@ class GameController {
    * @param {Number} input User input
    */
   checkPlayerInput(input) {
+    console.log('nu år du hr')
     if (input < this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Higher");
+      this.setListGuessedNumber(input);
     } else if (input > this.randomGeneratedNumber) {
       this.updateGameResponse(input, "Lower");
+      this.setListGuessedNumber(input);
     } else if (input === this.randomGeneratedNumber) {
       this.gameOver = true;
-      this.activePlayer.addToWins();
+      if (this.activePlayer instanceof BotPlayer) {
+        this.activePlayer.addToWins();
+        // const stats = this.activePlayer.getStatistics(this.nOfPlayers);
+      }
       this.goToWinnerPage();
       // HighScore.this.checkGameStatus();
     } else if (input === "Timeout!") {
@@ -229,6 +271,7 @@ class GameController {
    * Shows game state to over and presents the winner
    */
   goToWinnerPage() {
+    this.destroyTheElementsInInputDiv()
     this.updateWinnerPlayerTitle();
     this.updateWinnerNumberTitle();
     this.game.showPage("game-winner-container");
@@ -254,11 +297,9 @@ class GameController {
    */
   setListGuessedNumber(numberInput) {
     this.list.push(numberInput);
-    localStorage.setItem("guessedNumber", JSON.stringify(this.list));
-    let userGuesses = JSON.parse(localStorage.getItem("guessedNumber"));
     let ul = document.getElementById("guessedNumbersFromPlayer");
     ul.innerHTML = "";
-    for (let guess of userGuesses) {
+    for (let guess of this.list) {
       let li = document.createElement("li");
       li.innerHTML = guess;
       ul.appendChild(li);
