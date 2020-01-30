@@ -7,15 +7,8 @@ class Game {
       this.playerManager
     );
     this.gameSetupController = new GameSetupController();
-    this.gameController = new GameController(this);
     this.currentPageState = "";
     this.highScore = new HighScore(this.playerManager);
-
-    //Add Events
-    // this.gameSetupButton = document.getElementById('startPageButton')
-    // if(this.gameSetupButton !== null){//if button is removed, dont add eventlistener.
-    //     this.gameSetupButton.addEventListener('click', this.gotoSetupPage.bind(this))
-    // }
 
     this.gameSetupButton = document.getElementById("startPageButton");
     if (this.gameSetupButton !== null) {
@@ -63,16 +56,12 @@ class Game {
     this.showPage("start-container");
     this.startPageController.addStartGameEvent();
     this.startPageController.addUserNameInputEvent();
-    this.gameController.addEventToPlay();
-    this.gameController.addEventToInput();
   }
 
   //runs after showPage changes pages,
   updateState() {
     if (this.currentPageState === "game-winner-container") {
       console.log("run winner code " + this.gameController.gameResults);
-      //this.startPageController.getHumanPlayerName() + " player name and AI player number " +
-      //this.gameSetupController.getNumberOfAIPlayers())
     }
     if (this.currentPageState === "game-play-container") {
       this.gameController.userInput.focus();
@@ -88,26 +77,34 @@ class Game {
     this.showPage("game-setup-container");
 
     //test save new player info to local storage.
-    if (this.playerManager.currentHumanPlayer != null) {
-      this.playerManager.currentHumanPlayer.gamesPlayed++;
-      console.log(this.playerManager.currentHumanPlayer.gamesPlayed);
-      this.playerManager.saveAllPlayerAndBotsList();
-      this.playerManager.addPlayerToList(new BotPlayer("addBot", 8));
-      this.playerManager.addBotToList(new BotPlayer("addBotList", 3));
-      //this.playerManager.saveAllPlayerList()
-      console.log(this.playerManager.getAllPlayerList());
-      console.log(this.playerManager.getAllBotsList());
-      //this.playerManager.getAllBotPlayers()
-    }
+    // if (this.playerManager.currentHumanPlayer != null) {
+    //   this.playerManager.currentHumanPlayer.gamesPlayed++;
+    //   console.log(this.playerManager.currentHumanPlayer.gamesPlayed);
+    //   this.playerManager.saveAllPlayerAndBotsList();
+    //   this.playerManager.addPlayerToList(new BotPlayer("addBot", 8));
+    //   this.playerManager.addBotToList(new BotPlayer("addBotList", 3));
+    //   //this.playerManager.saveAllPlayerList()
+    //   console.log(this.playerManager.getAllPlayerList());
+    //   console.log(this.playerManager.getAllBotsList());
+    //   //this.playerManager.getAllBotPlayers()
+    // }
   }
 
   goToGamePlayPage() {
+    document.getElementById("guessedNumbersFromPlayer").innerHTML = "";
+    document.getElementById("gameResponse").innerHTML = "";
+
+
+    delete this.gameController
+    this.gameController = new GameController(this)
+    this.gameController.createPlayInputs();
+    this.gameController.addEventToPlay();
+    this.gameController.addEventToInput();
+
     this.gameController.createPlayerTurns(
       this.gameSetupController.getNumberOfAIPlayers()
     );
     this.gameController.cyclePlayerTurns();
-    // this.gameController.resetGuessedList();
-    document.getElementById("gameResponse").innerHTML = "";
     this.showPage("game-play-container");
   }
 
@@ -141,7 +138,7 @@ class Game {
    * Runs session sort in HighScore class.
    * TODO add sort to bots list also. 
    */
-  runHighScoreSort(){
+  runHighScoreSort() {
     this.highScore.sessionSort()
   }
 }
