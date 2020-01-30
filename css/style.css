@@ -6,7 +6,6 @@
 
 .wrapper {
     width: 100%;
-
     display: flex;
     justify-content: center;
 }
@@ -20,6 +19,7 @@ input:focus{
 }
 html{
     font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
     height: 100%;  
 }
 body{
@@ -49,6 +49,7 @@ button {
     padding:0.5rem;
     font-size: 0.9rem;
     outline: 0;
+    margin: 0.5rem 0 0 0;
 }
 
 .secondaryButton {
@@ -71,5 +72,5 @@ input {
     padding: 0.5rem;
     border-radius: 4rem; 
     margin-bottom: 1rem;
+    align-content: center;
 }
-
