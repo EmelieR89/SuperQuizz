@@ -61,6 +61,12 @@
     position: relative;
     width: 50%;
   }
+
+  .container > span{
+      display: flex;
+  
+      margin-top:1rem;
+  }
   
   .image {
     display: block;
@@ -70,35 +76,27 @@
   
   .overlay {
     position: absolute;
-    bottom: 5;
-    left: 0.1;
-    right: 0;
+    bottom: 0;
+    margin-left:-2rem;
+    top:10%;
     background-color:#bf00ff;
     overflow: hidden;
-    width: 10rem;
-    height: 10rem;
-    -webkit-transform: scale(0);
-    -ms-transform: scale(0);
+    width: 11rem;
+    height: 12rem;
     transform: scale(0);
-    -webkit-transition: .3s ease;
     transition: .3s ease;
   }
- 
-  
+
   .container:hover .overlay {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     transform: scale(1);
   }
   
   .text {
-    color: white;
-    font-size: 15px;
+    color: #fbefff;
+    font-size: 1.6vw;
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    text-align: center;
+    /* text-align: center; */
   }
