@@ -161,13 +161,13 @@ class GameController {
 
     nOfPlayers.forEach(bot => {
       if (bot.classList.contains("easyBot")) {
-        playerArray.push(new EasyBot("EasyBot"));
+        playerArray.push(new EasyBot("Joey"));
       } 
       if (bot.classList.contains("mediumBot")) {
-        playerArray.push(new MediumBot(`MediumBot`));
+        playerArray.push(new MediumBot("Elaine"));
       }
       if (bot.classList.contains("hardBot")) {
-        playerArray.push(new HardBot(`hardBot`));
+        playerArray.push(new HardBot("Amy"));
       }
     });
 
