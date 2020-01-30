@@ -16,6 +16,8 @@ class EasyBot extends Player {
                        'These are just feelings. They’ll go away.', 
                        'Over the line? You’re so far past the line that you can’t even see the line! The line is a dot to you!', 
                        'Paper! Snow! A Ghost!' ];
+        this.number;   
+        this.randomNumb = [];            
   }
  /**
    * This adds to the number of guesses
@@ -39,9 +41,18 @@ class EasyBot extends Player {
    * @param {String} status The result of the last made guess
    */
   calculateNewEasyGuess(guess, status) {
-    let randomNumb = parseInt(Math.random()*10);
+    this.randomNumb[0] = parseInt(Math.random()*10);
+    this.randomNumb[1] = Math.random());
 
-    this.optimalValue = this.phrases[randomNumb];
+  
+
+    if (this.randomNumb[1]<.5) {
+          this.optimalValue = this.phrases[randomNumb[0]];
+    } else {
+          this.optimalValue = this.number;
+    }
+
+    
 
   }
 }
