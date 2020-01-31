@@ -269,7 +269,7 @@ console.log(playerArray);
     }
 
     else if (this.activePlayer instanceof EasyBot) {
-      this.updateGameResponse(input, "Just pick a number Joey!");
+      this.updateGameResponse(input, "A number Joey!");
       this.setListGuessedNumber(input)
     }
 
