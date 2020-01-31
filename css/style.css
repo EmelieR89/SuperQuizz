@@ -84,3 +84,26 @@ input {
     margin-bottom: 1rem;
     align-content: center;
 }
+
+
+.game-result-container, p, h2{
+    text-align: center;
+    padding: 0.3rem 0;
+}
+
+.gamescore, .totalguess{
+    border:solid 0.2rem #bf00ff;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    animation: frame 2s ease-in infinite alternate;
+}
+
+@keyframes frame {
+    from {
+        border: 0.2rem solid  #bf00ff;
+    }
+  
+    to {
+        border: 0.2rem solid  #4cb971;
+    }
+  }
