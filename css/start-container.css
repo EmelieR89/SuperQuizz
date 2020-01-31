@@ -55,7 +55,7 @@
 
 .gameUnderTitel{
     font-family: 'Bangers', cursive;
-    color: #f7f6ee;
+    color: #fbefff;
 }
 
 
@@ -76,6 +76,14 @@
 .high-score-list .playerHolder {
     display: flex;
     justify-content: space-between;
+}
+
+.high-score-list li:nth-child(even){
+    color: #4cb971;
+}
+
+.high-score-list li{
+    padding:0.1rem;
 }
 
  
