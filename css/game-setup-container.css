@@ -65,8 +65,8 @@
 
   .container > span{
       display: flex;
-  
       margin-top:1rem;
+      margin-right: 2rem;
   }
   
   .image {
@@ -78,7 +78,7 @@
   .overlay {
     position: absolute;
     bottom: 0;
-    margin-left:-2rem;
+    margin-left:-3rem;
     top:10%;
     background-color:#bf00ff;
     overflow: hidden;
@@ -94,7 +94,7 @@
   
   .text {
     color: #fbefff;
-    font-size: 1.6vw;
+    font-size: 3vh;
     position: absolute;
     top: 50%;
     left: 50%;

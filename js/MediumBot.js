@@ -5,8 +5,8 @@
 
 class MediumBot extends Player {
   // import activeBots;
-  constructor(name, score) {
-    super(name, score);
+  constructor(name) {
+    super(name);
     this.previousGuesses = [0, 100];
     this.optimalValue = (this.previousGuesses[0] + this.previousGuesses[1]) / 2;
     this.totalWins = 0; // || localstorage

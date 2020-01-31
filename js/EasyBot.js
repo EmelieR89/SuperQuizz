@@ -2,8 +2,8 @@
 // Logic = optimal
 
 class EasyBot extends Player {
-  constructor(name, score) {
-    super(name, score);
+  constructor(name) {
+    super(name);
        this.previousGuesses = [0, 100];
        this.optimalValue; 
        this.totalGuess = 0;
