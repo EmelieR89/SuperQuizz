@@ -125,7 +125,10 @@ class StartPageController {
         let highScoreOLel = document.querySelector('.high-score-list')
         //console.log(highScoreOLel.innerHTML)
         this.game.runHighScoreSort() // runs sort before list is gotten.
-        let playerList = this.playerManager.getAllPlayerList()
+        //let playerList = this.playerManager.getAllPlayerList()
+        let playerList = JSON.parse(localStorage.getItem('humanPlayerList'))
+
+        //sortlist
         highScoreOLel.innerHTML = ""
 
         for (const player of playerList) {
@@ -143,7 +146,7 @@ class StartPageController {
 
 
             let nameTextNode = document.createTextNode(player.name)
-            let scoreTextNode = document.createTextNode(player.score)
+            let scoreTextNode = document.createTextNode(parseFloat(player.score).toFixed(1))
 
             nameDivEl.appendChild(nameTextNode)
             scoreDivEl.appendChild(scoreTextNode)
