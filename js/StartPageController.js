@@ -1,6 +1,6 @@
 //code for start page
-class StartPageController{
-    constructor(game, playerManager){
+class StartPageController {
+    constructor(game, playerManager) {
         this.game = game
         this.playerManager = playerManager
         this.rulesT = document.getElementById('readRulesButton')
@@ -31,23 +31,23 @@ class StartPageController{
             let disabled;
             if (this.userNameInput.value != "") {
                 disabled = true
-                
+
                 //change login/create button text if player is found or not.
-                if(!this.playerManager.findPlayer(this.userNameInput.value)){
+                if (!this.playerManager.findPlayer(this.userNameInput.value)) {
                     this.loginCreateButton.innerHTML = 'New User'
-                }else{
+                } else {
                     this.loginCreateButton.innerHTML = 'Login'
                 }//end login code.
 
                 this.manageStartButtonColor(disabled)
                 if (event.key === 'Enter') {
                     this.proceedToStartGame()
-                } 
+                }
             }
             else {
                 disabled = false
-                this.manageStartButtonColor(disabled) 
-                this.loginCreateButton.innerHTML = 'Login/Create'               
+                this.manageStartButtonColor(disabled)
+                this.loginCreateButton.innerHTML = 'Login/Create'
             }
         })
     }
@@ -64,81 +64,80 @@ class StartPageController{
     }
 
     //run when login button is clicked
-    loginCreateEvent(){
-        if(!this.playerManager.findPlayer(this.userNameInput.value)){
+    loginCreateEvent() {
+        this.game.currentPlayerName = this.userNameInput.value //test
+        if (!this.playerManager.findPlayer(this.userNameInput.value)) {
             this.playerManager.createPlayer(this.userNameInput.value)
             this.playerManager.setCurrentHumanPlayer(this.playerManager.findPlayer(this.userNameInput.value))
             //console.log(this.playerManager.findPlayer(this.userNameInput.value))
         }
-        else{
+        else {
             this.playerManager.setCurrentHumanPlayer(this.playerManager.findPlayer(this.userNameInput.value))
         }
 
         this.loginCreateButton.innerHTML = this.playerManager.getCurrentHumanPlayer().name
-
     }
-    
+
     generateEmptyUserNameMessage() {
         console.log('pls choose name');
     }
-    
+
     proceedToStartGame() {
-        this.game.gotoSetupPage()             
+        this.game.gotoSetupPage()
     }
 
-   /**
-    * toggles rules button. gets element by id and adds a eventlistener in cunstructor this.rulesT 
-    */
-    rulesToggle(){
+    /**
+     * toggles rules button. gets element by id and adds a eventlistener in cunstructor this.rulesT 
+     */
+    rulesToggle() {
         let rules = document.getElementById('showRules')
         let highScore = document.getElementById('showHighScore')
         console.log(rules.style.display)
         if (rules.style.display == 'block' || highScore.style.display == 'block') {
-            rules.style.display = 'none'  
+            rules.style.display = 'none'
             highScore.style.display = 'none'
-        } else{
+        } else {
             rules.style.display = 'block' || highScore.style.display == 'block'
-        } 
+        }
     }
+
     /**
      * toggles highscore button. gets element by id and adds a eventlistener in cunstructor this.highScoreT
      */
-    
-    highScoreToggle(){
+    highScoreToggle() {
         let rules = document.getElementById('showRules')
         let highScore = document.getElementById('showHighScore')
         this.updateHighScoreList()
         console.log(highScore.style.display)
         if (highScore.style.display == 'block' || rules.style.display == 'block') {
             highScore.style.display = 'none'
-            rules.style.display = 'none'  
-        } else{
+            rules.style.display = 'none'
+        } else {
             highScore.style.display = 'block' || rules.style.display == 'block'
         }
-      
     }
 
     /**
      * Runs when hihScoreToggle() is clicked, divs are added for name and score.
      * Css styling in start-container.css .playerHolder or .nameHolder, scoreHolder.
      */
-    updateHighScoreList(){
+    updateHighScoreList() {
         let highScoreOLel = document.querySelector('.high-score-list')
         //console.log(highScoreOLel.innerHTML)
         this.game.runHighScoreSort() // runs sort before list is gotten.
         let playerList = this.playerManager.getAllPlayerList()
         highScoreOLel.innerHTML = ""
-        
+
         for (const player of playerList) {
             let liEl = document.createElement('li')
             liEl.classList.add('highScoreLi')
-            
+
             let liDivEl = document.createElement('div')
             liDivEl.classList.add('playerHolder')
-            
+
             let nameDivEl = document.createElement('div')
             nameDivEl.classList.add('nameHolder')
-            
+
             let scoreDivEl = document.createElement('div')
             scoreDivEl.classList.add('scoreHolder')
 

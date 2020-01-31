@@ -5,5 +5,4 @@ window.onload = setup
 function setup() {
     const game = new Game()
     game.startGame()
-    //const startgame = new StartPageController()
 }
