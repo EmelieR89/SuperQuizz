@@ -65,6 +65,7 @@ class StartPageController {
 
     //run when login button is clicked
     loginCreateEvent() {
+        this.game.currentPlayerName = this.userNameInput.value //test
         if (!this.playerManager.findPlayer(this.userNameInput.value)) {
             this.playerManager.createPlayer(this.userNameInput.value)
             this.playerManager.setCurrentHumanPlayer(this.playerManager.findPlayer(this.userNameInput.value))

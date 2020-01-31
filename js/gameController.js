@@ -102,6 +102,7 @@ class GameController {
    */
   updateActivePlayer() {
     this.activePlayer = this.playerTurns[this.turn];
+    this.activePlayer.addTotalGuess();
   }
 
   /**
@@ -153,7 +154,7 @@ class GameController {
    * @param {Number} nOfPlayers Number of AI players input
    */
   createPlayerTurns(nOfPlayers) {
-  const humanPlayer = new HumanPlayer('hooman')
+  const humanPlayer = new HumanPlayer(this.game.currentPlayerName) //test was 'hooman' before
     
     this.nOfPlayers = nOfPlayers;
     let playerArray = [];

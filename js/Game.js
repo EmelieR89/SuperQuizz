@@ -9,6 +9,7 @@ class Game {
     this.gameSetupController = new GameSetupController();
     this.currentPageState = "";
     this.highScore = new HighScore(this.playerManager);
+    this.currentPlayerName = "Anon"
 
     this.gameSetupButton = document.getElementById("startPageButton");
     if (this.gameSetupButton !== null) {
