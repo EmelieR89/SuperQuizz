@@ -175,14 +175,6 @@ class GameController {
 playerArray.splice(humanPlayerTurn, 0, humanPlayer)
 console.log(playerArray);
 
-    // for (let i = 0; i < nOfPlayers.length + 1; i++) {
-    //   if (i === humanPlayerTurn) {
-    //     playerArray.push(new HumanPlayer("hooman"));
-    //     // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
-    //   } else {
-    //     playerArray.push(new HardBot(`Bot ${i}`));
-    //   }
-    // }
     this.playerTurns = playerArray;
     console.log(this.playerTurns);
   }
@@ -366,5 +358,15 @@ console.log(playerArray);
     if (!this.gameOver) {
       this.cyclePlayerTurns();
     }
+  }
+  returnHumanPlayer() {
+    let humanPlayer
+    this.playerTurns.forEach(player => {
+      console.log(player)
+      if (player instanceof HumanPlayer){
+        humanPlayer = player
+      }
+    });
+    return humanPlayer
   }
 }
