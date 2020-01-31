@@ -192,6 +192,9 @@ console.log(playerArray);
    */
   generateRandomNumber() {
     let rndnum = parseInt(Math.random() * 100);
+    if (rndnum === 0) {
+      rndnum = 1
+    }
     localStorage.setItem("rndnum", JSON.stringify(rndnum));
     return rndnum;
   }
@@ -288,6 +291,8 @@ console.log(playerArray);
    * Shows game state to over and presents the winner
    */
   goToWinnerPage() {
+    this.activePlayer.addTotalWins()
+    console.log(this.activePlayer.name + ' winner')
     this.destroyTheElementsInInputDiv()
     this.updateWinnerPlayerTitle();
     this.updateWinnerNumberTitle();
