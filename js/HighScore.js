@@ -7,22 +7,11 @@ class HighScore {
         this.tempNamesHistory = []
         this.highScore = JSON.parse(localStorage.getItem('highScoreHistory'))
         this.names = JSON.parse(localStorage.getItem('namesHistory'))
-        this.highScoreArray = this.playerManager.getAllPlayerList()
+        // this.highScoreArray = this.playerManager.getAllPlayerList()
         console.log(this.highScoreArray)
         this.sessionSort()
         console.log(this.highScoreArray)
     }
-
-    /**
-     * Gets local history
-     */
-   /* parseHistory(){
-        function parse() {
-            this.highScore = JSON.parse(localStorage.getItem('highScoreHistory'))
-            this.names = JSON.parse(localStorage.getItem('namesHistory'))
-        } 
-        parse()
-    } */
  
     /**
      * Stores local session
@@ -39,6 +28,8 @@ class HighScore {
      * Sorts high score high to low and adjusts the player names accordingly
      */
     sessionSort(){
+        this.highScoreArray = JSON.parse(localStorage.getItem('humanPlayerList'))
+
         this.highScoreArray.sort(
             function(a,b){
                 if (a.score > b.score) {
@@ -50,16 +41,7 @@ class HighScore {
                 return 0
         })
 
-        // for (i = 0; i < this.highScore.length; i++){
-        //    if (this.highScore[i] != this.tempHighScore[i]){
-        //         var tempStorage = this.names[i]
-        //         this.names[i] = this.names[i++]
-        //         this.names[i++] = tempStorage
-        //         tempStorage = this.tempHighScore [i]
-        //         this.tempHighScore [i] = this.tempHighScore [i++]
-        //         this.tempHighScore [i++] = tempStorage
-        //    }
-        // }
+        localStorage.setItem('humanPlayerList', JSON.stringify(this.highScoreArray));
     }
 
     /**
