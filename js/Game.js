@@ -110,6 +110,7 @@ class Game {
   }
 
   goToStartPage() {
+    this.startPageController.updateHighScoreList()
     this.showPage("start-container");
   }
 
@@ -117,9 +118,21 @@ class Game {
     this.showPage("high-score-container");
   }
   goToResults() {
+    this.showScore()
     this.showPage("game-result-container");
   }
   //End click functions.
+
+  showScore(){
+    const player = this.gameController.returnHumanPlayer()
+    const score = player.calculateScore()
+    const scoreElement = document.querySelector('.gamescore');
+    scoreElement.innerHTML = parseFloat(score).toFixed(1)
+    
+    // const totalGuesses = this.gameController.returnHumanPlayer()
+    const guessElement = document.querySelector('.totalguess');
+    guessElement.innerHTML = player.totalGuessA
+  }
 
   //Change pages by css Display: none in 'hiddenPages' style.css.
   showPage(classStringIn) {

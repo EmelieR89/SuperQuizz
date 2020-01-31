@@ -175,14 +175,6 @@ class GameController {
 playerArray.splice(humanPlayerTurn, 0, humanPlayer)
 console.log(playerArray);
 
-    // for (let i = 0; i < nOfPlayers.length + 1; i++) {
-    //   if (i === humanPlayerTurn) {
-    //     playerArray.push(new HumanPlayer("hooman"));
-    //     // localStorage.setItem("humanName", JSON.stringify(playerArray[0]));
-    //   } else {
-    //     playerArray.push(new HardBot(`Bot ${i}`));
-    //   }
-    // }
     this.playerTurns = playerArray;
     console.log(this.playerTurns);
   }
@@ -192,6 +184,9 @@ console.log(playerArray);
    */
   generateRandomNumber() {
     let rndnum = parseInt(Math.random() * 100);
+    if (rndnum === 0) {
+      rndnum = 1
+    }
     localStorage.setItem("rndnum", JSON.stringify(rndnum));
     return rndnum;
   }
@@ -288,6 +283,8 @@ console.log(playerArray);
    * Shows game state to over and presents the winner
    */
   goToWinnerPage() {
+    this.activePlayer.addTotalWins()
+    console.log(this.activePlayer.name + ' winner')
     this.destroyTheElementsInInputDiv()
     this.updateWinnerPlayerTitle();
     this.updateWinnerNumberTitle();
@@ -361,5 +358,15 @@ console.log(playerArray);
     if (!this.gameOver) {
       this.cyclePlayerTurns();
     }
+  }
+  returnHumanPlayer() {
+    let humanPlayer
+    this.playerTurns.forEach(player => {
+      console.log(player)
+      if (player instanceof HumanPlayer){
+        humanPlayer = player
+      }
+    });
+    return humanPlayer
   }
 }
