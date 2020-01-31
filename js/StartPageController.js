@@ -108,7 +108,7 @@ class StartPageController {
         let rules = document.getElementById('showRules')
         let highScore = document.getElementById('showHighScore')
         this.updateHighScoreList()
-        console.log(highScore.style.display)
+        //console.log(highScore.style.display)
         if (highScore.style.display == 'block' || rules.style.display == 'block') {
             highScore.style.display = 'none'
             rules.style.display = 'none'
@@ -130,6 +130,51 @@ class StartPageController {
 
         //sortlist
         highScoreOLel.innerHTML = ""
+
+        for (const player of playerList) {
+            let liEl = document.createElement('li')
+            liEl.classList.add('highScoreLi')
+
+            let liDivEl = document.createElement('div')
+            liDivEl.classList.add('playerHolder')
+
+            let nameDivEl = document.createElement('div')
+            nameDivEl.classList.add('nameHolder')
+
+            let scoreDivEl = document.createElement('div')
+            scoreDivEl.classList.add('scoreHolder')
+
+
+            let nameTextNode = document.createTextNode(player.name)
+            let scoreTextNode = document.createTextNode(parseFloat(player.score).toFixed(1))
+
+            nameDivEl.appendChild(nameTextNode)
+            scoreDivEl.appendChild(scoreTextNode)
+
+            liDivEl.appendChild(nameDivEl)
+            liDivEl.appendChild(scoreDivEl)
+
+            liEl.appendChild(liDivEl)
+
+            highScoreOLel.appendChild(liEl)
+            //console.log(highScoreOLel.innerHTML)
+        }
+        this.updateHighScoreListBots()
+    }
+
+    updateHighScoreListBots() {
+        let highScoreOLel = document.querySelector('.high-score-list-bots')
+        //console.log(highScoreOLel.innerHTML)
+        //this.game.runHighScoreSort() // runs sort before list is gotten.
+        //let playerList = this.playerManager.getAllPlayerList()
+        let playerList = JSON.parse(localStorage.getItem('botList'))
+
+        //sortlist
+        highScoreOLel.innerHTML = ""
+        
+        //add bots space list
+        //sort bots
+        //highScoreOLel.append(document.createElement('li').innerHTML = 'Bots TopList')
 
         for (const player of playerList) {
             let liEl = document.createElement('li')

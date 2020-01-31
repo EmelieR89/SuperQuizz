@@ -53,7 +53,7 @@ class PlayerManager{
             let playerList = []
 
             playerList.push(new HumanPlayer('Admin', 1))
-            playerList.push(new HumanPlayer('test', 10))
+            //playerList.push(new HumanPlayer('test', 10))
 
             localStorage.setItem(this.playerListLSName, JSON.stringify(playerList))
             this.allPlayerList = playerList
@@ -67,10 +67,10 @@ class PlayerManager{
             //create localStorage
             let botsList = []
             
-            botsList.push(new HardBot('testBot', 1))
-            botsList.push(new EasyBot('Joey', 3))
-            botsList.push(new MediumBot('Elaine', 7))
-            botsList.push(new HardBot('Amy', 18))
+            //botsList.push(new HardBot('testBot', 1))
+            botsList.push(new EasyBot('Joey'))
+            botsList.push(new MediumBot('Elaine'))
+            botsList.push(new HardBot('Amy'))
 
             localStorage.setItem(this.botsListLSName, JSON.stringify(botsList))
             this.allBotsList = botsList

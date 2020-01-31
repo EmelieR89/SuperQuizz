@@ -29,7 +29,9 @@ class HighScore {
      */
     sessionSort(){
         this.highScoreArray = JSON.parse(localStorage.getItem('humanPlayerList'))
+        this.highScoreArrayBot = JSON.parse(localStorage.getItem('botList'))
 
+        //sort humanplayer array.
         this.highScoreArray.sort(
             function(a,b){
                 if (a.score > b.score) {
@@ -40,8 +42,22 @@ class HighScore {
                 }
                 return 0
         })
-
+        
         localStorage.setItem('humanPlayerList', JSON.stringify(this.highScoreArray));
+
+        //sort bot array.
+        this.highScoreArrayBot.sort(
+            function(a,b){
+                if (a.score > b.score) {
+                    return -1
+                }
+                else if (a.score < b.score){
+                    return 1
+                }
+                return 0
+        })
+
+        localStorage.setItem('botList', JSON.stringify(this.highScoreArrayBot));
     }
 
     /**
