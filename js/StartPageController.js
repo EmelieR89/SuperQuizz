@@ -159,23 +159,22 @@ class StartPageController {
             highScoreOLel.appendChild(liEl)
             //console.log(highScoreOLel.innerHTML)
         }
-
         this.updateHighScoreListBots()
     }
 
     updateHighScoreListBots() {
-        let highScoreOLel = document.querySelector('.high-score-list')
+        let highScoreOLel = document.querySelector('.high-score-list-bots')
         //console.log(highScoreOLel.innerHTML)
         //this.game.runHighScoreSort() // runs sort before list is gotten.
         //let playerList = this.playerManager.getAllPlayerList()
         let playerList = JSON.parse(localStorage.getItem('botList'))
 
         //sortlist
-        //highScoreOLel.innerHTML = ""
+        highScoreOLel.innerHTML = ""
         
         //add bots space list
         //sort bots
-        highScoreOLel.append(document.createElement('li').innerHTML = '---spacer--')
+        //highScoreOLel.append(document.createElement('li').innerHTML = 'Bots TopList')
 
         for (const player of playerList) {
             let liEl = document.createElement('li')
