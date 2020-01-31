@@ -52,11 +52,26 @@ button {
     margin: 0.5rem 0 0 0;
 }
 
-.secondaryButton {
+.active-start:hover, .start-game:hover{
+    transform: scale(1.4)
+}
+
+.secondaryButton{
     background: none;
     border: 0.05rem solid  #bf00ff;
     cursor: pointer;
-}
+    animation: back 5s ease-in infinite alternate;
+  }
+  
+  @keyframes back {
+    from {
+        border: 0.05rem solid  #bf00ff;
+    }
+  
+    to {
+        border: 0.05rem solid  #5553ec;
+    }
+  }
 
 
 input {
